@@ -1696,7 +1696,8 @@ Bits and pieces are already there. Please try completing a macro that loads trac
 
 \section{Using Javascript}
 
-As you start to be experienced with coding in ImageJ macros, you might sometime find out that for whatever you want to do with ImageJ, corresponding macro function does not exist in the Build-in Macro Functions page\footnote{ see \url{http://rsb.info.nih.gov/ij/developer/macro/functions.html}}. One way to supplement the missing function is to create your own user function. Another way is to find a function directly from ImageJ Java code and use that function in macro. Javascript is a convinient way to access ImageJ API (Application Programming Interface), and since Javascript could be called from within ImageJ macro, you could use ImageJ API in your macro code. So This is done by the function below: 
+As you become experienced with coding in ImageJ macros, you might start to find
+out that for whatever you want to do with ImageJ, corresponding macro function does not exist in the Build-in Macro Functions page\footnote{ see \url{http://rsb.info.nih.gov/ij/developer/macro/functions.html}}. One way to supplement the missing function is to create your own user function. Another way is to find a function directly from ImageJ Java code and use that function in macro. Javascript is a convinient way to access ImageJ API (Application Programming Interface), and since Javascript could be called from within ImageJ macro, you could use ImageJ API in your macro code. So This is done by the function below:
 \begin{shaded}
 \begin{indentCom}
 \item \textbf{eval("script", javascript)}\\
@@ -1704,21 +1705,40 @@ Evaluates the JavaScript code contained in the string javascript.\\
 \end{indentCom}
 \end{shaded}
 
-Not limited to the use of Javascript code by calling from Macro, but you could also run Javascript as it is in ImageJ and Fiji. Syntax of Javascript is not same as ImageJ macro, but if you are used to write ImageJ macro, it should  not be too difficult to learn Javascript.  
+Not limited to the use of Javascript code by calling from Macro, 
+but you could also run Javascript as 
+it is in ImageJ and Fiji. Syntax of Javascript is not same as ImageJ macro, 
+but if you are used to write ImageJ macro, it should  not be too difficult to learn Javascript.  
  
 \dots then how could we code Javascript? 
 
-In this section, we learn basic know-how of Javascript with ImageJ \footnote{ If you want to learn in more detail, you could also visit \url{http://pacific.mpi-cbg.de/wiki/index.php/Javascript_Scripting} for learning more about Javascript.}. For coding with Javascript in ImageJ, the best is that you know Java programming language already but there is also some way around. When we are programming ImageJ macro, we often refer to the web site listing ImageJ macro language functions to look for a macro command. In similar way, we access so called API (Application Programming Interface) of ImageJ for coding with Javascript. ImageJ API is in the follwoing page
+In this section, we learn basic know-how of 
+Javascript with ImageJ 
+\footnote{ If you want to learn in more detail, 
+you could also visit \url{http://pacific.mpi-cbg.de/wiki/index.php/Javascript_Scripting} 
+for learning more about Javascript.}. For coding with Javascript in ImageJ, the best is that 
+you know Java programming language already but there is also some way around. 
+When we are programming ImageJ macro, we often refer to the web site listing 
+ImageJ macro language functions to look for a macro command. 
+In similar way, we access so called API (Application Programming Interface) 
+of ImageJ for coding with Javascript. ImageJ API is in the following page
 
 \url{http://rsb.info.nih.gov/ij/developer/api/index.html}
 
-At this moment, you might be puzzled with how to use these pages, but don't worry. One major aim of this section is to learn how to use this resource to come up with your Javascript. 
+At this moment, you might be puzzled with how to use these pages, 
+but don't worry. One major aim of this section is to learn how to use this resource 
+to come up with your Javascript. 
 
 OK, let's start. 
 
 \subsection{A trial with Javascript commands}
 %
-Let us first try using Javascript (JS) commands. From menu, do \ijmenu{[Plugins > Scripting > Javascript Interpreter]}. You will then see a new interface that looks like Fig \ref{fig:JSinterpreter}. This interface provides Javascripting in an interactive mode and is useful for a quick testing of codes. There is a input field at the bottom, where you could type in JS code. Then by pressing return key, the code is executed.  
+Let us first try using Javascript (JS) commands. 
+From menu, do \ijmenu{[Plugins > Scripting > Javascript Interpreter]}. 
+You will then see a new interface that looks like Fig \ref{fig:JSinterpreter}. 
+This interface provides Javascripting in an interactive mode and is useful for 
+a quick testing of codes. There is a input field at the bottom, where you could type in JS code. 
+Then by pressing return key, the code is executed.  
 
 \begin{figure}[htbp]
 \begin{center}
@@ -1734,7 +1754,8 @@ IJ.log("Hello JS")
 \end{lstlisting}
 This JS command will print "Hello JS" in the Log window of ImageJ.  
 
-Same command could be written in the Script editor. To start up the editor, do \ijmenu{[File > New > Script]} (then select \ijmenu{[Language > Javascript]}). 
+Same command could be written in the Script editor. To start up the editor, 
+do \ijmenu{[File > New > Script]} (then select \ijmenu{[Language > Javascript]}). 
 \begin{lstlisting}[numbers=none]
 IJ.log("Hello JS");
 \end{lstlisting}
@@ -1745,21 +1766,35 @@ What this JS code does is the same as the Macro code below.
 print();
 \end{lstlisting}
 
-In the following, you could use either Javascript interpreter or Script editor. Just choose one you like. If code become multiple lines, I recommend using Script Editor. Be sure to put semi-colon at the end of line in case you will be using Script Editor. 
+In the following, you could use either Javascript interpreter 
+or Script editor. Just choose one you like. If code become multiple lines, 
+I recommend using Script Editor. Be sure to put semi-colon at the end of line 
+in case you will be using Script Editor. 
 
-We could try some commands that is not present with ImageJ macro (which should be more interesting). For example, what would you do if you want to convert angle in degrees to radian? In macro, you could do calculation by first deviding the value by 360, then multiply by $\pi$. But a function actually is already there in Java, so you could simply use that as well. 
+We could try some commands that is not present with 
+ImageJ macro (which should be more interesting). 
+For example, what would you do if you want to convert angle in degrees to radian? 
+In macro, you could do calculation by first dividing the value by 360, 
+then multiply by $\pi$. But a function actually is already there in Java, 
+so you could simply use that as well. 
 \begin{lstlisting}[numbers=none]
 IJ.log(java.lang.Math.toDegrees(3.1415)) 
 \end{lstlisting}
-Running this line should print a number close to 180, or otherway around
+Running this line should print a number close to 180, or other way around
 \begin{lstlisting}[numbers=none]
 IJ.log(java.lang.Math.toRadians(180)) 
 \end{lstlisting}
 should print out 3.1415\dots.
 
-Next, we try a case when you want to retrieve data from table in Results window. With macro, you could do this by \ilcom{getResut} function, with which by specifying the column label and row number you could retrieve a value in that cell. But what should we do if we want to retrieve all data in a row at once, not a single value in a specific column at specific row? 
+Next, we try a case when you want to retrieve data from table in Results window. 
+With macro, you could do this by \ilcom{getResut} function, 
+with which by specifying the column label and row number you could retrieve 
+a value in that cell. But what should we do if we want to retrieve all data in a row at once, 
+not a single value in a specific column at specific row? 
 
-If you want to do this in macro, we could write a user defined function that loops for all the columns and get data one-by-one. With Javascript, this could be done by just one step, one command. 
+If you want to do this in macro, we could write a user defined function that loops 
+for all the columns and get data one-by-one. 
+With Javascript, this could be done by just one step, one command. 
 
 \begin{indentexercise}{1}
 
@@ -1777,7 +1812,8 @@ Then Threshold the blob image by
 
 \ijmenu{[Image > Adjust > Threshold]}. 
 
-Since the background of this image is bright, Dark Background' should be unchecked. If you see the thresholded image like fig. \ref{fig:ThresBlob},  do 
+Since the background of this image is bright, Dark Background' should be unchecked. 
+If you see the thresholded image like fig. \ref{fig:ThresBlob},  do 
 
 \ijmenu{[Analyze > Analyze Particles\dots]}. 
 
@@ -1790,25 +1826,32 @@ Since the background of this image is bright, Dark Background' should be uncheck
 \end{center}
 \end{figure} 
 
-In the Analyze Particles dialog, just be sure that \textbf{Display Results} is checked. Then click OK button. When the analysis is done, you will see  64 or so particles detected and listed in the Results window. 
+In the Analyze Particles dialog, just be sure that \textbf{Display Results} is checked. 
+Then click OK button. When the analysis is done, you will see  64 or so particles detected 
+and listed in the Results window. 
 
 \textbf{Testing Javascript Code}
 
-We now use the follwoing command to extract data from single Row. In Javascript interpreter, type the following command . 
+We now use the following command to extract data from single Row. In Javascript
+interpreter, type the following command .
 
 \begin{lstlisting}[numbers=none]
 IJ.log(ResultsTable.getResultsTable().getRowAsString(10));
 \end{lstlisting}
 
-If you excute this, you will see that all data that is in row 11 in Results table is now printed in the log window. 
+If you execute this, you will see that all data that is in row 11 in Results table is 
+now printed in the log window. 
 
 \dots that's the end of this exercise but don't close the Results window yet.   
 \end{indentexercise}
 
-Above is a single line pure JS code. We can use this code within macro by using \textbf{eval} function mentioned already. Here is an exrecise to test the function \textbf{eval}. 
+Above is a single line pure JS code. 
+We can use this code within macro by using \textbf{eval} function mentioned already. 
+Here is an exercise to test the function \textbf{eval}. 
 
 \begin{indentexercise}{2}
-Test running the following code, and check that any row in the table coulde be extracted and printed in Log window. 
+Test running the following code, and check that any row in the table could be extracted 
+and printed in Log window. 
 \begin{lstlisting}
 rownum = getNumber("Row?", 0);
 jscom = "IJ.log(ResultsTable.getResultsTable().getRowAsString("+rownum+"));";
@@ -1816,14 +1859,17 @@ eval("script", jscom);
 \end{lstlisting}
 \end{indentexercise}
 
-In the second line, JS code is constructed as a single string \ilcom{jscom} using the variable \ilcom{rownum} from line 1. Line 3 executes this JS code using \textbf{eval}. 
+In the second line, JS code is constructed as a single string \ilcom{jscom} 
+using the variable \ilcom{rownum} from line 1. Line 3 executes this JS code using \textbf{eval}. 
 
-So far, I have not yet explained where these commands came from. I will give more detailed explanation in later sections.  
+So far, I have not yet explained where these commands came from. 
+I will give more detailed explanation in later sections.  
 
 \begin{indentexercise}{2}
 This exercise is optional:
 
-Try the following Javascriptcommands using \textbf{eval}, from within an ImageJ macro. 
+Try the following Javascript commands using \textbf{eval}, from within an ImageJ
+macro.
 
 \dots lists all ImageIDs. There should be at least one image opened. 
 \begin{lstlisting}[numbers=none]
@@ -1846,13 +1892,16 @@ eval("script", "IJ.log(IJ.getImage().getStatistics().toString());");
 eval("script", "print(IJ.currentMemory())");
 \end{lstlisting}
 
-\dots moves current image window to top-left corner of the monitor with offset of 10 by to, and resizes the window. 
+\dots moves current image window to top-left corner of the monitor with offset of 10 by to, 
+and resizes the window. 
 \begin{lstlisting}[numbers=none]
 eval("script", "IJ.log(IJ.getImage().getWindow().setLocationAndSize(10, 10, 100, 100))");
 \end{lstlisting}
 \end{indentexercise}
 
-In all the example codes, we placed Javascript commands in the second argument for the function \textit{eval}. You could also write a full path to a javascript file. Here is the syntax. 
+In all the example codes, we placed Javascript commands in the second argument 
+for the function \textit{eval}. 
+You could also write a full path to a Javascript file. Here is the syntax. 
 \begin{shaded}
 \begin{indentCom}
 \item \textbf{eval}('script', \textbf{File.openAsString}("<pathpath>/name.js")) ;
@@ -1860,14 +1909,23 @@ In all the example codes, we placed Javascript commands in the second argument f
 \end{shaded}
 
 \subsection{Using Macro Recorder and ImageJ API}
-Javascript is a scripting language, so it has its own build-in functions. I will not explain about this since you could find many Javascript tutorials on the web. For example, following site is a place where I go and look for Javascript commands and usages:
+Javascript is a scripting language, so it has its own build-in functions. 
+I will not explain about this since you could find many Javascript tutorials on the web. 
+For example, following site is a place where I go and look for Javascript commands and usages:
 
 \href{http://www.w3schools.com/jsref/default.asp}{Javascript Reference @ w3chools.com}
 
-How do we find Javascript commands to interact and control ImageJ? The easiest way is to use the macro recorder. We have already learned and used macro recorder in previous chapters. We could used the same interface for recording JS codes. Recorded lines of JS codes could be copy \& pasted into Script Editor and can be directly executed. 
+How do we find Javascript commands to interact and control ImageJ? 
+The easiest way is to use the macro recorder. 
+We have already learned and used macro recorder in previous chapters. 
+We could used the same interface for recording JS codes. 
+Recorded lines of JS codes could be copy \& pasted into Script Editor and can be directly executed. 
 
 \begin{indentexercise}{1}
-First, we should start the recorder. \ijmenu{[Plugins > Macros > Record\dots]}. Then in the recorder window at the top-left corner, choose Javascript as the code to be recorded (Fig. \ref{fig:MacroRecorderJS}). 
+First, we should start the recorder. 
+\ijmenu{[Plugins > Macros > Record\dots]}. 
+Then in the recorder window at the top-left corner, 
+choose Javascript as the code to be recorded (Fig. \ref{fig:MacroRecorderJS}). 
 
 %figure
 \begin{figure}[htbp]
@@ -1881,11 +1939,15 @@ First, we should start the recorder. \ijmenu{[Plugins > Macros > Record\dots]}. 
 Then do the follwoing sequence of commands.
 \begin{itemize}
 \item \ijmenu{[File > Open Sample > Blobs]}
-\item Select rectangular ROI tool and set a ROI to select about 1/4th of the image (can be any place within the image. This is just a test.). 
+\item Select rectangular ROI tool and set a ROI to select 
+about 1/4th of the image (can be any place within the image. This is just a test.). 
 \item \ijmenu{[File > Transform > Flip Horizontally]}
 \item \ijmenu{[Process > Filters > Gaussian Blurr\dots]}
 \end{itemize}
-After all these operations, there should be JS codes printed in the Recorder window. Copy them all, and paste it to Script Editor (\ilcom{[File > New > Scripts]} and then paste, Fig. \ref{fig:ScriptEditorRecorded}) . After pasting, set language to JS by (\ilcom{[Language > Javascript]} from the menu bar of script editor.  
+After all these operations, there should be JS codes printed in the Recorder window. 
+Copy them all, and paste it to Script Editor (\ilcom{[File > New > Scripts]} and then paste, 
+Fig. \ref{fig:ScriptEditorRecorded}) . 
+After pasting, set language to JS by (\ilcom{[Language > Javascript]} from the menu bar of script editor.  
 
 %figure
 \begin{figure}[htbp]
@@ -1896,24 +1958,55 @@ After all these operations, there should be JS codes printed in the Recorder win
 \end{center}
 \end{figure}
 
-Then do \ilcom{[Run > Run]} from the menu of script editor, the script is executed. You should then see a new window of "blob" with some part of image processed. 
+Then do \ilcom{[Run > Run]} from the menu of script editor, the script is executed. 
+You should then see a new window of "blob" with some part of image processed. 
 \end{indentexercise}
 If you are successful in running the code, let's see the code. Here is how the code should look like. 
 
 %\lstinputlisting[morekeywords={*}]{code/code29.js}
 \lstinputlisting{code/code29.js}
 
-We first examine line 3 and line 4, focusing on the method \ilcom{IJ.run}  (in the follwoing, we use word "method" instead of "command", as this is more conventioanl way of calling it in Java). This method has three arguments for it.
+We first examine line 3 and line 4, focusing on the method \ilcom{IJ.run}  
+(in the follwoing, we use word "method" instead of "command", as this is more 
+conventional way of calling it in Java). This method has three arguments for it.
 
 \ilcom{IJ.run(argument1, argument2, argument3)}
 
- Just by looking at each of them you could realize that the second argument is a descriptive explanation of what the method does. This is because these strings are exactly the phrase of the menu item you see when you choose that function from ImageJ menu. 
+ Just by looking at each of them you could realize that the second argument 
+ is a descriptive explanation of what the method does. 
+ This is because these strings are exactly the phrase of the menu item you see 
+ when you choose that function from ImageJ menu. 
 
-\ilcom{IJ.run} is a method that uses second argument as a keyword to search for all the ImageJ menu items to find which of them is the one that the method intends to invoke \footnote{In ImageJ macro, a function similar to \ilcom{IJ.run} method is \ilcom{run(arg1, arg2)}.}. Third argument of \ilcom{IJ.run} in line 3 is an empty string, but in line 4, the third argument is \ilcom{sigma=2}. This is a value that you normally input when you select gaussian blur from the menu bar for the size of blurring kernel. 
+\ilcom{IJ.run} is a method that uses second argument as a keyword 
+to search for all the ImageJ menu items to find which of them is the one 
+that the method intends to invoke 
+\footnote{In ImageJ macro, a function similar to \ilcom{IJ.run} 
+method is \ilcom{run(arg1, arg2)}.}. 
+Third argument of \ilcom{IJ.run} in line 3 is an empty string, 
+but in line 4, the third argument is \ilcom{sigma=2}. 
+This is a value that you normally input when you select Gaussian blur 
+from the menu bar for the size of blurring kernel. 
 
-Then what is the first argument in \ilcom{IJ.run}? In both line 3 and 4, we have a variable \ilcom{imp}. To see what this is, we go back to line 1. \ilcom{imp} appears for the first time in the code at line 1, and \ilcom{imp} is the returned value of a method \ilcom{IJ.openImage}. If we think back what we were actually doing for this first line when recording, we accessed an item in the menu tree \ijmenu{[File > Open Sample > blobs]}. By choozing this item from menu, ImageJ downloads blobs.gif file from NIH web site and then shows it on your desktop. Single method that does the download action is the method \ilcom{IJ.openImage}. Argument for this command is the URL of the image. 
+Then what is the first argument in \ilcom{IJ.run}? 
+In both line 3 and 4, we have a variable \ilcom{imp}. 
+To see what this is, we go back to line 1. 
+\ilcom{imp} appears for the first time in the code at line 1, 
+and \ilcom{imp} is the returned value of a method \ilcom{IJ.openImage}. 
+If we think back what we were actually doing for this first line when recording, 
+we accessed an item in the menu tree \ijmenu{[File > Open Sample > blobs]}. 
+By choosing this item from menu, ImageJ downloads blobs.gif file from NIH web site 
+and then shows it on your desktop. 
+Single method that does the download action is the method \ilcom{IJ.openImage}. 
+Argument for this command is the URL of the image. 
 
-To know the definition of the method \ilcom{IJ.openImage}, we look up a reference called \href{http://rsb.info.nih.gov/ij/developer/api/index.html}{ImageJ API}\footnote{ ImageJ API: http://rsb.info.nih.gov/ij/developer/api/index.html}. In this web page, there is side bar in left side, with upper part for a list of "All Packages" (These packages are same as those listed in the table shown in the top page) and the bottom part for "All Classes".  
+To know the definition of the method \ilcom{IJ.openImage}, 
+we look up a reference called 
+\href{http://rsb.info.nih.gov/ij/developer/api/index.html}{ImageJ API}
+\footnote{ ImageJ API: http://rsb.info.nih.gov/ij/developer/api/index.html}. 
+In this web page, there is side bar in left side, with upper part 
+for a list of "All Packages" 
+(These packages are same as those listed in the table shown in the top page) 
+and the bottom part for "All Classes".  
 
 %figure
 \begin{figure}[htbp]
@@ -1925,7 +2018,12 @@ To know the definition of the method \ilcom{IJ.openImage}, we look up a referenc
 \end{figure}
 
 
-Each package contains several classes. We currently do not know which package does \ilcom{IJ.openImage} belong to, so we look for it in the bottom part "All Classes". There, you will find "IJ"\footnote{ Unlike ImageJ macro, Java and Javascript are case sensitive}. Click the link, and in the right side of the page, a page titled "Class IJ" appears (Fig. \ref{fig:IJAPClassIJ}). 
+Each package contains several classes. 
+We currently do not know which package does 
+\ilcom{IJ.openImage} belong to, so we look for it in the bottom part "All Classes". 
+There, you will find "IJ"\footnote{ Unlike ImageJ macro, Java and Javascript are case sensitive}. 
+Click the link, and in the right side of the page, a page titled "Class IJ" appears 
+(Fig. \ref{fig:IJAPClassIJ}). 
 
 %figure
 \begin{figure}[htbp]
@@ -1936,7 +2034,8 @@ Each package contains several classes. We currently do not know which package do
 \end{center}
 \end{figure}
 
-The page might look cryptic to you, if you scroll down the page, there is a table titled "Method Summary", listing all the methods that class IJ contains in alphabetical order. Within this list, you will find (Fig. \ref{fig:IJAPIIJopenImage})
+The page might look cryptic to you, if you scroll down the page, there is a table titled "Method Summary", listing all the methods that class IJ contains in alphabetical order. 
+Within this list, you will find (Fig. \ref{fig:IJAPIIJopenImage})
 
 \ilcom{openImage(java.lang.String path)} 
 
@@ -1950,13 +2049,36 @@ The page might look cryptic to you, if you scroll down the page, there is a tabl
 \end{center}
 \end{figure}
 
-There are three \ilcom{openImage} methods, with difference in number and types of arguments. The first one is without any argument, the second one has only one argument, the third having two arguments. When openImage method is called, one of these three are called depending on the number and types of the argument in the call. 
+There are three \ilcom{openImage} methods, with difference in number and types of arguments. 
+The first one is without any argument, the second one has only one argument, 
+the third having two arguments. 
+When openImage method is called, one of these three are called depending on the number 
+and types of the argument in the call. 
 
-\textbf{More Explanation:} So what are "Classes?" A class consists of two major components. One is Field and the other is Method. The former is like variable and the latter is similar to function in ImageJ macro (this is not a precise analogy, but for now let's think like that). Fields are values. Methods are actions. Class is a group of various field values and methods. By utilizing Class, we can have a single unit of assembled functionalities, which would be an advantage for letting an application to have high modularity. You could access (or use) Fileds and Methods by appending them behind the name of the class. For example. <class name>.<field name> or <class name>.<method name>(<arguments>) e.g. \ilcom{IJ.openImage(pathname)}.
+\textbf{More Explanation:} So what are "Classes?" A class consists of two major components. 
+One is Field and the other is Method. 
+The former is like variable and the latter is similar to function in ImageJ macro 
+(this is not a precise analogy, but for now let's think like that). 
+Fields are values. Methods are actions. Class is a group of various field values and methods. 
+By utilizing Class, we can have a single unit of assembled functions, 
+which would be an advantage for letting an application to have high modularity. 
+You could access (or use) fields and methods by appending them behind the name
+of the class. For example. <class name>.<field name> or <class name>.<method name>(<arguments>) 
+e.g. \ilcom{IJ.openImage(pathname)}.
 
- \textbf{A bit more on API page} At the top of the Class IJ page (Fig.\ref{fig:IJAPClassIJ}),  "ij" is written above the class name "Class IJ". This is the name of package that is containing this class. You could see all classes within the package ij (note: case sensitive), click "ij" in the left top panel listing "all packages".  You then will see all the classes within the package ij, such as compositeImage, Executer, IJ, ImageJ\dots and so on. Package is used to organize classes in hierarchycal tree. For example, there are packages ij.plugin, ij.plugin.filter and ij.plugin.frame. Likewise, package is a tree-like structure (remeber how folders are organized in your laptop) that organizes many classes in a structure. 
+ \textbf{A bit more on API page} At the top of the Class IJ page (Fig.\ref{fig:IJAPClassIJ}), 
+ "ij" is written above the class name "Class IJ". 
+ This is the name of package that is containing this class. 
+ You could see all classes within the package ij (note: case sensitive), 
+ click "ij" in the left top panel listing "all packages".  
+ You then will see all the classes within the package ij, 
+ such as compositeImage, Executor, IJ, ImageJ\dots and so on. 
+ Package is used to organize classes in hierarchical tree. 
+ For example, there are packages ij.plugin, ij.plugin.filter and ij.plugin.frame. 
+ Likewise, package is a tree-like structure (remember how folders are organized in your laptop) 
+ that organizes many classes in a structure. 
   
-Go back to the API description, in the left side of the table column   where 
+Go back to the API description, in the left side of the table column where 
 
 \ilcom{openImage(java.lang.String path) } 
 
@@ -1964,26 +2086,62 @@ is listed (Fig. \ref{fig:IJAPIIJopenImage}), there is a phrase
 
 \ilcom{static ImagePlus} 
 
-This tells you that if you invoke method \ilcom{openImage(java.lang.String path)} of class \ilcom{IJ}, a object called ImagePlus is returned (forget about the notion "static" for now). ImagePlus is another class, which you could also look up using the list of "All Classes".  
+This tells you that if you invoke method \ilcom{openImage(java.lang.String path)} of class \ilcom{IJ}, 
+a object called ImagePlus is returned (forget about the notion "static" for now). 
+ImagePlus is another class, which you could also look up using the list of "All Classes".  
 
-The class ImagePlus consists of image data and metadata fields, and methods to access these values. In \href{http://rsb.info.nih.gov/ij/developer/api/ij/ImagePlus.html}{ImagePlus API page}, you could see that many fields and methods are associated with this class. Note that many of field valus are "protected". 
+The class ImagePlus consists of image data and metadata fields, and methods to access these values. 
+In \href{http://rsb.info.nih.gov/ij/developer/api/ij/ImagePlus.html}{ImagePlus API page}, 
+you could see that many fields and methods are associated with this class. 
+Note that many of field values are "protected". 
 
-For example, \ilcom{nChannels} is one of the filed values of class ImagePlus but having a notion "protected" means that you cannot simply access from outside the class itself. Instead, there is a method named \ilcom{getNChannels()} for accessing the value from outside which by invoking it "Returns the number of channels" of ImagePlus object. \ilcom{getNChannels()} returns a value indicated as "int". This tells you that the type of returned object is "int", which means that returned value is a number, and specifically an integer, not a number with decimal points. Unlike ImageJ macro \textbf{object} with any type of class could be returned, not limited to number, string and array. This flexibility affords higher potential in modularity with Javascript compared to ImageJ macro and hence we call returned valus as "object" not "variables". Draw back is that Javascript coding becomes a bit more complicated then macro coding. One should always be careful about which class or type is returned, and one way to do so is to check ImageJ API everytime you wonder what is the returned value of certain method.  
+For example, \ilcom{nChannels} is one of the filed values of class ImagePlus 
+but having a notion "protected" means that you cannot simply access from outside the class itself. 
+Instead, there is a method named \ilcom{getNChannels()} for accessing the value 
+from outside which by invoking it "Returns the number of channels" of ImagePlus object. 
+\ilcom{getNChannels()} returns a value indicated as "int". 
+This tells you that the type of returned object is "int", which means that returned value is a number, 
+and specifically an integer, not a number with decimal points. Unlike ImageJ macro 
+\textbf{object} with any type of class could be returned, not limited to number, string and array. 
+This flexibility affords higher potential in modularity with Javascript compared to ImageJ macro 
+and hence we call returned values as "object" not "variables". 
+Draw back is that Javascript coding becomes a bit more complicated then macro coding. 
+One should always be careful about which class or type is returned, 
+and one way to do so is to check ImageJ API every time you wonder what is the
+returned value of certain method.
 
-Let's go back to the code again. The method \ilcom{IJ.openImage} returns an \textbf{object "ImagePlus"}, so in line 1 of the recorded Javascript code, an instance of ImagePlus object (which actually is "blob.png" downloaded from the NIH website) is stored in the variable "imp". Then after line 1, \ilcom{imp} behaves as an ImagePlus object. \ilcom{imp} is repeatedly used from line 2 to 5. In line 2, an method of class ImagePlus is invoked in the form <class>.<method>(arguments). Since method name is \ilcom{setROI} we look for it in the \href{http://rsb.info.nih.gov/ij/developer/api/ij/ImagePlus.html}{ImaegJ API ImagePlus page}, and you will find the following description:
+Let's go back to the code again. 
+The method \ilcom{IJ.openImage} returns an \textbf{object "ImagePlus"}, 
+so in line 1 of the recorded Javascript code, 
+an instance of ImagePlus object (which actually is "blob.png" downloaded from the NIH website) 
+is stored in the variable "imp". 
+Then after line 1, \ilcom{imp} behaves as an ImagePlus object. 
+\ilcom{imp} is repeatedly used from line 2 to 5. In line 2, an method of class ImagePlus is invoked 
+in the form <class>.<method>(arguments). 
+Since method name is \ilcom{setROI} we look for it in the 
+\href{http://rsb.info.nih.gov/ij/developer/api/ij/ImagePlus.html}{ImaegJ API ImagePlus page}, 
+and you will find the following description:
 
 \begin{quote}
 void | setRoi(int x, int y, int width, int height) \\
           Creates a rectangular selection.
 \end{quote}
 
-"void" means that this method does not return any value. There are four arguments and all of them are "int", integer. Description tells you that this methods creats an ROI in the image with position and size defined by arguments.  
+"void" means that this method does not return any value. 
+There are four arguments and all of them are "int", integer. 
+Description tells you that this methods creates an ROI in the image with position and size 
+defined by arguments.  
 
-In line 3 and 4, the first argument of \ilcom{run} method is \ilcom{imp}, telling the command \ilcom{IJ.run} to do the operation specifed by the second argument on \ilcom{imp}. 
+In line 3 and 4, the first argument of \ilcom{run} method is \ilcom{imp}, 
+telling the command \ilcom{IJ.run} to do the operation specified by the second argument on \ilcom{imp}. 
 
-Note that in case of ImageJ macro, target image could only be specified by activating the window using \ilcom{selectImage(imageID)}. In Javascript, selection of image could be more explicit by the direct use of ImagePlus object.  
+Note that in case of ImageJ macro, target image could only be specified by 
+activating the window using \ilcom{selectImage(imageID)}. 
+In Javascript, selection of image could be more explicit by the direct use of ImagePlus object.  
 
-Down to line 4, blob image actually is not shown on the desktop.  ImagePlus object of "blobs.tif" is in the memory, but still is not displayed. To show it on the dektop, we do line 5. 
+Down to line 4, blob image actually is not shown on the desktop. 
+ImagePlus object of "blobs.tif" is in the memory, but still is not displayed. To
+show it on the desktop, we do line 5.
 
 \begin{quote}
 \ilcom{imp.show();}
@@ -1994,10 +2152,13 @@ Down to line 4, blob image actually is not shown on the desktop.  ImagePlus obje
 %In case of Macro, we could execute that as a single line. So how about doing the same? Create a new script tab by \ijmenu{[File > New]} from the script editor menu. Then copy line 4 and paste that single line in the new script.
 
 \textbf{Grabbing Image}
-What if you want to capture already opened Image as a ImagePlus object? This could be done by using a method in Class IJ called \ilcom{getImage()}. You could replace the first line in the code we just studied with \ilcom{IJ.getImage()} to grab currently active image rather than downloading and opening an image file. 
+What if you want to capture already opened Image as a ImagePlus object? 
+This could be done by using a method in Class IJ called \ilcom{getImage()}. 
+You could replace the first line in the code we just studied with \ilcom{IJ.getImage()} 
+to grab currently active image rather than downloading and opening an image file. 
 
 \begin{indentexercise}{1}
-Modify code 29 so that this JS code grabbs currently active image and do the same processing. 
+Modify code 29 so that this JS code grabs currently active image and do the same processing. 
 \end{indentexercise}
 
 \textbf{Summary}
@@ -2005,16 +2166,17 @@ Modify code 29 so that this JS code grabbs currently active image and do the sam
 \item Object should be either created (initialized, of "Constructed") or Grabbed. 
 \begin{itemize}
 \item \ilcom{IJ.openImage(path)} creates and image object from file.
-\item \ilcom{IJ.getImage()} grabbs already existing object. 
+\item \ilcom{IJ.getImage()} grabs already existing object. 
 \end{itemize}
 \item Object is constructed taking a class as template. A class has field values and methods. Hence, object has those values and classes. 
 \begin{itemize}
-\item Fileld values are in most cases accessed via methods.
+\item Field values are in most cases accessed via methods.
 \item Once an object is constructed, its public method could be used
 \end{itemize}
 \item Exception: So called "static" methods could be accessed any time. 
 \begin{itemize}
-\item Most of mthods in Class IJ are static, so you do not need to construct it.
+\item Most of methods in Class IJ are static, so you do not need to construct
+it.
 \end{itemize}
 \end{itemize}
 
@@ -2028,16 +2190,29 @@ Curve Fitting example.
 
 \subsection{Using none-ImageJ libraries in Fiji}
 
-Besides access to ImageJ API, power of Javascript is in importing external pacakages written in Java to use their functins.
+Besides access to ImageJ API, power of Javascript is in importing external packages 
+written in Java to use their functions.
 
-In Fiji, many java libraries (packages) are included besides ImageJ itself. You could see them listed in \href{http://pacific.mpi-cbg.de/javadoc/}{Fiji API}. Here are some picks among them, which might be interesting to use for math and statistics in Javascript\footnote{ If you want to use these packages in ImageJ, you could downlaod the package from its website and configure ImageJ to include that package on start up.}. In the next section, we will study several examples to know how to import these libraries in Javascript. 
+In Fiji, many java libraries (packages) are included besides ImageJ itself. 
+You could see them listed in \href{http://pacific.mpi-cbg.de/javadoc/}{Fiji API}. 
+Here are some picks among them, which might be interesting to use for math and statistics 
+in Javascript\footnote{ If you want to use these packages in ImageJ, 
+you could download the package from its website and configure ImageJ 
+to include that package on start up.}. In the next section, 
+we will study several examples to know how to import these libraries in Javascript. 
 
 \href{http://math.nist.gov/javanumerics/jama/}{Java Matrix Package (JAMA)}
 \begin{shaded}
 \begin{quote}
- JAMA is comprised of six Java classes: Matrix, CholeskyDecomposition, LUDecomposition, QRDecomposition, SingularValueDecomposition and EigenvalueDecomposition.
+ JAMA is comprised of six Java classes: Matrix, CholeskyDecomposition, 
+ LUDecomposition, QRDecomposition, SingularValueDecomposition and EigenvalueDecomposition.
 
-The Matrix class provides the fundamental operations of numerical linear algebra.  Various constructors create Matrices from two dimensional arrays of double precision floating point numbers.  Various gets and sets provide access to submatrices and matrix elements.   The basic arithmetic operations include matrix addition and multiplication, matrix norms and selected element-by-element array operations.  A convenient matrix print method is also included.
+The Matrix class provides the fundamental operations of numerical linear algebra. 
+Various constructors create Matrices from two dimensional arrays of double precision 
+floating point numbers.  Various gets and sets provide access to submatrices and matrix elements. 
+The basic arithmetic operations include matrix addition and multiplication, 
+matrix norms and selected element-by-element array operations.  
+A convenient matrix print method is also included.
 
 Five fundamental matrix decompositions, which consist of pairs or triples of matrices, permutation vectors, and the like, produce results in five decomposition classes.  These decompositions are accessed by the Matrix class to compute solutions of simultaneous linear equations, determinants, inverses and other matrix functions.  The five decompositions are
 \begin{itemize}
@@ -2056,7 +2231,8 @@ Five fundamental matrix decompositions, which consist of pairs or triples of mat
 Commons Math is divided into fourteen subpackages, based on functionality provided.
 \begin{itemize}
 \item org.apache.commons.math.stat - statistics, statistical tests
-\item org.apache.commons.math.analysis - rootfinding, integration, interpolation, polynomials
+\item org.apache.commons.math.analysis - root finding, integration,
+interpolation, polynomials
 \item org.apache.commons.math.random - random numbers, strings and data generation
 \item org.apache.commons.math.special - special functions (Gamma, Beta)
 \item org.apache.commons.math.linear - matrices, solving linear systems
@@ -2076,32 +2252,49 @@ Commons Math is divided into fourteen subpackages, based on functionality provid
 \href{http://xmlgraphics.apache.org/batik/}{Batic SVG Tool kit}
 \begin{shaded}
 \begin{quote}
-Batik is a Java-based toolkit for applications or applets that want to use images in the Scalable Vector Graphics (SVG) format for various purposes, such as display, generation or manipulation.
+Batik is a Java-based toolkit for applications or applets that want to use images 
+in the Scalable Vector Graphics (SVG) format for various purposes, 
+such as display, generation or manipulation.
 
-The project's ambition is to give developers a set of core modules that can be used together or individually to support specific SVG solutions. Examples of modules are the SVG Parser, the SVG Generator and the SVG DOM. Another ambition for the Batik project is to make it highly extensibleâ€”for example, Batik allows the developer to handle custom SVG elements. Even though the goal of the project is to provide a set of core modules, one of the deliverables is a full fledged SVG browser implementation which validates the various modules and their inter-operability.
+The project's ambition is to give developers a set of core modules 
+that can be used together or individually to support specific SVG solutions. 
+Examples of modules are the SVG Parser, the SVG Generator and the SVG DOM. 
+Another ambition for the Batik project is to make it highly extensibleâ€”for example, 
+Batik allows the developer to handle custom SVG elements. 
+Even though the goal of the project is to provide a set of core modules, one of the 
+deliverables is a full fledged SVG browser implementation which validates the various modules 
+and their inter-operability.
 \end{quote}
 \end{shaded}
 
 \href{http://spaceroots.org/software/mantissa/index.html}{Mantissa (Mathematical Algorithms for Numerical Tasks In Space System Applications)}
 \begin{shaded}
 \begin{quote}
-Mantissa is a collection of various mathematical tools aimed towards for simulation. It is not a complete mathematical library like GSL, NAG or IMSL, but it contains various algorithms useful for dynamics simulation and 3D geometry computation.
+Mantissa is a collection of various mathematical tools aimed towards for simulation. 
+It is not a complete mathematical library like GSL, NAG or IMSL, but it contains various 
+algorithms useful for dynamics simulation and 3D geometry computation.
 \end{quote}
 \end{shaded}
 
 \href{http://www.cs.waikato.ac.nz/ml/weka/}{Weka}
 \begin{shaded}
 \begin{quote}
-Weka is a collection of machine learning algorithms for data mining tasks. The algorithms can either be applied directly to a dataset or called from your own Java code. Weka contains tools for data pre-processing, classification, regression, clustering, association rules, and visualization. It is also well-suited for developing new machine learning schemes.
+Weka is a collection of machine learning algorithms for data mining tasks. 
+The algorithms can either be applied directly to a dataset or called from your own Java code. 
+Weka contains tools for data pre-processing, classification, regression, 
+clustering, association rules, and visualization. 
+It is also well-suited for developing new machine learning schemes.
 \end{quote}
 \end{shaded}
 
 Some other packages\dots
 
 \begin{itemize}
-\item \href{http://www.imagescience.org/meijering/software/}{ImageScience} - Implemented as plugins for filtering but valuable for use as a library. 
+\item \href{http://www.imagescience.org/meijering/software/}{ImageScience} - 
+Implemented as plugins for filtering but valuable for use as a library. 
 \item \href{http://www.f4.htw-berlin.de/~barthel/ImageJ/ImageJ3D/ImageJ3D.html}{ImageJ3D - JRenderer3D} -3D renderer. 
-\item kfschmidt.*  - Numerical analysis tools: Simplex, GLM analyzer, Matrix calculatons
+\item kfschmidt.*  - Numerical analysis tools: Simplex, GLM analyzer, Matrix
+calculations
 \item math3D -Matrix calculation, 3D tools.  
 \end{itemize}
 
@@ -2131,13 +2324,17 @@ We could solve linear equation system below, in the form AX = B, by LU decomposi
 \newpage
 
 \section{Actual Macro programming}
-The biggest tip for Macro coding: Don't try to code everything from scratch. Refer to the downloadable macros linked in the ImageJ web site \footnote{ see \url{http://rsb.info.nih.gov/ij/macros/}}, and there should be something you could copy some parts to full fill the task you want to achieve.\\
+The biggest tip for Macro coding: Don't try to code everything from scratch. 
+Refer to the downloadable macros linked in the ImageJ web site 
+\footnote{ see \url{http://rsb.info.nih.gov/ij/macros/}}, 
+and there should be something you could copy some parts to full fill the task you want to achieve.\\
 
 \begin{indentexercise}{1}
 Think about your daily work with image processing / analysis, and design a macro that helps your task. 
 \item 1. Present your idea. Similar macro might already exists, which could be modified for your task.  
 \item 2. Write the macro after discussion with your instructor. 
-\item 3. Debug the macro. If you could not finish, do it as homework. Turn it in, regardless of whether its working or not. 
+\item 3. Debug the macro. If you could not finish, do it as homework. 
+Turn it in, regardless of whether its working or not. 
 \end{indentexercise}
 
 \newpage
@@ -2171,7 +2368,9 @@ Write a time stamping macro for t-stacks. You should implement following functio
 mm:ss \\
 (two-digits minutes and two digits seconds)
 \end{itemize}
-Hint: Use following: for-statement, \ilcom{nSlices, setSlice, getNumber,\\ setForegroundcolor, setBackgroundColor, drawString}. (refer to the Build-in Macro Function page in ImageJ web site!)
+Hint: Use following: for-statement, 
+\ilcom{nSlices, setSlice, getNumber,\\ setForegroundcolor, setBackgroundColor, drawString}. 
+(refer to the Build-in Macro Function page in ImageJ web site!)
 
 \subsubsection{Assignment 4} 
 Modify code 14 so that the macro does not use "while" loop. For example with the following way. 
