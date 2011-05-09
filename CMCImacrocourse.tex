@@ -1473,11 +1473,19 @@ If you run these two lines, you will see data printed out in the Log window (Fig
 \end{center}
 \end{figure}
 
-So far so good, we succeeded in getting data out of the results table. Then what we need to do now is to play around with \ilcom{str} variable, where all the data is now contained as a chunk.  Since this chunk of data is not usable directly, we first split the \ilcom{str} to single lines of string array. For this we use \ilcom{split} command, the definition of which is 
+So far so good, we succeeded in getting data out of the results table. 
+Then what we need to do now is to play around with \ilcom{str} variable, 
+where all the data is now contained as a chunk.  Since this chunk of data is not usable directly, 
+we first split the \ilcom{str} to single lines of string array. 
+For this we use \ilcom{split} command, the definition of which is 
 
 \begin{indentCom}
 \textbf{split(string, delimiters)}\\
-Breaks a string into an array of substrings. Delimiters is a string containing one or more delimiter characters. The default delimiter set " \textbackslash{}t\textbackslash{}n\textbackslash{}r" (space, tab, newline, return) is used if delimiters is an empty string or split is called with only one argument. Returns a one element array if no delimiter is found. 
+Breaks a string into an array of substrings. 
+Delimiters is a string containing one or more delimiter characters. 
+The default delimiter set " \textbackslash{}t\textbackslash{}n\textbackslash{}r" 
+(space, tab, newline, return) is used if delimiters is an empty string or split is called with only one argument. 
+Returns a one element array if no delimiter is found. 
 \end{indentCom}
 
 Using this command to convert the string to a string array and adding two more lines to check the content of array, code now looks like this:\\
@@ -1488,7 +1496,8 @@ strA = split(str, "\n");
 print(strA[0]);
 print(strA[1]);
 \end{lstlisting}
-We use delimiter \ilcom{\textbackslash{}n} which means "new line", a hidden command in \ilcom{str} that feeds new line to form a table. When we run above code we will see two data shown in the log window (Fig. \ref{fig:splittedLine}).
+We use delimiter \ilcom{\textbackslash{}n} which means "new line", a hidden command in \ilcom{str} 
+that feeds new line to form a table. When we run above code we will see two data shown in the log window (Fig. \ref{fig:splittedLine}).
 %figure 
 \begin{figure}[htbp]
 \begin{center}
@@ -1516,13 +1525,19 @@ We use delimiter \ilcom{\textbackslash{}t}, which means "tab", to convert single
 \end{center}
 \end{figure}
 
-The value shown in the Log window (Fig. \ref{fig:doublesplittedLine}) should be the same as X value in the first row of the original table (Fig. \ref{fig:manualtrackingresults}). 
+The value shown in the Log window (Fig. \ref{fig:doublesplittedLine}) 
+should be the same as X value in the first row of the original table (Fig. \ref{fig:manualtrackingresults}). 
 
-We now know how to access individual data values within \ilcom{str}, by first splitting it with delimiter  \ilcom{\textbackslash{}n} and then by  \ilcom{\textbackslash{}t}. We can print all XY coordinates in Log window by following code.  
+We now know how to access individual data values within \ilcom{str}, 
+by first splitting it with delimiter  \ilcom{\textbackslash{}n} and then by  
+\ilcom{\textbackslash{}t}. We can print all XY coordinates in Log window by following code.  
 
 \lstinputlisting[morekeywords={*, split}]{code/code25.ijm}
 
-If you encounter error message with \ilcom{lineA[]} such as shown in fig.\ref{fig:fig262_ErrorMessage}, this is just because there is another text widow opened and \ilcom{getInfo()}command worked on that window rather than the results table of the Manual Tracking. To avoid such error, close extra text windows and then try running the macro again. 
+If you encounter error message with \ilcom{lineA[]} such as shown in fig.\ref{fig:fig262_ErrorMessage}, 
+this is just because there is another text widow opened and \ilcom{getInfo()}command worked on 
+that window rather than the results table of the Manual Tracking. To avoid such error, 
+close extra text windows and then try running the macro again. 
 %figure  
 \begin{figure}[htbp]
 \begin{center}
@@ -1543,11 +1558,17 @@ From line 4 to 7, new arrays are generated to store data from four columns in th
 \end{center}
 \end{figure}
 
-Check the log window (Fig. \ref{fig:fig253_CoordinatesPrintedOut}), compare the output with manual tracker results table, and if you are confident that you are accessing data in table, you could then use XY coordinates to place a circular ROI, measure average intensity in that area and list them in ImageJ Results window.
+Check the log window (Fig. \ref{fig:fig253_CoordinatesPrintedOut}), 
+compare the output with manual tracker results table, and if you are confident that you are accessing data in table, 
+you could then use XY coordinates to place a circular ROI, measure average intensity in that area and list them in ImageJ Results window.
 
 \lstinputlisting[morekeywords={*, split}]{code/code25_5.ijm}
 
-Running this code, you should see Results window that looks like figure \ref{fig:fig262_ManualTrackIntfinalResults}, tracking data plus measured intensity is shown in column titled "RoiInt". The way oval ROI is used to measure mean intensity is similar to what we have coded in the previous subsection. A difference is that this time, we use arrays that store data extracted by splitting the chunk of string data. 
+Running this code, you should see Results window that looks like figure 
+\ref{fig:fig262_ManualTrackIntfinalResults}, tracking data plus measured intensity is shown in 
+column titled "RoiInt". The way oval ROI is used to measure mean intensity is similar to what 
+we have coded in the previous subsection. A difference is that this time, we use arrays that store data 
+extracted by splitting the chunk of string data. 
 
 %figure  This should be replaced with results window!!!
 \begin{figure}[htbp]
@@ -1564,9 +1585,18 @@ We then successfully measured the intensity dynamics of moving object again.
 \subsection{Accessing Data File: Simple Case}
 In this section and in the next section, we study how to access data in saved file for secondary measurements. 
 
-Two cases we studied so far were both accessing data listed in a table that is already loaded in ImageJ (data is already an instance of ImageJ). What if we want to use data that is saved as a file? For example, we want to use results of Manual Tracking (previous section) that was saved as an .xls file and you want to use its data for secondary measurement. More generally, you did particle tracking using different software such as Imaris Track, and you want to use  coordinate data from that analysis for intensity measurement to be done in ImageJ. In such cases, we should access tabulated data in file accessing from ImageJ. 
+Two cases we studied so far were both accessing data listed in a table that is already loaded in ImageJ 
+(data is already an instance of ImageJ). What if we want to use data that is saved as a file? For example, 
+we want to use results of Manual Tracking (previous section) that was saved as an .xls file and 
+you want to use its data for secondary measurement. More generally, you did particle tracking using different software 
+such as Imaris Track, and you want to use  coordinate data from that analysis for intensity measurement to be done in ImageJ. 
+In such cases, we should access tabulated data in file accessing from ImageJ. 
 
-In this section, we try accessing data saved by Manual Tracking. Loading data file could be done by a small modification of the code we studied in the previous section. Instead of command \ilcom{getInfo("window.content")} in line 3 of code 25.5, we use \ilcom{FileOpenAsString(path)} to retrieve file content into a string variable.  By leaving the argument \ilcom{path} blank (""), user will be asked for choosing a file. Since this is a simple one-line replacement of line 3 of code 25.5, below is the new code but only showing its first 10 lines.  
+In this section, we try accessing data saved by Manual Tracking. Loading data file could be done by a small modification 
+of the code we studied in the previous section. Instead of command 
+\ilcom{getInfo("window.content")} in line 3 of code 25.5, we use \ilcom{FileOpenAsString(path)} to retrieve 
+file content into a string variable.  By leaving the argument \ilcom{path} blank (""), user will be asked for choosing a file. 
+Since this is a simple one-line replacement of line 3 of code 25.5, below is the new code but only showing its first 10 lines.  
 
 \lstinputlisting[linerange={1-10}, morekeywords={*, File, openAsString}]{code/code26.ijm}
 
@@ -1574,14 +1604,25 @@ To run this macro, be sure that you have your stack already opened, as it is req
 
 \subsection{Accessing Data File: Complex Case}
 
-We now try making use of data file with more complex format. In the case we studied with Manual Tracking plugin in the previous section, data format was pretty straight forward so we did not have to do much work for dealing with the data format. In general, things are not so simple and one must figure out some way to decode the format for using it in secondary measurement. 
+We now try making use of data file with more complex format. 
+In the case we studied with Manual Tracking plugin in the previous section, data format was pretty straight forward 
+so we did not have to do much work for dealing with the data format. 
+In general, things are not so simple and one must figure out some way to decode the format for using it in secondary measurement. 
 
-Automatic tracking plugin "ParticelTracker" allows you to save trajectory data by "Save Full Report" button in the results interface (see Fig. \ref{fig:particletrackingresults}). We try to access this data. \footnote{ This technique is especially important if you want to do automated particle tracking of many data. A new feature in ParticleTracker plugin released in Nov. 2010 is that when ParticleTracker is called from macro, it automatically saves data in folder where the image file is located. We then are able to process many files using macro, even recursively, and get tracking data automatically. For this reason technique for accessing ParticleTracker data file is valuable.}
+Automatic tracking plugin "ParticelTracker" allows you to save trajectory data by "Save Full Report" 
+button in the results interface (see Fig. \ref{fig:particletrackingresults}). 
+We try to access this data. 
+\footnote{ This technique is especially important if you want to do automated particle tracking of many data. 
+A new feature in ParticleTracker plugin released in Nov. 2010 is that when ParticleTracker is called from macro, 
+it automatically saves data in folder where the image file is located. We then are able to process many files using macro, 
+even recursively, and get tracking data automatically. For this reason technique for accessing ParticleTracker data file is valuable.}
 
 First, you must prepare the data file. 
 
 \begin{indentexercise}{1}
-\item Open sample image stack \textbf{TransportOfEndosomalVirus.tif}. Then do \ijmenu{[Plugins > Particle Detextor \& Tracker> Particle Tracker]}. An interface appears, so fill in the parameters as follows:
+\item Open sample image stack \textbf{TransportOfEndosomalVirus.tif}. 
+Then do \ijmenu{[Plugins > Particle Detextor \& Tracker> Particle Tracker]}. 
+An interface appears, so fill in the parameters as follows:
 \begin{itemize}
 \item radius: 3
 \item cutoff: 0
@@ -1589,7 +1630,12 @@ First, you must prepare the data file.
 \item link range: 1
 \item distance: 20
 \end{itemize}
-\item Click "Save Full Report" and save the data file in the folder where sample image stack "\textbf{TransportOfEndosomalVirus.tif}" is. Saving dialog will come up with a proposal of file name to be "Traj\_<filename>.txt" so do not change that and simply click Save (this file name will be important). Close the Results interface. Do not close the image stack \textbf{TransportOfEndosomalVirus.tif}, as we will use it still in the follwoing.
+\item Click "Save Full Report" and save the data file in the folder where sample image stack 
+"\textbf{TransportOfEndosomalVirus.tif}" is. 
+Saving dialog will come up with a proposal of file name to be "Traj\_<filename>.txt" 
+so do not change that and simply click Save (this file name will be important). 
+Close the Results interface. Do not close the image stack \textbf{TransportOfEndosomalVirus.tif}, 
+as we will use it still in the following.
 \end{indentexercise}
 
 Now you are ready with data, so we try loading data into ImageJ/Fiji. Run the following code. 
@@ -1607,26 +1653,36 @@ You now have all the values in the log window, that should look like fig. \ref{f
 \end{center}
 \end{figure}
 
-
-Before getting into data file structure, let's look at what we have done in the code above. You might then study about how to deal with string, extracting parts of it. 
+Before getting into data file structure, let's look at what we have done in the code above. 
+You might then study about how to deal with string, extracting parts of it. 
 \begin{itemize}
-\item Line 2: \ilcom{getDirectory} command with option \ilcom{("image")} will return a path of the last-opened image location. This will be where the file "\textbf{TransportOfEndosomalVirus.tif}", inside the sample image folder. 
+\item Line 2: \ilcom{getDirectory} command with option \ilcom{("image")} 
+will return a path of the last-opened image location. 
+This will be where the file "\textbf{TransportOfEndosomalVirus.tif}", inside the sample image folder. 
 \item Line 3: Filename of the image  "\textbf{TransportOfEndosomalVirus.tif}" is acquired. 
-\item Line 4: Generating the file name of the data file. "Traj\_" is the prefix that was automatically added to the data file name. Command \ilcom{substring} extracts part of the string variable, and in our case, we try to get the image file name without ".tif". Definition of \ilcom{substring} command is as follows.
+\item Line 4: Generating the file name of the data file. "Traj\_" is the prefix that was automatically added to 
+the data file name. Command \ilcom{substring} extracts part of the string variable, and in our case, 
+we try to get the image file name without ".tif". Definition of \ilcom{substring} command is as follows.
 
 \begin{indentCom}
 \textbf{substring(string, index1, index2)}\\
-Returns a new string that is a substring of string. The substring begins at index1 and extends to the character at index2 - 1. See also: indexOf, startsWith, endsWith, replace.
+Returns a new string that is a substring of string. The substring begins at index1 and extends to the character at index2 - 1. 
+See also: indexOf, startsWith, endsWith, replace.
 \end{indentCom}
 
-index1 should be 0, as we want from the beginning of the file name, and index2 should be 4 strings before the last string so we need the total length of the string. For this we use \ilcom{lengthOf} command. 
+index1 should be 0, as we want from the beginning of the file name, and index2 should be 4 strings before the 
+last string so we need the total length of the string. For this we use \ilcom{lengthOf} command. 
 \begin{indentCom}
 \textbf{lengthOf(str)}\\
 Returns the length of a string or array.
 \end{indentCom}
-In this way, we construct the file name we want to access (the name of which originally is automatically generated when saving the data in Particle Tracker interface) the file further setting the full path to the file in line 5. 
-\item Line 8: This line checks if the file full path generated above is valid. \ilcom{File.exists(full-path-to-file)} returns false if there is no such file. In that case, we should not proceed more so macro terminates at line 8. 
-\item Line 11: If everything is ok, then the file is opened as a string, and the string will be printed in Log window by line 12. 
+In this way, we construct the file name we want to access 
+(the name of which originally is automatically generated when saving the data in Particle Tracker interface) 
+the file further setting the full path to the file in line 5. 
+\item Line 8: This line checks if the file full path generated above is valid. 
+\ilcom{File.exists(full-path-to-file)} returns false if there is no such file. In that case, we should not proceed more so macro terminates at line 8. 
+\item Line 11: If everything is ok, then the file is opened as a string, 
+and the string will be printed in Log window by line 12. 
 \end{itemize}
 
 ParticleTracker data file consists of three parts. 
@@ -1635,9 +1691,11 @@ ParticleTracker data file consists of three parts.
 \item Detected Particles: Detected particles in each frame is listed.
 \item Trajectories: Trajectories are listed, one by one. 
 \end{enumerate}
-Since we need to access trajectory information, we need to go through the data string to reach the third part of the data structure. To do so we split the file by lines (\textbackslash{}n), then loop through the array to find the position where the trajectory information is contained. 
+Since we need to access trajectory information, we need to go through the data string to reach the third part of the data structure. 
+To do so we split the file by lines (\textbackslash{}n), then loop through the array to find the position where the trajectory information is contained. 
 
-We examine the data file in detail, to see what could be the marker for the starting and end point of each trajectory. Here is a part of data, that is a directly copy and pasted below. 
+We examine the data file in detail, to see what could be the marker for the starting and end point of each trajectory. 
+Here is a part of data, that is a directly copy and pasted below. 
 \begin{lstlisting}[numbers=none]
 24 154.894485 137.063614 7.338140 3.316167 15.683273
 25 154.217377 138.368927 7.087145 3.417947 0.188002
@@ -1657,7 +1715,8 @@ We examine the data file in detail, to see what could be the marker for the star
 %% Trajectory 38
 15 142.326370 81.088326 5.813046 2.967546 13.995440
 \end{lstlisting}
-Single trajectory data start with a line with "\%\%Trajectory " plus numbering, and ends with a blank space. We use these information as markers for determining the location of trajectory data within file. Each line of data consists of 6 numbers: 
+Single trajectory data start with a line with "\%\%Trajectory " plus numbering, and ends with a blank space. 
+We use these information as markers for determining the location of trajectory data within file. Each line of data consists of 6 numbers: 
 \begin{enumerate} 
 \item Frame number
 \item Y coordinate
@@ -1668,28 +1727,41 @@ Single trajectory data start with a line with "\%\%Trajectory " plus numbering, 
 \end{enumerate}
 These values are separated by space. So splitting single line to an array of elementary data needs to be done by \ilcom{split(line, " ")}.
 
-Here is a macro, that uses \ilcom{File.openAsString("")} to load the file and then loads the trajectory information into Results table with the strategy explained above. 
+Here is a macro, that uses \ilcom{File.openAsString("")} to load the file and then loads the trajectory information 
+into Results table with the strategy explained above. 
 
 \lstinputlisting[morekeywords={*, }]{code/code28.ijm}
 
-In the code 28, core of the processing resides within the function \ilcom{Load2ResultsV3}. It takes path to the data file and file name as arguments, and first opens the file as string at line 15. The chunk of string is then split by lines and for-loop starts to go through the array of lines (line 19). 
+In the code 28, core of the processing resides within the function \ilcom{Load2ResultsV3}. 
+It takes path to the data file and file name as arguments, and first opens the file as string at line 15. 
+The chunk of string is then split by lines and for-loop starts to go through the array of lines (line 19). 
 
-In every line in the array, if the line is a starting marker "\%\% Trajectory <number>" is tested (line 22) . If that is the case, then do-while loop is started, that loops until all the trajectory points are read out (line 24 to 41). While this trajectory read out is done, counter for the for-loop \ilcom{i} is also incremented that when the do-while loop ends (line 25), the for-loop starts again from the line after the data of that trajectory. Exit from do-loop occurs when blank line is found (line 42). 
+In every line in the array, if the line is a starting marker "\%\% Trajectory <number>" is tested (line 22) . 
+If that is the case, then do-while loop is started, that loops until all the trajectory points are read out (line 24 to 41). 
+While this trajectory read out is done, counter for the for-loop \ilcom{i} is also incremented that when the do-while loop ends (line 25), the for-loop starts again from the line after the data of that trajectory. Exit from do-loop occurs when blank line is found (line 42). 
 
-Inside the do-while loop, space character is replaced with tab delimiter (line 26 to 32). This is required, since ImageJ results importing only recognized tab-delimited file as a table.  
+Inside the do-while loop, space character is replaced with tab delimiter (line 26 to 32). 
+This is required, since ImageJ results importing only recognized tab-delimited file as a table.  
 
-There is a small adjustment by another function \ilcom{CommaEliminator} at line 32. This is required for removing comma character in some cases (this happens when the data file was opened and saved in excel or so). You probably do not need this line and function as we are using the data file directly after saving them. I left it in the code for your future usage. 
+There is a small adjustment by another function \ilcom{CommaEliminator} at line 32. 
+This is required for removing comma character in some cases (this happens when the data file was opened and saved in excel or so). 
+You probably do not need this line and function as we are using the data file directly after saving them. I left it in the code for your future usage. 
 
-Just to be sure with data content, line 33 and 34 double-check that the line indeed contains several data. line 35 to 38 writes trajectory ID, Frame number and XY coordinates into Results window by \ilcom{setResult} command.
+Just to be sure with data content, line 33 and 34 double-check that the line indeed contains several data. 
+Line 35 to 38 writes trajectory ID, Frame number and XY coordinates into Results window by \ilcom{setResult} command.
 
 \begin{indentexercise}{2}
-\item Finally, we can combine several macros and functions we studied so far to make a new macro that loads the ParticleTracker data file to Results table, and read out intensity. This could be done by combining following codes, with a bit of modifications with each. 
+\item Finally, we can combine several macros and functions we studied so far to make a new macro 
+that loads the ParticleTracker data file to Results table, and read out intensity. 
+This could be done by combining following codes, with a bit of modifications with each. 
 \begin{itemize}
 \item code 27 (check the current image stack name and loads its track data file as string)
 \item code 28 (data in string format is converted to Result table)
 \item code 24.5 (measure intensity according to coordinates in Results table)
 \end{itemize}
-Bits and pieces are already there. Please try completing a macro that loads track data file according to the title of the image stack that is already opened, place them in Results table, and then measure the intensity in corresponding frame and position in the image stack. 
+Bits and pieces are already there. Please try completing a macro that loads track data file according 
+to the title of the image stack that is already opened, place them in Results table, and then measure 
+the intensity in corresponding frame and position in the image stack. 
 \end{indentexercise}
 
 \newpage
@@ -1697,7 +1769,14 @@ Bits and pieces are already there. Please try completing a macro that loads trac
 \section{Using Javascript}
 
 As you become experienced with coding in ImageJ macros, you might start to find
-out that for whatever you want to do with ImageJ, corresponding macro function does not exist in the Build-in Macro Functions page\footnote{ see \url{http://rsb.info.nih.gov/ij/developer/macro/functions.html}}. One way to supplement the missing function is to create your own user function. Another way is to find a function directly from ImageJ Java code and use that function in macro. Javascript is a convinient way to access ImageJ API (Application Programming Interface), and since Javascript could be called from within ImageJ macro, you could use ImageJ API in your macro code. So This is done by the function below:
+out that for whatever you want to do with ImageJ, 
+corresponding macro function does not exist in the Build-in Macro Functions page
+\footnote{ see \url{http://rsb.info.nih.gov/ij/developer/macro/functions.html}}. 
+One way to supplement the missing function is to create your own user function. 
+Another way is to find a function directly from ImageJ Java code and use that function in macro. 
+Javascript is a convenient way to access ImageJ API (Application Programming Interface), 
+and since Javascript could be called from within ImageJ macro, you could use ImageJ API in your macro code. 
+So This is done by the function below:
 \begin{shaded}
 \begin{indentCom}
 \item \textbf{eval("script", javascript)}\\
@@ -1759,7 +1838,9 @@ do \ijmenu{[File > New > Script]} (then select \ijmenu{[Language > Javascript]})
 \begin{lstlisting}[numbers=none]
 IJ.log("Hello JS");
 \end{lstlisting}
-Type in the same code that prints out in the Log window. Do not forget adding semicolon (;) at the end of command this time. In case you write your code in Script Editor, you need to indicate the end of line, just like you do when you write a macro. \ijmenu{[Run > Run]} will execute the command. You should then see the same result like you saw with the Javascript inteprpreter. 
+Type in the same code that prints out in the Log window. Do not forget adding semicolon (;) at the end of command this time. 
+In case you write your code in Script Editor, you need to indicate the end of line, just like you do when you write a macro. 
+\ijmenu{[Run > Run]} will execute the command. You should then see the same result like you saw with the Javascript interpreter. 
 
 What this JS code does is the same as the Macro code below. 
 \begin{lstlisting}[numbers=none]
@@ -2149,7 +2230,11 @@ show it on the desktop, we do line 5.
 
 \ilcom{show()} is a method of ImagePlus class to show the actual image of ImagePlus object. 
 
-%In case of Macro, we could execute that as a single line. So how about doing the same? Create a new script tab by \ijmenu{[File > New]} from the script editor menu. Then copy line 4 and paste that single line in the new script.
+%In case of Macro, we could execute that as a single line. 
+% So how about doing the same? 
+% Create a new script tab by \ijmenu{[File > New]} 
+% from the script editor menu. 
+% Then copy line 4 and paste that single line in the new script.
 
 \textbf{Grabbing Image}
 What if you want to capture already opened Image as a ImagePlus object? 
@@ -2168,7 +2253,8 @@ Modify code 29 so that this JS code grabs currently active image and do the same
 \item \ilcom{IJ.openImage(path)} creates and image object from file.
 \item \ilcom{IJ.getImage()} grabs already existing object. 
 \end{itemize}
-\item Object is constructed taking a class as template. A class has field values and methods. Hence, object has those values and classes. 
+\item Object is constructed taking a class as template. A class has field values and methods. 
+Hence, object has those values and classes. 
 \begin{itemize}
 \item Field values are in most cases accessed via methods.
 \item Once an object is constructed, its public method could be used
@@ -2214,7 +2300,10 @@ The basic arithmetic operations include matrix addition and multiplication,
 matrix norms and selected element-by-element array operations.  
 A convenient matrix print method is also included.
 
-Five fundamental matrix decompositions, which consist of pairs or triples of matrices, permutation vectors, and the like, produce results in five decomposition classes.  These decompositions are accessed by the Matrix class to compute solutions of simultaneous linear equations, determinants, inverses and other matrix functions.  The five decompositions are
+Five fundamental matrix decompositions, which consist of pairs or triples of matrices, 
+permutation vectors, and the like, produce results in five decomposition classes.  
+These decompositions are accessed by the Matrix class to compute solutions of simultaneous linear equations, 
+determinants, inverses and other matrix functions.  The five decompositions are
 \begin{itemize}
 \item Cholesky Decomposition of symmetric, positive definite matrices
 \item LU Decomposition (Gaussian elimination) of rectangular matrices
@@ -2304,7 +2393,10 @@ Following will be some examples of using Apache Commons Math library.
 
 \lstinputlisting{code/code32.js}
 
-When you use a package, you should first import it. The first line is doing this by using a method \ilcom{importPackage}. One could also import a single class, using \ilcom{importClass} method. In line 4, a new object of Class DescriptiveStatistics is created. Line 5 and 6 stores data in this object, and calculates statistics in line 9, 10 and 11.
+When you use a package, you should first import it. The first line is doing this by using a method \ilcom{importPackage}. 
+One could also import a single class, using \ilcom{importClass} method. 
+In line 4, a new object of Class DescriptiveStatistics is created. Line 5 and 6 stores data in this object, 
+and calculates statistics in line 9, 10 and 11.
 
 \subsubsection{Solving Linear System}
 % http://commons.apache.org/math/userguide/linear.html
