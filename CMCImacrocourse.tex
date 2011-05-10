@@ -222,29 +222,49 @@ For example, if you want to do \\
 \ijmenu{[Process -> Contrast Enhancement]}, \\
 apply \ijmenu{[Process -> Gaussian blurring]} \\
 and then \ijmenu{[Process -> threshold]} \\
-to an image, it takes three times of mouse operation choosing these commands from ImageJ menu. If you need to do this for many images, the work load would become pretty heavy. Writing a macro assembles such works into a single task. Macro becomes even more powerful when you need to process/analyze stacks. 
+to an image, it takes three times of mouse operation choosing these commands from ImageJ menu. 
+If you need to do this for many images, the work load would become pretty heavy. 
+Writing a macro assembles such works into a single task. Macro becomes even more powerful 
+when you need to process/analyze stacks. 
 
 \subsection{Generate new functions which do not exist in the menu or as a PlugIn.}
-Automation of a series of command is very convenient, but the macro programming is not only limited to such automation. ImageJ macro language enables you to access single pixels in digital images. This means that when you know an algorithm for processing/analysis but the function is not implemented in the ImageJ itself or as a PlugIn, one could write a custom function using the macro language.
+Automation of a series of command is very convenient, but the macro programming is not only limited to such automation. 
+ImageJ macro language enables you to access single pixels in digital images. 
+This means that when you know an algorithm for processing/analysis but the function is not implemented in the ImageJ 
+itself or as a PlugIn, one could write a custom function using the macro language.
 \subsection{Running your job in remote server}
-ImageJ could be used from command line, and macro file could be executed by adding the file name to the java command. This enables you to do the calculation with faster machines like the EMBL cluster. If you use job array many jobs could be done in parallel so you could finish your calculation much faster.
+ImageJ could be used from command line, and macro file could be executed by 
+adding the file name to the java command. This enables you to do the calculation with faster machines like the EMBL cluster. 
+If you use job array many jobs could be done in parallel so you could finish your calculation much faster.
 
 \subsection{Limitations compared to Plugins written in Java}
 
-In addition to Macro programming, ImageJ has plugin-writing capability. This enables one to add new functions to ImageJ by coding in Java programming language. This capability affords almost infinite possibility to process and analyze images; you could create any kind of processing / analysis functions you could imagine. Compared to plugins, ImageJ Macro language has some limitations: 
+In addition to Macro programming, ImageJ has plugin-writing capability. 
+This enables one to add new functions to ImageJ by coding in Java programming language. 
+This capability affords almost infinite possibility to process and analyze images; 
+you could create any kind of processing / analysis functions you could imagine. 
+Compared to plugins, ImageJ Macro language has some limitations: 
 
 \begin{enumerate}
-\item If you need to process large images or stacks with many steps, you might recognize that it is slow. Some benchmarks indicates that a Plugin would be about 40 times faster than Macro. 
+\item If you need to process large images or stacks with many steps, 
+you might recognize that it is slow. Some benchmarks indicates that a Plugin would be about 40 times faster than Macro. 
 
-\item Macro cannot be used as a library\footnote{It is possible to write a macro in a library fashion and use it from another macro, but this is not as robust and clear as it is in java, which is a language designed to be so.}. In Java, once a class is written, this could be used later again from another class . 
+\item Macro cannot be used as a library
+\footnote{It is possible to write a macro in a library fashion and use it from another macro, 
+but this is not as robust and clear as it is in java, which is a language designed to be so.}. 
+In Java, once a class is written, this could be used later again from another class . 
 
-\item Macro is not efficient in implementing real-time interactive input during the macro command is executed; \textit{e.g.} If you want to design a program that requires real-time user input to select a ROI interactively.  Macro could only do such interactive tasks by separating the program into several different commands. 
+\item Macro is not efficient in implementing real-time interactive input during the macro command is executed; 
+\textit{e.g.} If you want to design a program that requires real-time user input to select a ROI interactively.  
+Macro could only do such interactive tasks by separating the program into several different commands. 
 \end{enumerate}
 
 If you become unsatisfied with these limitations, learning more complicated but more flexible PlugIn programming is recommended. 
 
 \subsection{Comparison with Other scripting languages}
-There are several other scripting capability for customizing ImageJ function. This is because ImageJ is a java program, and there are many scripting languages that are interfaced with Java. Scripting languages included in Fiji are 
+There are several other scripting capability for customizing ImageJ function. 
+This is because ImageJ is a java program, and there are many scripting languages that are interfaced with Java. 
+Scripting languages included in Fiji are 
 
 \begin{itemize}
  \item Javascript
@@ -253,35 +273,67 @@ There are several other scripting capability for customizing ImageJ function. Th
  \item Clojure
  \end{itemize}
 
-If you set up environment by yourself, you could also use other languages such as Scala and Groovy. Compared to ImageJ macro language, all these languages are more general and widely used. 
+If you set up environment by yourself, you could also use other languages such as Scala and Groovy. 
+Compared to ImageJ macro language, all these languages are more general and widely used. 
 
 Advantages of ImageJ Macro compared to these scripting languages are: 
 \begin{itemize}
-\item Easy to learn. Functions are mirrors of ImageJ menu, so scripting is intuitive if you know ImageJ already. Macro recorder is a handy tool for finding out the right commands. 
+\item Easy to learn. Functions are mirrors of ImageJ menu, so scripting is intuitive if you know ImageJ already. 
+Macro recorder is a handy tool for finding out the right commands. 
 
-\item Macro set allows you to contain multiple macros in one file (called 'Macro-set"). This is useful for complex processing is required (see Advanced Macro Programming section for more details). 
+\item Macro set allows you to contain multiple macros in one file (called 'Macro-set"). 
+This is useful for complex processing is required (see Advanced Macro Programming section for more details). 
 
-\item A significant hurdle for coding with general scripting languages is that one must know the \textbf{ImageJ Java API} well, meaning that you basically have to know fundamentals of Java programming language for using these scripting languages. 
+\item A significant hurdle for coding with general scripting languages is that one must know the 
+\textbf{ImageJ Java API} well, meaning that you basically have to know fundamentals of Java programming language 
+for using these scripting languages. 
 \end{itemize}
 
 Thus, ImageJ macro language is the easiest way to access scripting capability in ImageJ. 
 
-Disadvantage of ImageJ macro compared to other scripting languages beside its generality is its extendibility: code you write could not be recycled except with copy and pasting\footnote{One could also use getArgument() and File related functions for passing arguments from a macro file to the other, but ImageJ macro is not designed to be a library. }. With other scripting languages available for ImageJ, one could write more object-oriented programs and once you write, code could be recycled in other programs\footnote{ Except for Javascript. Calling other Javascript file from another Javascript file is not stragiht forward.}. Another disadvantage is that Macro is slow compared to some of scripting languages like Clojure and Scala. Processing speed is comparable to Jython and Javascript.  
+Disadvantage of ImageJ macro compared to other scripting languages beside its generality is its extendability: 
+code you write could not be recycled except with copy and pasting
+\footnote{One could also use getArgument() and File related functions for passing arguments 
+from a macro file to the other, but ImageJ macro is not designed to be a library. }. 
+With other scripting languages available for ImageJ, one could write more object-oriented programs 
+and once you write, code could be recycled in other programs
+\footnote{ Except for Javascript. Calling other Javascript file from another Javascript file is not straight forward.}. 
+Another disadvantage is that Macro is slow compared to some of scripting languages like Clojure and Scala. 
+Processing speed is comparable to Jython and Javascript.  
 
 \subsection{Summary}
-Macro programming enables you to ease the work loads by automating sequence of commands. Accessing single pixels from macro is also possible. The potential of the macro is similar to PlugIn, but for interactive functions PlugIn works better. Macro is also slower than plugin. 
+Macro programming enables you to ease the work loads by automating sequence of commands. 
+Accessing single pixels from macro is also possible. 
+The potential of the macro is similar to PlugIn, but for interactive functions PlugIn works better. 
+Macro is also slower than plugin. 
 
-\textbf{How to learn Macro programming:} In this course, you will encounter with many example codes. You will write the example codes in your own laptop ImageJ and run the macro. Modifying these examples is a very important exercise since in most cases, you start writing your macro by modifying some parts of the macro that is distributed already\footnote{200+ macros are available in ImageJ web site. \href{http://rsb.info.nih.gov/ij/macros/}{http://rsb.info.nih.gov/ij/macros/}}. 
+\textbf{How to learn Macro programming:} 
+In this course, you will encounter with many example codes. 
+You will write the example codes in your own laptop ImageJ and run the macro. 
+Modifying these examples is a very important exercise since in most cases, 
+you start writing your macro by modifying some parts of the macro that is distributed already
+\footnote{200+ macros are available in ImageJ web site. 
+\href{http://rsb.info.nih.gov/ij/macros/}{http://rsb.info.nih.gov/ij/macros/}}. 
 \newpage
 \section{Basics}
 
 \subsection{''Hello World!''}
 
-We first try writing a simple macro that prints out''Hello World!''. ImageJ has a macro editor with simple debugger function\footnote{Debugger assists you to correct mistakes in the code. This is convenient when the code becomes long. Macro can be written in any text editor such as "Notepad" in Windows but of course there is no debugger function available in this case.}. To open the editor, select \ijmenu{[PlugIns -> New -> Macro]} from the menu.  This will create a new window where you can write macro (we call this ''macro editor''). 
+We first try writing a simple macro that prints out''Hello World!''. 
+ImageJ has a macro editor with simple debugger function
+\footnote{Debugger assists you to correct mistakes in the code. 
+This is convenient when the code becomes long. 
+Macro can be written in any text editor such as "Notepad" in Windows but of course 
+there is no debugger function available in this case.}. 
+To open the editor, select \ijmenu{[PlugIns -> New -> Macro]} from the menu.  
+This will create a new window where you can write macro (we call this ''macro editor''). 
 \begin{indentFiji}
-Fiji: You could use more advanced interface called ''script editor'' by \ijmenu{[Plugins -> Scripting -> Script Editor]}. Then select \ijmenu{[Language -> ImageJ Macro]}. Syntax high lighter offers automatic coloring of ImageJ functions. 
+Fiji: You could use more advanced interface called ''script editor'' by \ijmenu{[Plugins -> Scripting -> Script Editor]}. 
+Then select \ijmenu{[Language -> ImageJ Macro]}. Syntax high lighter offers automatic coloring of ImageJ functions. 
 \end{indentFiji}
-Then write a program as follows\footnote{NOTE: DON'T FORGET TO TABULATE THE SECOND LINE!}. Omit the line numbers! These numbers were added just for explanation. 
+Then write a program as follows
+\footnote{NOTE: DON'T FORGET TO TABULATE THE SECOND LINE!}. 
+Omit the line numbers! These numbers were added just for explanation. 
 
 %Code 1
 %\begin{lstlisting}
@@ -307,7 +359,9 @@ Then write a program as follows\footnote{NOTE: DON'T FORGET TO TABULATE THE SECO
 \end{center}
 \end{figure}
 
-Click "Macros" in the menu at the top of the macro editing window ("Macros" in the menu appears only when the macro editing window is active). In the first line, there is "Run Macro". Try running it from editor menu \ijmenu{[Macros-> Run Macro]} 
+Click "Macros" in the menu at the top of the macro editing window 
+("Macros" in the menu appears only when the macro editing window is active). 
+In the first line, there is "Run Macro". Try running it from editor menu \ijmenu{[Macros-> Run Macro]} 
 \begin{indentFiji}
 Fiji:  Use \ijmenu{[Run -> Run]}. 
 \end{indentFiji}
@@ -322,20 +376,32 @@ This will create a new window "Log", with "Hello World" printed. \\
 
 Explanation for the Code 1:\\
 \begin{itemize}
-\item line 1: You are declaring that a macro code starts and the code is contained between  curly braces \{\}. "print\_out" will be the name of macro. 
+\item line 1: You are declaring that a macro code starts and the code is contained between 
+curly braces \{\}. "print\_out" will be the name of macro. 
 
-\item line2: print() command orders ImageJ to print out the content within the parenthesis in the "Log" window. The text to be printed must be contained within the double quotes (""). The best reference to macro functions of ImageJ is in the ImageJ web site\footnote{ http://rsbweb.nih.gov/ij/developer/macro/functions.html}. For example, you could find definition of print("") command in the web site as quoted in below:\\
+\item line2: print() command orders ImageJ to print out the content within the parenthesis 
+in the "Log" window. The text to be printed must be contained within the double quotes (""). 
+The best reference to macro functions of ImageJ is in the ImageJ web site
+\footnote{ http://rsbweb.nih.gov/ij/developer/macro/functions.html}. 
+For example, you could find definition of print("") command in the web site as quoted in below:\\
 %\item
 \begin{indentCom}
 \textbf{print(string)}\\
-Outputs a string to the "Log" window. Numeric arguments are automatically converted to strings. The print() function accepts multiple arguments. For example, you can use print(x,y,width, height) instead of print(x+" "+y+" "+width+" "+height). If the first argument is a file handle returned by File.open(path), then the second is saved in the referred file (see SaveTextFileDemo).
+Outputs a string to the "Log" window. Numeric arguments are automatically converted to strings. 
+The print() function accepts multiple arguments. For example, you can use print(x,y,width, height) 
+instead of print(x+" "+y+" "+width+" "+height). 
+If the first argument is a file handle returned by File.open(path), 
+then the second is saved in the referred file (see SaveTextFileDemo).
 
-Numeric expressions are automatically converted to strings using four decimal places, or use the d2s function to specify the decimal places. For example, print(2/3) outputs "0.6667" but print(d2s(2/3,1)) outputs "0.7".
+Numeric expressions are automatically converted to strings using four decimal places, 
+or use the d2s function to specify the decimal places. 
+For example, print(2/3) outputs "0.6667" but print(d2s(2/3,1)) outputs "0.7".
 \end{indentCom}
 
 \item line 3: a brace tells ImageJ that the code "print\_out" finishes at this line.  
 \end{itemize}
-So that was the very basic of how you use a macro. To integrate the macro into the ImageJ Menu bar, the macro must be "installed". To do so, in the editor menu, \ijmenu{[Macros -> Install Macros]} 
+So that was the very basic of how you use a macro. To integrate the macro into the ImageJ Menu bar, 
+the macro must be "installed". To do so, in the editor menu, \ijmenu{[Macros -> Install Macros]} 
 \begin{indentFiji}
 Fiji: [Run -> Install Macro]).
 \end{indentFiji}
@@ -348,11 +414,15 @@ Check IJ menu \ijmenu{[Macros -> ]} to see that the macro is now in the menu.\\
 \end{center}
 \end{figure}
 
-Macro can be saved as a file and can be directly installed also. In the editor, do \ijmenu{[File -> Save]}. Saving dialogue window appears, and just save the file wherever you can remember afterwards . To install the macro, do \ijmenu{[PlugIns -> Macro -> Install\ldots]} Select the macro file you want to install.\\
+Macro can be saved as a file and can be directly installed also. 
+In the editor, do \ijmenu{[File -> Save]}. Saving dialogue window appears, 
+and just save the file wherever you can remember afterwards . 
+To install the macro, do \ijmenu{[PlugIns -> Macro -> Install\ldots]} Select the macro file you want to install.\\
 
 %\begin{indentexercise}{1cm}
 \begin{indentexercise}{1}
-\item Add another line \texttt{"print("\textbackslash{}\textbackslash{}Clear");"} after the second line (below, code 1.5. don't forget the semi-colon at the end!). 
+\item Add another line \texttt{"print("\textbackslash{}\textbackslash{}Clear");"} 
+after the second line (below, code 1.5. don't forget the semi-colon at the end!). 
 \item \lstinputlisting{code/code01_5.ijm}
 Then test also another macro when you insert the same command in the third line (code 1.75). What happened?  
 \item \lstinputlisting{code/code01_75.ijm}
@@ -363,7 +433,9 @@ Then test also another macro when you insert the same command in the third line 
 \end{indentexercise}
 
 \begin{indentexercise}{3}
-\item Multiple macros can exist in a single file. We call this \textbf{"macro sets"}. Duplicate the code you wrote by copying and pasting under the original. The second macro should have a different name. In the example below, the second macro is named "pirnt\_out2".
+\item Multiple macros can exist in a single file. We call this \textbf{"macro sets"}. 
+Duplicate the code you wrote by copying and pasting under the original. 
+The second macro should have a different name. In the example below, the second macro is named "pirnt\_out2".
 \end{indentexercise}
 
 \begin{figure}[htbp]
@@ -374,26 +446,34 @@ Then test also another macro when you insert the same command in the third line 
 \end{figure}
 
 \subsection{Variables and Strings}
-Texts such as "Hello World!" can substituted by variables (there is no distinction of number variable and string variable in ImageJ macro.). Let's understand this by examining a short macro below.
+Texts such as "Hello World!" can substituted by variables 
+(there is no distinction of number variable and string variable in ImageJ macro.). 
+Let's understand this by examining a short macro below.
 \lstinputlisting{code/code02.ijm}
 \lstinputlisting{code/code03.ijm}
-
 
 \begin{indentexercise}{1}
 \item Add more string variables and make a longer sentence.\\
 \end{indentexercise}
 
-Message\_text is a "String Variable" or simply a "String". ImageJ prepares a memory space for this variable, and you can change the content by re-defining the content. It is also possible to substitute the content with numbers, such as\\
+Message\_text is a "String Variable" or simply a "String". 
+ImageJ prepares a memory space for this variable, and you can change the content by re-defining the content. 
+It is also possible to substitute the content with numbers, such as\\
 \begin{lstlisting}[numbers=none]
 message_text = 256;
 \end{lstlisting}
-With this assignment, the variable is now a "Numerical variable" or simply "variable". In other programming languages such as C or Java, difference between numbers and characters matters a lot. In ImageJ you do not have to care whether the variable is number or string, but in some cases this may cause problem so it's better to just keep this difference in your mind. We will see an example of such confusion, and also a way to avoid the confusion. 
+With this assignment, the variable is now a "Numerical variable" or simply "variable". 
+In other programming languages such as C or Java, difference between numbers and characters matters a lot. 
+In ImageJ you do not have to care whether the variable is number or string, but in some cases this may cause problem 
+so it's better to just keep this difference in your mind. We will see an example of such confusion, 
+and also a way to avoid the confusion. 
 
 Test the following macro to see how the numerical variable works. 
 \lstinputlisting{code/code04.ijm}
 Did you get some results printed out? It should, but you should read the code carefully. 
 
-You might have noticed a strange expression at line 8, in the way it assigns the variable txt. It starts with double quotation marks. \\
+You might have noticed a strange expression at line 8, in the way it assigns the variable txt. 
+It starts with double quotation marks. \\
 %\lstinputlisting[language=Java, linerange={8-8}, numbers=none]{code/code04.ijm}
 \begin{lstlisting}[numbers=none]
 txt="" + a + "+"+ b + "="+c;
@@ -402,7 +482,9 @@ Seemingly this looks like meaningless. If you define txt without the first "usel
 \begin{lstlisting}[numbers=none]
 txt=a + "+"+ b + "="+c;
 \end{lstlisting}
-Theoretically this should work also, since the double quotes does not have any content so it shouldn't matter whether if it is there. But if you try this what seems to be straight-forward assignment, ImageJ returns error message when you run it. 
+Theoretically this should work also, since the double quotes does not have any content so it shouldn't matter 
+whether if it is there. But if you try this what seems to be straight-forward assignment, 
+ImageJ returns error message when you run it. 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -411,7 +493,10 @@ Theoretically this should work also, since the double quotes does not have any c
 \end{center}
 \end{figure}
 
-This is because when ImageJ scans through the macro from top to bottom line by line, it reaches the txt substitution line and first sees the variable a and interprets that txt should be a numerical variable (or function), since a is a number. Then ImageJ goes on with the scanning and then sees "+" which is a character. ImageJ cannot interpret String variable within a numerical function. 
+This is because when ImageJ scans through the macro from top to bottom line by line, 
+it reaches the txt substitution line and first sees the variable a and interprets that txt should be a numerical variable 
+(or function), since a is a number. Then ImageJ goes on with the scanning and then sees "+" which is a character. 
+ImageJ cannot interpret String variable within a numerical function. 
 
 Instead, the programmer can tell ImageJ that \textit{txt} is a string function at the beginning of the function by putting a set of double quote at the beginning. ImageJ does handle numerical variables within string function, so the line works and prints out the result successfully.  
 
@@ -420,7 +505,8 @@ Modify the code 4, so that the calculation involves subtraction (-), multiplicat
 \end{indentexercise}
 
 \subsection{Parameter Input by User}
-In many cases you may want to make a macro to ask the user to input some numerical values, file names. We learn how to do this here by first examining the following code. 
+In many cases you may want to make a macro to ask the user to input some numerical values, 
+file names. We learn how to do this here by first examining the following code. 
 \lstinputlisting{code/code05.ijm}
 Running this macro,  a dialogue window pops-up.
 
@@ -541,10 +627,25 @@ The result should look like:
 \begin{itemize}
 \item Line 3 asks the user to input a string (we did this already). If user does not change the default text ("whatever") and click "OK", then the command interpreter proceeds to line 4.
 
-\item Line 4 \ilcom{for(i=0; i<5; i+=1)} sets the number of looping. Three parameters are required for "for" loop. The first parameter defines the variable used for the counting loop and its initial value (\ilcom{i=0}). The second parameter sets the condition for exiting from the loop (\ilcom{i<5}). Third parameter sets the step size of i, meaning that how much value is added per loop (\ilcom{i +=1}, could also be subtraction, multiplication, division e.g. \ilcom{i-= 1}). 
-\item After this \ilcom{for(\ldots;\ldots;\ldots)} command, there is a brace (\{) one at the end of line 4 (\{) and the second one in the line 6. These braces tell ImageJ to loop commands in between so command in line 5 will be iterated according to the parameters defined in the parenthesis of for. Between braces, you could add more lines of functions as much as you want.  
+\item Line 4 \ilcom{for(i=0; i<5; i+=1)} sets the number of looping. 
+Three parameters are required for "for" loop. The first parameter defines the variable used for the counting loop and 
+its initial value (\ilcom{i=0}). The second parameter sets the condition for exiting from the loop (\ilcom{i<5}). 
+Third parameter sets the step size of i, meaning that how much value is added per loop (\ilcom{i +=1}, 
+could also be subtraction, multiplication, division e.g. \ilcom{i-= 1}). 
+\item After this \ilcom{for(\ldots;\ldots;\ldots)} command, there is a brace (\{) one at the end of line 4 (\{) and 
+the second one in the line 6. These braces tell ImageJ to loop commands in between so command in line 5 will be iterated 
+according to the parameters defined in the parenthesis of for. Between braces, you could add more lines of functions as much as 
+you want.  
 \end{itemize}
-So when the command interpreter reaches line 4 and sees \ilcom{for(}, it starts looking inside the parenthesis and defines that the counting starts with 0 using a variable \ilcom{i}, and then line 5 is executed. The macro prints out "0 \ensuremath\colon whatever" using the content of \ilcom{i}, string \ilcom{\ensuremath\colon} and the string variable \ilcom{message\_txt}. Then in line 6, interpreter sees \ilcom{\}} and goes back to line 4 and adds 1 (because of \ilcom{i+=1}). i is still 1 so \ilcom{i<5} is true. The interpreter goes to line 5 and executes the command and prints out "1\ensuremath\colon whatever". Such looping will continue until i becomes 5, since when i becomes 5, \ilcom{i<5} is no longer true so interpreter goes out from the for-loop. \\
+So when the command interpreter reaches line 4 and sees \ilcom{for(}, 
+it starts looking inside the parenthesis and defines that the counting starts with 0 using a variable \ilcom{i}, 
+and then line 5 is executed. The macro prints out "0 \ensuremath\colon whatever" 
+using the content of \ilcom{i}, string \ilcom{\ensuremath\colon} and the string variable \ilcom{message\_txt}. 
+Then in line 6, interpreter sees \ilcom{\}} and goes back to line 4 and adds 1 (because of \ilcom{i+=1}). 
+i is still 1 so \ilcom{i<5} is true. The interpreter goes to line 5 and 
+executes the command and prints out "1\ensuremath\colon whatever". 
+Such looping will continue until i becomes 5, since when i becomes 5, \ilcom{i<5} is no longer true so interpreter goes out 
+from the for-loop. \\
 
 \begin{indentexercise}{1}
 (1) Change the first parameter in \ilcom{for(i=0;i<5;i+=1)} so that the macro prints out only 1 line. 
@@ -555,12 +656,17 @@ So when the command interpreter reaches line 4 and sees \ilcom{for(}, it starts 
 \end{indentexercise}
 
 \subsection{Stack Management by for-statement}
-One of powerful application of for-loop in biological image processing is image stack management, such as measuring dynamics or multi-frame processing. Many ImageJ commands works with only single frame within a stack. Without macro programming, you need to execute the command while you flip the frame manually. Macro programming enables you to automate this process. Here is an example of measuring intensity change over time. 
+One of powerful application of for-loop in biological image processing is image stack management, 
+such as measuring dynamics or multi-frame processing. Many ImageJ commands works with only single frame within a stack. 
+Without macro programming, you need to execute the command while you flip the frame manually. 
+Macro programming enables you to automate this process. Here is an example of measuring intensity change over time. 
 \lstinputlisting[morekeywords={*, run, setSlice, nSlices}]{code/code10.ijm}
 \begin{itemize}
 \item Line 3: \ilcom{nSlices} is a command that returns number of slices in the active slice. 
 
-\item Line 4: Sets measurement parameters. In this case "mean" intensity will be measured. You do not have to care for now about the "redirect" parameter. "decimal" This is the number of digits to the right of the decimal point in real numbers displayed in the results table. 
+\item Line 4: Sets measurement parameters. In this case "mean" intensity will be measured. 
+You do not have to care for now about the "redirect" parameter. "decimal" This is the number of digits to 
+the right of the decimal point in real numbers displayed in the results table. 
 
 \item Line 5: clears the results table. 
 
@@ -573,7 +679,11 @@ One of powerful application of for-loop in biological image processing is image 
 \item Line 9:  actual measurement is done. Result will be recorded in the memory and will be displayed in the Results table window. 
 \end{itemize}
 
-Open an example stack \textbf{1703-2(3s-20s).stk}\footnote{Some of you may realize that you used this sequence in the Image Processing / Analysis Course for learning Time Series Analyzer Plugin. Now, you can program similar device in macro. Good thing about the custom program is that you will be able to modify the program further to add more functions.}. This is a short sequence of FRAP analysis, so edge of the one of the cells is bleached and then fluorescence recovers by time. Select FRAPped region by ROI tool (such as in the figure below). Execute the macro. Results will be printed in the Results window (see see the table in the figure left). 
+Open an example stack \textbf{1703-2(3s-20s).stk}
+\footnote{Some of you may realize that you used this sequence in the Image Processing / Analysis Course for learning 
+Time Series Analyzer Plugin. Now, you can program similar device in macro. Good thing about the custom program 
+is that you will be able to modify the program further to add more functions.}. 
+This is a short sequence of FRAP analysis, so edge of the one of the cells is bleached and then fluorescence recovers by time. Select FRAPped region by ROI tool (such as in the figure below). Execute the macro. Results will be printed in the Results window (see see the table in the figure left). 
 
 %%%figure frap seq and quantification
 %\begin{figure}[htbp]
@@ -1181,7 +1291,8 @@ Analysis of images requires both input and out put: input is to load images, and
 
 When you have a time series sequence and you want to measure multiple signals with multiple parameters in each frame, measurement results in each frame needs to be somehow saved. Here, we learn how to export measurement results in your hard disk automatically using macro. 
 
-Open the sample image \ilcom{Nucseq001.tif}. Cell nucleus shows that they divide and increase their number over time. We want to count the number of nucleus in each frame to know the dynamics of increase. At the same time, we may also want to see changes in the signal intensity and shape. For this measurement Particle Analysis function works best. Do the following:
+Open the sample image \ilcom{Nucseq001.tif}. Cell nucleus shows that they divide and increase their number over time. We want to count the number of nucleus in each frame to know the dynamics of increase. 
+At the same time, we may also want to see changes in the signal intensity and shape. For this measurement Particle Analysis function works best. Do the following:
 
 \begin{enumerate}
 \small{
@@ -1434,7 +1545,10 @@ This function is similar to getStatistics except that the values returned are un
 Next, we study a case when data are shown in non-Results Table. Manual Tracking plugin is another way of measuring particle movement, and utilizes non-Results table. 
 
 \begin{indentexercise}{1}
-Open sample image stack \textbf{TransportOfEndosomalVirus.tif} and track at least two virus manually\footnote{ For detailed instruction on how to use Manual tracker, see corresponding section in CMCI Image Processing and Analysis Course I Basic.}. In ImageJ, you should install this plugin by yourself. In Fiji, Manual Tracking plugin could be found at \ijmenu{[Plugins > tracking >]}.
+Open sample image stack \textbf{TransportOfEndosomalVirus.tif} 
+and track at least two virus manually\footnote{ For detailed instruction on how to use Manual tracker, 
+see corresponding section in CMCI Image Processing and Analysis Course I Basic.}. 
+In ImageJ, you should install this plugin by yourself. In Fiji, Manual Tracking plugin could be found at \ijmenu{[Plugins > tracking >]}.
 \end{indentexercise}
 
 After the tracking, we have a results table that looks like figure \ref{fig:manualtrackingresults}.
@@ -1447,12 +1561,19 @@ After the tracking, we have a results table that looks like figure \ref{fig:manu
 \end{center}
 \end{figure}
 
-To extract these data and use it for the secondary measurement, you might immediately think of using \ilcom{getResult(column header, row)} as we did in the previous subsection.
+To extract these data and use it for the secondary measurement, 
+you might immediately think of using \ilcom{getResult(column header, row)} 
+as we did in the previous subsection.
 
-That should then be pretty straight forward\ldots But if you try this, you would see that this function returns error and does not work in case of Manual Tracking plugin. This is because result table created by Manual Tracking plugin is not the genuine ImageJ Results window. For such non-genuine results window, we retrieve data using the following command. 
+That should then be pretty straight forward\ldots 
+But if you try this, you would see that this function returns error and does not work in case of Manual Tracking plugin. 
+This is because result table created by Manual Tracking plugin is not the genuine ImageJ Results window. 
+For such non-genuine results window, we retrieve data using the following command. 
 \begin{indentCom}
 \textbf{getInfo("window.contents")}\\
-If the front window is a text window, returns the contents of that window. If the front window is an image, returns a string containing the text that would be displayed by Image>Show Info. Note that \ilcom{getImageInfo()} is a more reliable way to retrieve information about an image. Use \\
+If the front window is a text window, returns the contents of that window. 
+If the front window is an image, returns a string containing the text that would be displayed by 
+Image>Show Info. Note that \ilcom{getImageInfo()} is a more reliable way to retrieve information about an image. Use \\
 \ilcom{split(getInfo(),"\textbackslash{}n")} \\
 to break the string returned by this function into separate lines. Replaces the \ilcom{getInfo()} function.
 \end{indentCom}
@@ -1488,7 +1609,8 @@ The default delimiter set " \textbackslash{}t\textbackslash{}n\textbackslash{}r"
 Returns a one element array if no delimiter is found. 
 \end{indentCom}
 
-Using this command to convert the string to a string array and adding two more lines to check the content of array, code now looks like this:\\
+Using this command to convert the string to a string array and adding two more lines to check the content of array, 
+code now looks like this:\\
 \begin{lstlisting}[numbers=none, morekeywords={*, split}]
 str = getInfo("window.contents");
 //print(str);
@@ -1560,7 +1682,8 @@ From line 4 to 7, new arrays are generated to store data from four columns in th
 
 Check the log window (Fig. \ref{fig:fig253_CoordinatesPrintedOut}), 
 compare the output with manual tracker results table, and if you are confident that you are accessing data in table, 
-you could then use XY coordinates to place a circular ROI, measure average intensity in that area and list them in ImageJ Results window.
+you could then use XY coordinates to place a circular ROI, 
+measure average intensity in that area and list them in ImageJ Results window.
 
 \lstinputlisting[morekeywords={*, split}]{code/code25_5.ijm}
 
@@ -1738,7 +1861,9 @@ The chunk of string is then split by lines and for-loop starts to go through the
 
 In every line in the array, if the line is a starting marker "\%\% Trajectory <number>" is tested (line 22) . 
 If that is the case, then do-while loop is started, that loops until all the trajectory points are read out (line 24 to 41). 
-While this trajectory read out is done, counter for the for-loop \ilcom{i} is also incremented that when the do-while loop ends (line 25), the for-loop starts again from the line after the data of that trajectory. Exit from do-loop occurs when blank line is found (line 42). 
+While this trajectory read out is done, counter for the for-loop \ilcom{i} 
+is also incremented that when the do-while loop ends (line 25), the for-loop starts again from the 
+line after the data of that trajectory. Exit from do-loop occurs when blank line is found (line 42). 
 
 Inside the do-while loop, space character is replaced with tab delimiter (line 26 to 32). 
 This is required, since ImageJ results importing only recognized tab-delimited file as a table.  
