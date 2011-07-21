@@ -142,7 +142,7 @@ morestring=[b]",
 
 {\bfseries EMBL-CMCI course II}\\[\baselineskip]
 {\textcolor{Medium}{\Huge Macro Programming in ImageJ}}\\[\baselineskip]
-{\small ver 2.0.0}\par
+{\small ver 2.0.1}\par
 \vfill
 
 %{\Large Centre for Molecular \& Cellular Imaging\\EMBL Heidelberg\\\plogo}\par
@@ -198,7 +198,7 @@ Note: This textbook was written using Fiji (ImageJ 1.44e).
 When you want to distribute, please ask Kota as this textbook is progressively edited.
 \\
 Compiled on \today \\
-Copyright 2006 - 2011, Kota Miura (http://cmci.embl.de)
+$\copyright$ 2006 - 2011, Kota Miura (http://cmci.embl.de)
 \\
 \HRule
 \end{abstract}
@@ -1901,7 +1901,7 @@ One way to supplement the missing function is to create your own user function.
 Another way is to find a function directly from ImageJ Java code and use that function in macro. 
 Javascript is a convenient way to access ImageJ API (Application Programming Interface), 
 and since Javascript could be called from within ImageJ macro, you could use ImageJ API in your macro code. 
-So This is done by the function below:
+This is done by the macro function shown below:
 \begin{shaded}
 \begin{indentCom}
 \item \textbf{eval("script", javascript)}\\
@@ -1909,10 +1909,12 @@ Evaluates the JavaScript code contained in the string javascript.\\
 \end{indentCom}
 \end{shaded}
 
-Not limited to the use of Javascript code by calling from Macro, 
-but you could also run Javascript as 
-it is in ImageJ and Fiji. Syntax of Javascript is not same as ImageJ macro, 
-but if you are used to write ImageJ macro, it should  not be too difficult to learn Javascript.  
+This would be the simplest way to use Javascript if you are already
+comfortable with ImageJ macro language. 
+
+\textbf{But there is more to it}. You could also run Javascript as it is in
+ImageJ and Fiji. Syntax of Javascript is not same as ImageJ macro, 
+but if you are used to write ImageJ macro, it should not be too difficult to learn Javascript.  
  
 \dots then how could we code Javascript? 
 
@@ -1920,24 +1922,27 @@ In this section, we learn basic know-how of
 Javascript with ImageJ 
 \footnote{ If you want to learn in more detail, 
 you could also visit \url{http://pacific.mpi-cbg.de/wiki/index.php/Javascript_Scripting} 
-for learning more about Javascript.}. For coding with Javascript in ImageJ, the best is that 
-you know Java programming language already but there is also some way around. 
-When we are programming ImageJ macro, we often refer to the web site listing 
-ImageJ macro language functions to look for a macro command. 
+for learning more about Javascript.}. Experience with 
+Java programming is largely helpful but if not, there is also some way around
+to learn quickly. 
+
+When we are programming ImageJ macro, we often refer to the
+web site listing ImageJ macro language functions to look for a macro command. 
 In similar way, we access so called API (Application Programming Interface) 
-of ImageJ for coding with Javascript. ImageJ API is in the following page
+for coding with Javascript. ImageJ API is in the following page:
 
 \url{http://rsb.info.nih.gov/ij/developer/api/index.html}
 
-At this moment, you might be puzzled with how to use these pages, 
-but don't worry. One major aim of this section is to learn how to use this resource 
-to come up with your Javascript. 
+At this moment, you might be puzzled with these pages, 
+but don't worry. Major aim of this section is to learn how to use this resource 
+to code your Javascript. 
 
 OK, let's start. 
 
 \subsection{A trial with Javascript commands}
 %
 Let us first try using Javascript (JS) commands. 
+
 From menu, do \ijmenu{[Plugins > Scripting > Javascript Interpreter]}. 
 You will then see a new interface that looks like Fig \ref{fig:JSinterpreter}. 
 This interface provides Javascripting in an interactive mode and is useful for 
@@ -1963,9 +1968,12 @@ do \ijmenu{[File > New > Script]} (then select \ijmenu{[Language > Javascript]})
 \begin{lstlisting}[numbers=none]
 IJ.log("Hello JS");
 \end{lstlisting}
-Type in the same code that prints out in the Log window. Do not forget adding semicolon (;) at the end of command this time. 
-In case you write your code in Script Editor, you need to indicate the end of line, just like you do when you write a macro. 
-\ijmenu{[Run > Run]} will execute the command. You should then see the same result like you saw with the Javascript interpreter. 
+This should do the same thing, but be careful! Do not forget adding semicolon
+(;) at the end of the line. In case you write your code in Script Editor, you need
+to explicitly mark the end of line, just like you do when you write a macro.
+
+To run the code, \ijmenu{[Run > Run]} will execute the command (you could also
+use ctrl-r or cmd-r). 
 
 What this JS code does is the same as the Macro code below. 
 \begin{lstlisting}[numbers=none]
@@ -1973,34 +1981,38 @@ print();
 \end{lstlisting}
 
 In the following, you could use either Javascript interpreter 
-or Script editor. Just choose one you like. If code become multiple lines, 
-I recommend using Script Editor. Be sure to put semi-colon at the end of line 
-in case you will be using Script Editor. 
+or Script editor. Just choose the one you like. If code become multiple lines, 
+I recommend you to use the Script Editor\ldots and in this case, this is a
+redundant warning, place a semi-colon ``;'' at the end of each line.
 
-We could try some commands that is not present with 
-ImageJ macro (which should be more interesting). 
+Now, we could try some commands that is not present in 
+ImageJ macro.
+ 
 For example, what would you do if you want to convert angle in degrees to radian? 
 In macro, you could do calculation by first dividing the value by 360, 
-then multiply by $\pi$. But a function actually is already there in Java, 
+then multiply by $2\pi$. But a function actually is already there in Java, 
 so you could simply use that as well. 
 \begin{lstlisting}[numbers=none]
 IJ.log(java.lang.Math.toDegrees(3.1415)) 
 \end{lstlisting}
-Running this line should print a number close to 180, or other way around
-\begin{lstlisting}[numbers=none]
+Running this line should print a number close to 180. You could also do the
+other way around:
+ \begin{lstlisting}[numbers=none]
 IJ.log(java.lang.Math.toRadians(180)) 
 \end{lstlisting}
 should print out 3.1415\dots.
 
-Next, we try a case when you want to retrieve data from table in Results window. 
-With macro, you could do this by \ilcom{getResut} function, 
+Next, we try to retrieve a column of data from table in Results window. 
+In macro, you could do this by \ilcom{getResult} function, 
 with which by specifying the column label and row number you could retrieve 
-a value in that cell. But what should we do if we want to retrieve all data in a row at once, 
-not a single value in a specific column at specific row? 
+a value in that cell. 
 
+But what should we do if we want to retrieve all data in a row at once, 
+not a single value in a specific column at specific row? 
 If you want to do this in macro, we could write a user defined function that loops 
 for all the columns and get data one-by-one. 
-With Javascript, this could be done by just one step, one command. 
+
+With Javascript, this could be done in just a single step, one command. 
 
 \begin{indentexercise}{1}
 
@@ -2142,7 +2154,7 @@ choose Javascript as the code to be recorded (Fig. \ref{fig:MacroRecorderJS}).
 \end{center}
 \end{figure}
 
-Then do the follwoing sequence of commands.
+Then do the following sequence of commands.
 \begin{itemize}
 \item \ijmenu{[File > Open Sample > Blobs]}
 \item Select rectangular ROI tool and set a ROI to select 
@@ -2194,10 +2206,10 @@ This is a value that you normally input when you select Gaussian blur
 from the menu bar for the size of blurring kernel. 
 
 Then what is the first argument in \ilcom{IJ.run}? 
-In both line 3 and 4, we have a variable \ilcom{imp}. 
+In both line 3 and 4, we have a variable \textbf{\ilcom{imp}}. 
 To see what this is, we go back to line 1. 
-\ilcom{imp} appears for the first time in the code at line 1, 
-and \ilcom{imp} is the returned value of a method \ilcom{IJ.openImage}. 
+\textbf{\ilcom{imp}} appears for the first time in the code at line 1, 
+and \textbf{\ilcom{imp}} is the returned value of a method \ilcom{IJ.openImage}. 
 If we think back what we were actually doing for this first line when recording, 
 we accessed an item in the menu tree \ijmenu{[File > Open Sample > blobs]}. 
 By choosing this item from menu, ImageJ downloads blobs.gif file from NIH web site 
@@ -2282,7 +2294,11 @@ e.g. \ilcom{IJ.openImage(pathname)}.
  Package is used to organize classes in hierarchical tree. 
  For example, there are packages ij.plugin, ij.plugin.filter and ij.plugin.frame. 
  Likewise, package is a tree-like structure (remember how folders are organized in your laptop) 
- that organizes many classes in a structure. 
+ that organizes many classes in a structure. In Java, such tree-like structure
+ is organized separated by dots (``.''). For example, see
+ \href{http://rsb.info.nih.gov/ij/developer/api/ij/plugin/filter/package-summary.html}{Package
+ ij.plugin.filter}. The package filter is under the plugin package, that is
+ under the ij package. 
   
 Go back to the API description, in the left side of the table column where 
 
@@ -2311,8 +2327,9 @@ and specifically an integer, not a number with decimal points. Unlike ImageJ mac
 \textbf{object} with any type of class could be returned, not limited to number, string and array. 
 This flexibility affords higher potential in modularity with Javascript compared to ImageJ macro 
 and hence we call returned values as "object" not "variables". 
-Draw back is that Javascript coding becomes a bit more complicated then macro coding. 
-One should always be careful about which class or type is returned, 
+
+A draw back is that Javascript coding becomes a bit more complicated then macro
+coding. One should always be careful about which class or type is returned, 
 and one way to do so is to check ImageJ API every time you wonder what is the
 returned value of certain method.
 
@@ -2369,6 +2386,47 @@ to grab currently active image rather than downloading and opening an image file
 
 \begin{indentexercise}{1}
 Modify code 29 so that this JS code grabs currently active image and do the same processing. 
+\end{indentexercise}
+
+\begin{indentexercise}{2}
+We study the nature of ImagePlus object in this exercise. We start with a simple
+code to open an image, then add more lines to see how ImagePlus instance
+behaves. Type in the code below to start up. 
+
+\lstinputlisting{code/code30_1.js}
+
+As we have done already, this will show a blobs.gif image on your desktop. We
+can have another window with blobs.gif by adding two more lines. 
+
+\lstinputlisting{code/code30_2.js}
+
+We now have two instances of ImagePlus object. These are independent. 
+Whatever you do to imp, that does not affect imp2. We could do a small trick
+that two windows could share the the same image, that the same image appearing
+in two windows. Close two windows of blobs, and then modify the code as shown
+below.
+
+\lstinputlisting{code/code30_3.js}
+
+Run this code, and you would see two windows with same image, which seemingly
+are same as before. 
+
+Take one image and try to select some region using a ROI tool,
+and from Fiji menu do \textit{[Edit > delete]}. Then the selected region blacks
+out or whites out. Click another blobs window. Then you would see that the
+second window, which you did not process anything, also is processed. 
+
+This is because both windows are sharing the same image, shown in two windows.
+In other way of saying, there is a single instance of image with two ImagePlus
+instances. In the modified code, an extra line is added in line 3, and line 4 is
+changed. Line 3 is generating a pointer (ip) to the image that is contained in
+the ImagePlus instance \textit{imp}. In the 4th line, a new instance of
+ImagePlus is created using what we call ``constructor'' (see ImagePlus API for
+a list of constructor), using the ip that is actually associated with the
+preexisting ImagePlus \textit{imp}. Finally, the 5th line shows the second
+window (\texit{imp2}), the image content of which is shared with \textit{imp}. 
+
+ 
 \end{indentexercise}
 
 \textbf{Summary}
