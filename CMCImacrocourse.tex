@@ -190,7 +190,8 @@ Macro Programming in ImageJ}
 \HRule
 \\
 \\
-\textbf{Aim: Students acquire ImageJ macro programming technique to ease their work loads with image processing / analysis.}
+\textbf{Aim: Students acquire ImageJ macro programming technique 
+to ease their work loads with image processing / analysis.}
 \\
 \\
 %need to fix greek beta
@@ -216,7 +217,8 @@ $\copyright$ 2006 - 2011, Kota Miura (http://cmci.embl.de)
 
 \subsection{Automate your mouse clicking!}
 
-ImageJ commands can be listed in a text file as a sequence of event and then executed as a single task. Writing such a text file is called scripting, or writing a ``macro''. 
+ImageJ commands can be listed in a text file as a sequence of event and then executed as a single task. 
+Writing such a text file is called scripting, or writing a ``macro''. 
 
 For example, if you want to do \\
 \ijmenu{[Process -> Contrast Enhancement]}, \\
@@ -228,13 +230,16 @@ Writing a macro assembles such works into a single task. Macro becomes even more
 when you need to process/analyze stacks. 
 
 \subsection{Generate new functions which do not exist in the menu or as a PlugIn.}
-Automation of a series of command is very convenient, but the macro programming is not only limited to such automation. 
+Automation of a series of command is very convenient, 
+but the macro programming is not only limited to such automation. 
 ImageJ macro language enables you to access single pixels in digital images. 
-This means that when you know an algorithm for processing/analysis but the function is not implemented in the ImageJ 
+This means that when you know an algorithm for processing/analysis 
+but the function is not implemented in the ImageJ 
 itself or as a PlugIn, one could write a custom function using the macro language.
 \subsection{Running your job in remote server}
 ImageJ could be used from command line, and macro file could be executed by 
-adding the file name to the java command. This enables you to do the calculation with faster machines like the EMBL cluster. 
+adding the file name to the java command. 
+This enables you to do the calculation with faster machines like the EMBL cluster. 
 If you use job array many jobs could be done in parallel so you could finish your calculation much faster.
 
 \subsection{Limitations compared to Plugins written in Java}
@@ -247,23 +252,28 @@ Compared to plugins, ImageJ Macro language has some limitations:
 
 \begin{enumerate}
 \item If you need to process large images or stacks with many steps, 
-you might recognize that it is slow. Some benchmarks indicates that a Plugin would be about 40 times faster than Macro. 
+you might recognize that it is slow. 
+Some benchmarks indicates that a Plugin would be about 40 times faster than Macro. 
 
 \item Macro cannot be used as a library
 \footnote{It is possible to write a macro in a library fashion and use it from another macro, 
 but this is not as robust and clear as it is in java, which is a language designed to be so.}. 
 In Java, once a class is written, this could be used later again from another class . 
 
-\item Macro is not efficient in implementing real-time interactive input during the macro command is executed; 
-\textit{e.g.} If you want to design a program that requires real-time user input to select a ROI interactively.  
+\item Macro is not efficient in implementing real-time interactive input 
+during the macro command is executed; 
+\textit{e.g.} If you want to design a program that requires real-time user input 
+to select a ROI interactively.  
 Macro could only do such interactive tasks by separating the program into several different commands. 
 \end{enumerate}
 
-If you become unsatisfied with these limitations, learning more complicated but more flexible PlugIn programming is recommended. 
+If you become unsatisfied with these limitations, 
+learning more complicated but more flexible PlugIn programming is recommended. 
 
 \subsection{Comparison with Other scripting languages}
 There are several other scripting capability for customizing ImageJ function. 
-This is because ImageJ is a java program, and there are many scripting languages that are interfaced with Java. 
+This is because ImageJ is a java program, 
+and there are many scripting languages that are interfaced with Java. 
 Scripting languages included in Fiji are 
 
 \begin{itemize}
@@ -278,26 +288,30 @@ Compared to ImageJ macro language, all these languages are more general and wide
 
 Advantages of ImageJ Macro compared to these scripting languages are: 
 \begin{itemize}
-\item Easy to learn. Functions are mirrors of ImageJ menu, so scripting is intuitive if you know ImageJ already. 
+\item Easy to learn. 
+Functions are mirrors of ImageJ menu, so scripting is intuitive if you know ImageJ already. 
 Macro recorder is a handy tool for finding out the right commands. 
 
 \item Macro set allows you to contain multiple macros in one file (called 'Macro-set"). 
 This is useful for complex processing is required (see Advanced Macro Programming section for more details). 
 
 \item A significant hurdle for coding with general scripting languages is that one must know the 
-\textbf{ImageJ Java API} well, meaning that you basically have to know fundamentals of Java programming language 
+\textbf{ImageJ Java API} well, meaning that you basically have to know 
+fundamentals of Java programming language 
 for using these scripting languages. 
 \end{itemize}
 
 Thus, ImageJ macro language is the easiest way to access scripting capability in ImageJ. 
 
-Disadvantage of ImageJ macro compared to other scripting languages beside its generality is its extendability: 
+Disadvantage of ImageJ macro compared to other scripting languages 
+beside its generality is its extendability: 
 code you write could not be recycled except with copy and pasting
 \footnote{One could also use getArgument() and File related functions for passing arguments 
 from a macro file to the other, but ImageJ macro is not designed to be a library. }. 
 With other scripting languages available for ImageJ, one could write more object-oriented programs 
 and once you write, code could be recycled in other programs
-\footnote{ Except for Javascript. Calling other Javascript file from another Javascript file is not straight forward.}. 
+\footnote{ Except for Javascript. Calling other Javascript 
+file from another Javascript file is not straight forward.}. 
 Another disadvantage is that Macro is slow compared to some of scripting languages like Clojure and Scala. 
 Processing speed is comparable to Jython and Javascript.  
 
@@ -328,8 +342,10 @@ there is no debugger function available in this case.}.
 To open the editor, select \ijmenu{[PlugIns -> New -> Macro]} from the menu.  
 This will create a new window where you can write macro (we call this ''macro editor''). 
 \begin{indentFiji}
-Fiji: You could use more advanced interface called ''script editor'' by \ijmenu{[Plugins -> Scripting -> Script Editor]}. 
-Then select \ijmenu{[Language -> ImageJ Macro]}. Syntax high lighter offers automatic coloring of ImageJ functions. 
+Fiji: You could use more advanced interface called ''script editor'' 
+by \ijmenu{[Plugins -> Scripting -> Script Editor]}. 
+Then select \ijmenu{[Language -> ImageJ Macro]}. 
+Syntax high lighter offers automatic coloring of ImageJ functions. 
 \end{indentFiji}
 Then write a program as follows
 \footnote{NOTE: DON'T FORGET TO TABULATE THE SECOND LINE!}. 
@@ -361,11 +377,12 @@ Omit the line numbers! These numbers were added just for explanation.
 
 Click "Macros" in the menu at the top of the macro editing window 
 ("Macros" in the menu appears only when the macro editing window is active). 
-In the first line, there is "Run Macro". Try running it from editor menu \ijmenu{[Macros-> Run Macro]} 
+In the first line, there is "Run Macro". 
+Try running it from editor menu \ijmenu{[Macros-> Run Macro]} 
 \begin{indentFiji}
 Fiji:  Use \ijmenu{[Run -> Run]}. 
 \end{indentFiji}
-This will create a new window "Log", with "Hello World" printed. \\
+This will create a new window "Log", with "Hello World" printed. 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -417,19 +434,22 @@ Check IJ menu \ijmenu{[Macros -> ]} to see that the macro is now in the menu.\\
 Macro can be saved as a file and can be directly installed also. 
 In the editor, do \ijmenu{[File -> Save]}. Saving dialogue window appears, 
 and just save the file wherever you can remember afterwards . 
-To install the macro, do \ijmenu{[PlugIns -> Macro -> Install\ldots]} Select the macro file you want to install.\\
+To install the macro, do \ijmenu{[PlugIns -> Macro -> Install\ldots]} 
+Select the macro file you want to install.\\
 
 %\begin{indentexercise}{1cm}
 \begin{indentexercise}{1}
 \item Add another line \texttt{"print("\textbackslash{}\textbackslash{}Clear");"} 
 after the second line (below, code 1.5. don't forget the semi-colon at the end!). 
 \item \lstinputlisting{code/code01_5.ijm}
-Then test also another macro when you insert the same command in the third line (code 1.75). What happened?  
+Then test also another macro when you insert the same command in the third line (code 1.75). 
+What happened?  
 \item \lstinputlisting{code/code01_75.ijm}
 \end{indentexercise}
 
 \begin{indentexercise}{2}
-\item Try modifying the third line in code 1.5 and check that the modified text will be printed in the "Log" window. \\
+\item Try modifying the third line in code 1.5 
+and check that the modified text will be printed in the "Log" window. \\
 \end{indentexercise}
 
 \begin{indentexercise}{3}
@@ -464,7 +484,8 @@ message_text = 256;
 \end{lstlisting}
 With this assignment, the variable is now a "Numerical variable" or simply "variable". 
 In other programming languages such as C or Java, difference between numbers and characters matters a lot. 
-In ImageJ you do not have to care whether the variable is number or string, but in some cases this may cause problem 
+In ImageJ you do not have to care whether the variable is number or string, 
+but in some cases this may cause problem 
 so it's better to just keep this difference in your mind. We will see an example of such confusion, 
 and also a way to avoid the confusion. 
 
@@ -478,11 +499,13 @@ It starts with double quotation marks. \\
 \begin{lstlisting}[numbers=none]
 txt="" + a + "+"+ b + "="+c;
 \end{lstlisting}
-Seemingly this looks like meaningless. If you define txt without the first "useless" quotation marks, then it will be like\\
+Seemingly this looks like meaningless. 
+If you define txt without the first "useless" quotation marks, then it will be like\\
 \begin{lstlisting}[numbers=none]
 txt=a + "+"+ b + "="+c;
 \end{lstlisting}
-Theoretically this should work also, since the double quotes does not have any content so it shouldn't matter 
+Theoretically this should work also, 
+since the double quotes does not have any content so it shouldn't matter 
 whether if it is there. But if you try this what seems to be straight-forward assignment, 
 ImageJ returns error message when you run it. 
 
@@ -498,7 +521,11 @@ it reaches the txt substitution line and first sees the variable a and interpret
 (or function), since a is a number. Then ImageJ goes on with the scanning and then sees "+" which is a character. 
 ImageJ cannot interpret String variable within a numerical function. 
 
-Instead, the programmer can tell ImageJ that \textit{txt} is a string function at the beginning of the function by putting a set of double quote at the beginning. ImageJ does handle numerical variables within string function, so the line works and prints out the result successfully.  
+Instead, the programmer can tell ImageJ that 
+\textit{txt} is a string function at the beginning of the function 
+by putting a set of double quote at the beginning. 
+ImageJ does handle numerical variables within string function, 
+so the line works and prints out the result successfully.  
 
 \begin{indentexercise}{2}
 Modify the code 4, so that the calculation involves subtraction (-), multiplication (*) and division (/). 
@@ -521,7 +548,11 @@ The command \textit{getNumber} consists of two parameters (programmers call such
 \begin{indentCom}
 \textbf{getNumber}(message string, default number)
 \end{indentCom}
-The first parameter is a string bounded with double quotes (see code 5, line 3 and 4). This string will appear in the dialogue window such as shown above. Default number will also appear in the dialogue window, and the user modifies this number. Then the number will be returned and then substituted to the variable a in the macro. 
+The first parameter is a string bounded with double quotes (see code 5, line 3 and 4). 
+This string will appear in the dialogue window such as shown above. 
+Default number will also appear in the dialogue window, 
+and the user modifies this number. 
+Then the number will be returned and then substituted to the variable a in the macro. 
 
 To ask a string to users, following is an easy example. 
 \lstinputlisting[morekeywords={*, getString}]{code/code06.ijm}
@@ -535,7 +566,10 @@ Run the code 6 and input 1 for a and 2 for b. What happened? Explain the reason.
 \subsection{Including ImageJ commands into a macro}
 There are many functions in ImageJ. All these commands can be accessed from macro. 
 
-We will make a macro that creates a new image, add noise,  blurs this image by Gaussian blur, and then thresholding the image. To know the commands we need there is a very convenient tool called "Command Recorder". Do \ijmenu{[PlugIns -> Macros -> Record\ldots]}. A window like below then opens. 
+We will make a macro that creates a new image, add noise,  blurs this image by Gaussian blur, 
+and then thresholding the image. To know the commands we need there is a very convenient tool called 
+"Command Recorder". 
+Do \ijmenu{[PlugIns -> Macros -> Record\ldots]}. A window like below then opens. 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -544,7 +578,11 @@ We will make a macro that creates a new image, add noise,  blurs this image by G
 \end{center}
 \end{figure}
 
-All the commands you will execute will be recorded in this window. So we first do the processing manually. Prepare a new image using [File -> New] command. Size of the image can be anything. Then do \ijmenu{[Process -> Noise -> Salt and Pepper]} (Fig. \ref{fig_SaltAndPepper}).
+All the commands you will execute will be recorded in this window. 
+So we first do the processing manually. 
+Prepare a new image using [File -> New] command. 
+Size of the image can be anything. 
+Then do \ijmenu{[Process -> Noise -> Salt and Pepper]} (Fig. \ref{fig_SaltAndPepper}).
 
 \begin{figure}[htbp]
 \begin{center}
@@ -556,9 +594,12 @@ All the commands you will execute will be recorded in this window. So we first d
 
 \ijmenu{[Process -> Filters -> Gaussian Blur]} (use Sigma = 2.0).
 then
-\ijmenu{[Image -> Adjust -> Threshold\ldots]}. Toggle the slider to make signals red. Then click "Apply". Check "Dark Background" and OK. 
+\ijmenu{[Image -> Adjust -> Threshold\ldots]}. 
+Toggle the slider to make signals red. Then click "Apply". Check "Dark Background" and OK. 
 
-Now, check the Command Recorder window. It should now look like Fig. \ref{fig_macroRecorderFilled}. Lines appeared after your operations are corresponding commands.
+Now, check the Command Recorder window. 
+It should now look like Fig. \ref{fig_macroRecorderFilled}. 
+Lines appeared after your operations are corresponding commands.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -568,18 +609,34 @@ Now, check the Command Recorder window. It should now look like Fig. \ref{fig_ma
 \end{center}
 \end{figure}
 
-These lines appeared in the recorder can be used as it is. So you could copy and paste them to your macro. Prepare a macro like below, by copy and pasting the commands in the recorder. Delete the lines that is commented out (lines that begins with "//" are lines that are skipped by the macro interpreter).
+These lines appeared in the recorder can be used as it is. 
+So you could copy and paste them to your macro. 
+Prepare a macro like below, by copy and pasting the commands in the recorder. 
+Delete the lines that is commented out 
+(lines that begins with "//" are lines that are skipped by the macro interpreter).
 \lstinputlisting{code/code07.ijm}
 
 Try the macro! (I hope that you are amazed by now with the power of Macro Recorder!)\\
  
-The second line in the above macro creates a new image. This command has many parameters (in coding jargon, we say "5 arguments"). To know what these parameters are, the quickest way is to read the Build-In Macro Function page in ImageJ web site  (the reference is attached to this manual so take a look).  In case of newImage command, the description looks like this. 
+The second line in the above macro creates a new image. 
+This command has many parameters (in coding jargon, we say "5 arguments"). 
+To know what these parameters are, 
+the quickest way is to read the Build-In Macro Function page in ImageJ web site  
+(the reference is attached to this manual so take a look).  
+In case of newImage command, the description looks like this. 
 
 \begin{indentCom}
 \textbf{newImage}(title, type, width, height, depth)\\
-Opens a new image or stack using the name title. The string type should contain "8-bit", "16-bit", "32-bit" or "RGB". In addition, it can contain "white", "black" or "ramp" (the default is "white"). As an example, use "16-bit ramp" to create a 16-bit image containing a grayscale ramp. Width and height specify the width and height of the image in pixels. Depth specifies the number of stack slices.
+Opens a new image or stack using the name title. 
+The string type should contain "8-bit", "16-bit", "32-bit" or "RGB". 
+In addition, it can contain "white", "black" or "ramp" (the default is "white"). 
+As an example, use "16-bit ramp" to create a 16-bit image containing a grayscale ramp. 
+Width and height specify the width and height of the image in pixels. 
+Depth specifies the number of stack slices.
 \end{indentCom}
-Using this information, you can modify the macro to change the size of the image. It is also possible to use variables as parameter. You could modify macro, so that the macro asks you width and height of the new image such as:
+Using this information, you can modify the macro to change the size of the image. 
+It is also possible to use variables as parameter. 
+You could modify macro, so that the macro asks you width and height of the new image such as:
 \lstinputlisting{code/code08.ijm}
 
 \begin{indentexercise}{1}
@@ -588,7 +645,15 @@ Modify the code 8, so that user can input the desired Gaussian sigma.
 
 
 \subsection{Batch Processing using "batch macro" function}
-In above macro, list of commands were wrapped inside macro "title"\{ code \} so that the commands could be executed by single selection from menu. To apply such commands for many images in a single folder (say you have one-thousand images you want to contrast enhance and also to Gaussian-blur), there are two ways. One way is to further extend the macro by adding file-accessing command and looping the commands (you will learn this later). Another way is to do such "batch processing" by copy and pasting list of commands in previous section to batch-processing interface. This function could be called by \ijmenu{[Process -> Batch -> Macro]}
+In above macro, list of commands were wrapped inside macro "title"\{ code \} 
+so that the commands could be executed by single selection from menu. 
+To apply such commands for many images in a single folder 
+(say you have one-thousand images you want to contrast enhance and also to Gaussian-blur), 
+there are two ways. One way is to further extend the macro by adding file-accessing command and 
+looping the commands (you will learn this later). 
+Another way is to do such "batch processing" by copy and pasting list of commands 
+in previous section to batch-processing interface. 
+This function could be called by \ijmenu{[Process -> Batch -> Macro]}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -597,7 +662,12 @@ In above macro, list of commands were wrapped inside macro "title"\{ code \} so 
 \end{center}
 \end{figure}
 
-In "Input" field, select the folder where image files are stored. In output field, select a destination folder where processed images will be stored. You then copy and paste the list of commands in the code field such as shown in Fig. \ref{fig_BatchProcessInterface}. In the case shown in this figure, line 6 to 9 was copied and pasted. Clicking "Process" button will start the processing.
+In "Input" field, select the folder where image files are stored. 
+In output field, select a destination folder where processed images will be stored. 
+You then copy and paste the list of commands in the code field such as 
+shown in Fig. \ref{fig_BatchProcessInterface}. 
+In the case shown in this figure, line 6 to 9 was copied and pasted. 
+Clicking "Process" button will start the processing.
 \newpage
 
 \section{Conditions and Loops}
@@ -625,7 +695,9 @@ The result should look like:
 \end{figure}
 
 \begin{itemize}
-\item Line 3 asks the user to input a string (we did this already). If user does not change the default text ("whatever") and click "OK", then the command interpreter proceeds to line 4.
+\item Line 3 asks the user to input a string (we did this already). 
+If user does not change the default text ("whatever") and click "OK", 
+then the command interpreter proceeds to line 4.
 
 \item Line 4 \ilcom{for(i=0; i<5; i+=1)} sets the number of looping. 
 Three parameters are required for "for" loop. The first parameter defines the variable used for the counting loop and 
@@ -634,8 +706,8 @@ Third parameter sets the step size of i, meaning that how much value is added pe
 could also be subtraction, multiplication, division e.g. \ilcom{i-= 1}). 
 \item After this \ilcom{for(\ldots;\ldots;\ldots)} command, there is a brace (\{) one at the end of line 4 (\{) and 
 the second one in the line 6. These braces tell ImageJ to loop commands in between so command in line 5 will be iterated 
-according to the parameters defined in the parenthesis of for. Between braces, you could add more lines of functions as much as 
-you want.  
+according to the parameters defined in the parenthesis of for. 
+Between braces, you could add more lines of functions as much as you want.  
 \end{itemize}
 So when the command interpreter reaches line 4 and sees \ilcom{for(}, 
 it starts looking inside the parenthesis and defines that the counting starts with 0 using a variable \ilcom{i}, 
@@ -644,7 +716,8 @@ using the content of \ilcom{i}, string \ilcom{\ensuremath\colon} and the string 
 Then in line 6, interpreter sees \ilcom{\}} and goes back to line 4 and adds 1 (because of \ilcom{i+=1}). 
 i is still 1 so \ilcom{i<5} is true. The interpreter goes to line 5 and 
 executes the command and prints out "1\ensuremath\colon whatever". 
-Such looping will continue until i becomes 5, since when i becomes 5, \ilcom{i<5} is no longer true so interpreter goes out 
+Such looping will continue until i becomes 5, since when i becomes 5, 
+\ilcom{i<5} is no longer true so interpreter goes out 
 from the for-loop. \\
 
 \begin{indentexercise}{1}
@@ -657,9 +730,11 @@ from the for-loop. \\
 
 \subsection{Stack Management by for-statement}
 One of powerful application of for-loop in biological image processing is image stack management, 
-such as measuring dynamics or multi-frame processing. Many ImageJ commands works with only single frame within a stack. 
+such as measuring dynamics or multi-frame processing. 
+Many ImageJ commands works with only single frame within a stack. 
 Without macro programming, you need to execute the command while you flip the frame manually. 
-Macro programming enables you to automate this process. Here is an example of measuring intensity change over time. 
+Macro programming enables you to automate this process. 
+Here is an example of measuring intensity change over time. 
 \lstinputlisting[morekeywords={*, run, setSlice, nSlices}]{code/code10.ijm}
 \begin{itemize}
 \item Line 3: \ilcom{nSlices} is a command that returns number of slices in the active slice. 
@@ -676,14 +751,20 @@ the right of the decimal point in real numbers displayed in the results table.
 
 \item Line 8: \ilcom{setSlice} command set the frame according to the frame number calculated in line6. 
 
-\item Line 9:  actual measurement is done. Result will be recorded in the memory and will be displayed in the Results table window. 
+\item Line 9:  actual measurement is done. 
+Result will be recorded in the memory and will be displayed in the Results table window. 
 \end{itemize}
 
 Open an example stack \textbf{1703-2(3s-20s).stk}
-\footnote{Some of you may realize that you used this sequence in the Image Processing / Analysis Course for learning 
-Time Series Analyzer Plugin. Now, you can program similar device in macro. Good thing about the custom program 
+\footnote{Some of you may realize that you used this sequence 
+in the Image Processing / Analysis Course for learning 
+Time Series Analyzer Plugin. Now, you can program similar 
+device in macro. Good thing about the custom program 
 is that you will be able to modify the program further to add more functions.}. 
-This is a short sequence of FRAP analysis, so edge of the one of the cells is bleached and then fluorescence recovers by time. Select FRAPped region by ROI tool (such as in the figure below). Execute the macro. Results will be printed in the Results window (see see the table in the figure left). 
+This is a short sequence of FRAP analysis, 
+so edge of the one of the cells is bleached and then fluorescence recovers by time. 
+Select FRAPped region by ROI tool (such as in the figure below). 
+Execute the macro. Results will be printed in the Results window (see see the table in the figure left). 
 
 %%%figure frap seq and quantification
 %\begin{figure}[htbp]
@@ -888,7 +969,13 @@ Modify code 13 that the dot moves up and down vertically. Change the stack width
 \end{indentexercise}
 
 \subsubsection{Application of "while" and "if" in image processing.}
-Now, we try solving a problem with image thresholding by an application of \ilcom{while} loop in a macro. Open image \textbf{mt\_darkening.tif} in the sample image you downloaded. This is a stack, so you could slide the bar at the bottom of the window to see what is happening: the image gets darker and darker, as frame number increases. When you study fluorescence images, you will find such effect very often, because fluorescence bleaches due to the irradiated excitation light for the acquisition. When you want to segment this structure (a microtubule), you might use image-thresholding as follows. 
+Now, we try solving a problem with image thresholding by an application of 
+\ilcom{while} loop in a macro. Open image \textbf{mt\_darkening.tif} in the sample image you downloaded. 
+This is a stack, so you could slide the bar at the bottom of the window to see what is happening: 
+the image gets darker and darker, as frame number increases. When you study fluorescence images, 
+you will find such effect very often, because fluorescence bleaches due to the irradiated excitation light 
+for the acquisition. 
+When you want to segment this structure (a microtubule), you might use image-thresholding as follows. 
 
 %figure
 \begin{figure}[htbp]
@@ -984,19 +1071,35 @@ Activates the image with the specified ID (a negative number). If id is greater 
 \newpage
 
 \section{Advanced Macro Programming}
-This section could be a bit boring for you in terms of biology, but try to be patient. All these knowledge are required for advanced programming. Ability to do complex image processing using macro widens your view on planning experiments also.
+This section could be a bit boring for you in terms of biology, but try to be patient. 
+All these knowledge are required for advanced programming. 
+Ability to do complex image processing using macro widens your view on planning experiments also.
 
 \subsection{User-defined Functions}
-As the code you write becomes longer, you will start to realize that similar processing or calculation appears several times in a macro or through macro sets. To simplify this redundancy, one could write a separate \ilcom{function} that works as a module for macros. 
+As the code you write becomes longer, 
+you will start to realize that similar processing or 
+calculation appears several times in a macro or through macro sets. 
+To simplify this redundancy, one could write a 
+separate \ilcom{function} that works as a module for macros. 
 For example, if you have a simple code like:
 \lstinputlisting[morekeywords={*,}]{code/code15.ijm}
-It should be easy for you to expect that this macro will print out "3" in the Log window. From this macro, we could extract part of it and and make a separate function. 
+It should be easy for you to expect that this macro will print out "3" in the Log window. 
+From this macro, we could extract part of it and and make a separate function. 
 \lstinputlisting[morekeywords={*,}]{code/code15_1.ijm}
-This is not a macro, but is a program that works as a unit. Functions can be embedded in macro. \ilcom{ReturnAdd }(code 15.1) is the name of the function, and the following (n, m) are the variables that will be used in the function. Within the function, n and m will be added and the result of which is substituted in to a new variable p. \ilcom{return p} in line 4 will return a value as an output of the function. In a sense, this is a custom made Macro function. Using this function, code 15 can be rewritten as
+This is not a macro, but is a program that works as a unit. 
+Functions can be embedded in macro. \ilcom{ReturnAdd }(code 15.1) is the name of the function, 
+and the following (n, m) are the variables that will be used in the function. Within the function, 
+n and m will be added and the result of which is substituted in to a new variable p. 
+\ilcom{return p} in line 4 will return a value as an output of the function. 
+In a sense, this is a custom made Macro function. Using this function, code 15 can be rewritten as
 \lstinputlisting[morekeywords={*,}]{code/code15_2.ijm}
 or more simply, by nesting the custom made function inside ImageJ native function \ilcom{print()},
 \lstinputlisting[morekeywords={*,}]{code/code15_3.ijm}
-Macro interpreter reads the macro line by line. When the interpreter sees \ilcom{ReturnAdd(a, b)}, the interpreter first tries to find the function within the ImageJ Build-in function. If its not there, the interpreter looks for the function within the same macro file\ldots (user-defined function (e.g. \ilcom{ReturnAdd(a, b)} must be written in the same macro file. Here is how it looks like: a macro that uses a function. 
+Macro interpreter reads the macro line by line. When the interpreter sees \ilcom{ReturnAdd(a, b)}, 
+the interpreter first tries to find the function within the ImageJ Build-in function. 
+If its not there, the interpreter looks for the function within the same macro file\ldots 
+(user-defined function (e.g. \ilcom{ReturnAdd(a, b)} must be written in the same macro file. 
+Here is how it looks like: a macro that uses a function. 
 %figure
 \begin{figure}[htbp]
 \begin{center}
@@ -1006,9 +1109,14 @@ Macro interpreter reads the macro line by line. When the interpreter sees \ilcom
 \end{center}
 \end{figure} 
 
-In this simple case, you might not feel the convenience of the User-defined function, but you will start to feel its power as you start writing longer codes. Advantages of using \ilcom{function} are
+In this simple case, 
+you might not feel the convenience of the User-defined function, 
+but you will start to feel its power as you start writing longer codes. 
+Advantages of using \ilcom{function} are
 \begin{enumerate} 
-\item Once written in a macro file, it could be used as a single line function as many times as you want in the macro file. This also means that if there is a bug, fixing the function solves the problem in all places where the function is used.
+\item Once written in a macro file, it could be used as a single line function 
+as many times as you want in the macro file. This also means that if there is a bug, 
+fixing the function solves the problem in all places where the function is used.
 \item Long codes could be simplified to an explicit outline of events. Such as:
 \begin{lstlisting}[numbers=none]
 macro "whatever" {
@@ -1021,20 +1129,27 @@ macro "whatever" {
 
 Let's go back to the code 14, the automatic threshold adjusting macro. 
 
-At the beginning of the code, we check if the active image if it is a stack. There is another check after that, to see if the image is adjusted with threshold level.
+At the beginning of the code, we check if the active image if it is a stack. 
+There is another check after that, to see if the image is adjusted with threshold level.
 
 \lstinputlisting[linerange={1-10}]{code/code14.ijm}
 
-We can make a function for checking stack (line 3 to 5) and another function that checks if the stack is adjusted with threshold level (from line 6 to 9) as below.
+We can make a function for checking stack (line 3 to 5) and another function that checks 
+if the stack is adjusted with threshold level (from line 6 to 9) as below.
 
 \lstinputlisting{code/code16_17functions.ijm}
 
-Then the initial part of code 14 (line 3 to 9) can now be replaced with these two functions\footnote{For a complete coding of 14.1, getThreshold(lower, upper) should appear again in line 8 to get lower and upper threshold value of the reference image.}. 
+Then the initial part of code 14 (line 3 to 9) can now be replaced with 
+these two functions\footnote{For a complete coding of 14.1, 
+getThreshold(lower, upper) should appear again in line 8 to get lower and upper threshold value 
+of the reference image.}. 
 
 \lstinputlisting[linerange={1-5}]{code/code14_1.ijm}
 
 \begin{indentexercise}{1}
-The following macro asks the user to input x and y coordinates of two points, calculate the distance between those points and prints out the distance. Modify the code so that the distance calculation is done in a separate function. 
+The following macro asks the user to input x and y coordinates of two points, 
+calculate the distance between those points and prints out the distance. 
+Modify the code so that the distance calculation is done in a separate function. 
 
 \lstinputlisting{code/code18.ijm}
 
@@ -1047,7 +1162,12 @@ For example, \ilcom{pow(4, 2)} returns 16.
 \end{indentexercise}
 
 \subsection{Multi-parameter dialogue}
-In code 18 we examined above, user-interface is very poor since before calculation the user must input\ldots click\ldots input\ldots click\ldots for total of four times. To ease this exhausting series of input process, you could create a dialog box that asks the user to input several parameters at once. We use \ilcom{Dialog} functions. 
+In code 18 we examined above, 
+user-interface is very poor since before calculation the user must input\ldots 
+click\ldots input\ldots click\ldots for total of four times. 
+To ease this exhausting series of input process, 
+you could create a dialog box that asks the user to input several parameters at once. 
+We use \ilcom{Dialog} functions. 
 
 \lstinputlisting[morekeywords={*, Dialog, create, addMessage, addNumber, addCheckbox, show, getNumber, getCheckbox}]{code/code18_5.ijm}
 
@@ -1063,7 +1183,7 @@ In code 18 we examined above, user-interface is very poor since before calculati
 Line 2 to 9 creates a dialog box that has multiple input boxes that looks like Fig. \ref{figGenericDialog}. 
 
 \begin{itemize}
-\item Line 3 defines the title of the dialog window. 
+\item Line 3 defines the title of the dialog window. 
 
 \item Line 4 texts will be shown within the window. 
 
@@ -1088,11 +1208,23 @@ Modify Code 5 so that two parameters are asked in a single dialog box.
 \begin{lstlisting}[numbers=none]
 scale = 0.1
 \end{lstlisting}
-somewhere at the beginning of the macro. This works OK, but the problem appears when there are many macros in the file, since it will be a loads of work to find the variable \ilcom{scale} in the file and change the value. It could also be that the name of variable is not \ilcom{scale} and something like \ilcom{pixelsize}, which then you have to check what this variable is doing. Furthermore, it becomes redundant if you need to calculate the scale in every macro. For this reason, you could define the scale only once in the macro file such that:
+somewhere at the beginning of the macro. This works OK, but the problem appears 
+when there are many macros in the file, since it will be a loads of work to 
+find the variable \ilcom{scale} in the file and change the value. 
+It could also be that the name of variable is not \ilcom{scale} and something like \ilcom{pixelsize}, 
+which then you have to check what this variable is doing. Furthermore, 
+it becomes redundant if you need to calculate the scale in every macro. 
+For this reason, you could define the scale only once in the macro file such that:
 
 \lstinputlisting[linerange={1-20}, morekeywords={*, Gscale}]{code/code18_75.ijm}
 
-\ilcom{var} is a statement that tells macro interpreter to treat the variable as a global variable. It should be always outside the scope (braces) of macro or function. I replaced the default value in the scale input field of the \ilcom{dialog.addnumber()} at line 11 to \ilcom{Gscale}, so that the initial value defined in line 2 appears in the dialog box. The value in the field could be modified by the user, but this does not affect the \ilcom{Gscale} value defined in Line 2. This is because the flow of information is:
+\ilcom{var} is a statement that tells macro interpreter to treat the variable as a global variable. 
+It should be always outside the scope (braces) of macro or function. 
+I replaced the default value in the scale input field of the \ilcom{dialog.addnumber()} at line 11 
+to \ilcom{Gscale}, so that the initial value defined in line 2 appears in the dialog box. 
+The value in the field could be modified by the user, 
+but this does not affect the \ilcom{Gscale} value defined in Line 2. 
+This is because the flow of information is:
 
 \ilcom{Gscale} \\
 \tab > default value for the \ilcom{Dialog.addNumber} field 5 \\
@@ -1100,18 +1232,27 @@ somewhere at the beginning of the macro. This works OK, but the problem appears 
 \tab\tab\tab > stored in the \ilcom{Dialog.addNumber} field 5\\
 \tab\tab\tab\tab > scale = \ilcom{Dialog.getNumber} (field 5)\\
 
-So \ilcom{Gscale} is referenced, but not modified. If you want to change the Global value from inside the macro, you must redefine by such as
+So \ilcom{Gscale} is referenced, but not modified. 
+If you want to change the Global value from inside the macro, you must redefine by such as
 \begin{lstlisting}[numbers=none]
 Gscale = scale;
 \end{lstlisting}
-In the macro set below, we test the use of global variable (+ function!). The macro is for the conversion of pixel length into micrometer. The second macro changes the scale value. I usually put G for all global variable. This is not necessary, but in a file with many macros this is convenient.
+In the macro set below, we test the use of global variable (+ function!). 
+The macro is for the conversion of pixel length into micrometer. 
+The second macro changes the scale value. 
+I usually put G for all global variable. This is not necessary, 
+but in a file with many macros this is convenient.
 \lstinputlisting[morekeywords={*, G_scale}]{code/code19_globalVariable.ijm}
 \begin{indentexercise}{1}
-Add another global variable G\_scale\_z ( [\ensuremath{\mu}m]) for storing spacing in z-axis. Change the first macro, that it calculates the size of Voxel in um3. Then add another macro for changing the scale in Z axis. 
+Add another global variable G\_scale\_z ( [\ensuremath{\mu}m]) for storing spacing in z-axis. 
+Change the first macro, that it calculates the size of Voxel in um3. 
+Then add another macro for changing the scale in Z axis. 
 \end{indentexercise}
 
 \subsection{String Arrays}
-Array is a powerful tool. before going into how to use it, here is an easy explanation. Imagine that an array is a stack of boxes. Boxes could contain either numbers or strings. For instance, if you have a following list of strings:
+Array is a powerful tool. before going into how to use it, here is an easy explanation. 
+Imagine that an array is a stack of boxes. Boxes could contain either numbers or strings. 
+For instance, if you have a following list of strings:
 
 \textit{Heidelberg, Hamburg, Hixton, Grenoble, Monterotondo}
 
@@ -1126,7 +1267,10 @@ An array "EMBL" could be prepared that the array element will contain these 5 st
 \end{center}
 \end{figure} 
  
-Then when you want to retrieve some name, you refer to the address within the array. So EMBL[0] will be Heidelberg, EMBL[4] will be Monterotondo, and so on. In such a way, files names contained in a folder could be listed and stored, or x-y coordinates of free-hand ROI could be stored for further use. 
+Then when you want to retrieve some name, you refer to the address within the array. 
+So EMBL[0] will be Heidelberg, EMBL[4] will be Monterotondo, and so on. 
+In such a way, files names contained in a folder could be listed and stored, 
+or x-y coordinates of free-hand ROI could be stored for further use. 
 
 Here is a macro using the EMBL array example. 
 
@@ -1218,11 +1362,19 @@ Array is used in many built-in macro functions, especially for storing array of 
 }
 \end{indentCom}
 
-To learn the actual use of Array in Image analysis, we use some of these functions and create a macro that reads and shows the line-profile from segmented line ROI. Similar function is already available ([Analyze > Plot Profilw]), but original function reads only single-pixel width profile from segmented line ROI. We extend this native function to enable sampling segmented line ROI with flexible width.
+To learn the actual use of Array in Image analysis, we use some of these functions and 
+create a macro that reads and shows the line-profile from segmented line ROI. 
+Similar function is already available ([Analyze > Plot Profilw]), 
+but original function reads only single-pixel width profile from segmented line ROI. 
+We extend this native function to enable sampling segmented line ROI with flexible width.
 
-In the code below, there is only one macro. Three functions are added at the bottom. Two are for the plotting of the profile in a graph and the last one is for outputting the results in the result table. Strategy of this macro is to use straight line selection for each segment (custom thickness is available with straight line ROI). 
+In the code below, there is only one macro. Three functions are added at the bottom. 
+Two are for the plotting of the profile in a graph and the last one is for outputting 
+the results in the result table. Strategy of this macro is to use straight line selection 
+for each segment (custom thickness is available with straight line ROI). 
 
-Since width of the profile could be set various, each segment is measured individually and then profiles are assembled afterwards. 
+Since width of the profile could be set various, each segment is measured individually 
+and then profiles are assembled afterwards. 
 
 %\lstinputlisting[morekeywords={*, newArray, selectionType, getProfile, setResult, updateResults}]{code/code20_75.ijm}
 \lstinputlisting[morekeywords={*, getSelectionCoordinates, makeLine, Plot, create, setLimits, setColor, add, show}]{code/code20_75.ijm}
@@ -1273,30 +1425,47 @@ Creates a new straight line selection. The origin (0,0) is assumed to be the upp
 \item Line 52, 53: if a value in the array is larger than the maximum value stored in the global variable \ilcom{PlotRange\_y\_max}, then replace the value with the array value. 
 \item Line 54, 55: if a value in the array is smaller than the minimum value stored in the global variable \ilcom{PlotRange\_y\_min}, then replace the value with that array value. 
 
-\item Line 60 - 67: Function for outputting the profile array in the result table.  This function is exactly the same function you studied in the previous chapter (code 20.5).
+\item Line 60 - 67: Function for outputting the profile array in the result table.  
+This function is exactly the same function you studied in the previous chapter (code 20.5).
 
 \end{itemize}
 
-Length of array must be defined when the array is created and cannot be changed afterward. For this reason, this macro needs to first loops through segments to count the number of points (line 11 -16) to create an array for storing the full profile of the segemented ROI (line 21). Actual measurement of intensity profile is done in the second loop (line 22-33).
+Length of array must be defined when the array is created and cannot be changed afterward. 
+For this reason, this macro needs to first loops through segments to count the number of points (line 11 -16) to create an array for storing the full profile of the segemented ROI (line 21). Actual measurement of intensity profile is done in the second loop (line 22-33).
 
-Such restriction on array usage (fixed array length) does not exist with other scripting languages such as Javascript or Jython, since array in these languages could be added with new elements after creating it. 
+Such restriction on array usage (fixed array length) does not exist with other scripting languages 
+such as Javascript or Jython, since array in these languages could be added with new elements after 
+creating it. 
 
 \newpage
 
 \section{File I/O}
 
-Analysis of images requires both input and out put: input is to load images, and output is  to save either processed images or numerical data. If number of image files or quantity data is manageable by manual loading and saving, we do not have to automate. But in some cases you need to process a huge number of files. This often happens especially after you establish a protocol and you want to get statistically sufficient amount of data. Then you need to automate file input and output using macro. Once you learn how to write File I/O program, you can process as much files as you want, as long as your memory space allows.
+Analysis of images requires both input and out put: input is to load images, 
+and output is  to save either processed images or numerical data. 
+If number of image files or quantity data is manageable by manual loading and saving, 
+we do not have to automate. But in some cases you need to process a huge number of files. 
+This often happens especially after you establish a protocol and you want to get 
+statistically sufficient amount of data. Then you need to automate file input and output using macro. 
+Once you learn how to write File I/O program, you can process as much files as you want, 
+as long as your memory space allows.
 
 \subsection{Saving the Measurement Results Automatically}
 
-When you have a time series sequence and you want to measure multiple signals with multiple parameters in each frame, measurement results in each frame needs to be somehow saved. Here, we learn how to export measurement results in your hard disk automatically using macro. 
+When you have a time series sequence and you want to measure multiple signals with 
+multiple parameters in each frame, measurement results in each frame needs to be somehow saved. 
+Here, we learn how to export measurement results in your hard disk automatically using macro. 
 
-Open the sample image \ilcom{Nucseq001.tif}. Cell nucleus shows that they divide and increase their number over time. We want to count the number of nucleus in each frame to know the dynamics of increase. 
-At the same time, we may also want to see changes in the signal intensity and shape. For this measurement Particle Analysis function works best. Do the following:
+Open the sample image \ilcom{Nucseq001.tif}. Cell nucleus shows that they divide and 
+increase their number over time. We want to count the number of nucleus in each frame to know 
+the dynamics of increase. 
+At the same time, we may also want to see changes in the signal intensity and shape. 
+For this measurement Particle Analysis function works best. Do the following:
 
 \begin{enumerate}
 \small{
-\item \ijmenu{[Image -> Adjust -> Threshold]}. Threshold the image and check the threshold lower and upper value that segments the nucleus optimally. 
+\item \ijmenu{[Image -> Adjust -> Threshold]}. 
+Threshold the image and check the threshold lower and upper value that segments the nucleus optimally. 
 \item Set the measurement parameters. \ijmenu{[Analysis -> set measurements\ldots]}
 \begin{enumerate}
 \item Check Area, Mean intensity, centroid, Circularity and Slice number. 
@@ -1339,21 +1508,41 @@ Using macro recorder, its easy to write a macro set as following.
 
 \lstinputlisting[morekeywords={*, }]{code/code21.ijm}
 
-Two macros and a global variable consists this macro set. Global variable is a string variable that stores the path to the location where file will be saved. (note: path is differently written in MacOS. It uses slash instead of back-slash). The first macro \ilcom{Set Directory to save Results} is for setting the path to the folder (or directory) where the file will be saved. We use a command \ilcom{getDirectory(title)} to get user choice of a destination folder. 
+Two macros and a global variable consists this macro set. 
+Global variable is a string variable that stores the path to the location where file will be saved. 
+(note: path is differently written in MacOS. It uses slash instead of back-slash). 
+The first macro \ilcom{Set Directory to save Results} is for setting the path to the folder 
+(or directory) where the file will be saved. 
+We use a command \ilcom{getDirectory(title)} to get user choice of a destination folder. 
 
 \begin{indentCom}
 \textbf{getDirectory(title)}\\
-Returns the path to a specified directory. If title is "startup", returns the path to the directory that ImageJ was launched from (usually the ImageJ directory). If it is "plugins" or "macros", returns the path to the plugins or macros folder. If it is "image", returns the path to the directory that the active image was loaded from. If it is "home", returns the path to users home directory. If it is "temp", returns the path to the /tmp directory. Otherwise, displays a dialog (with title as the title), and returns the path to the directory selected by the user. Note that the path returned by getDirectory() ends with a file separator, either "\" (Windows) or "/". Returns an empty string if the specified directory is not found or aborts the macro if the user cancels the dialog box.
+Returns the path to a specified directory. If title is "startup", returns the path to the directory 
+that ImageJ was launched from (usually the ImageJ directory). If it is "plugins" or 
+"macros", returns the path to the plugins or macros folder. If it is "image", 
+returns the path to the directory that the active image was loaded from. 
+If it is "home", returns the path to users home directory. 
+If it is "temp", returns the path to the /tmp directory. 
+Otherwise, displays a dialog (with title as the title), 
+and returns the path to the directory selected by the user. 
+Note that the path returned by getDirectory() ends with a file separator, 
+either "\" (Windows) or "/". Returns an empty string if the specified directory is not found or 
+aborts the macro if the user cancels the dialog box.
 \end{indentCom}
 
-When you run this first macro, global string variable \ilcom{G\_Ddir} will be set to a folder where user will select, and line 6 prints out the path to a folder (or directory). It might be convenient for you to change the default directory path in the code above (line 2), by copying the results in the log window and pasting it in the macro. 
+When you run this first macro, global string variable \ilcom{G\_Ddir} 
+will be set to a folder where user will select, and line 6 prints out the path to 
+a folder (or directory). It might be convenient for you to change the default directory path 
+in the code above (line 2), by copying the results in the log window and pasting it in the macro. 
 
 The measurement macro starts from the Line 9. 
 \begin{itemize}
 \item Line 10 to 13: Checks if the image is thresholded. 
 \item Line 14: Sets the threshold level. 
-\item Line 15: Gets the title of the image window for later use. We use this for generating name of the results file.
-\item Line 16: to 17: Sets the measurement parameter and does the actual particle analysis. Commands are direct copies from the recorder. 
+\item Line 15: Gets the title of the image window for later use. We use this for 
+generating name of the results file.
+\item Line 16: to 17: Sets the measurement parameter and does the actual 
+particle analysis. Commands are direct copies from the recorder. 
 \end{itemize}
 After the analysis, we want to save the results. 
 \begin{itemize}
@@ -1405,19 +1594,28 @@ Run this macro and if you choose a folder in the sample image folder containing 
 \begin{itemize}
 \item Line 2: Asks the user to select a folder. Variable \ilcom{dir} is then stored with the full path to the folder. 
 \item Line3 uses the \ilcom{getFileList} command, and reads out the file names as a string array and stored in List (array). 
-\item Line 4 to 6 is a loop. \ilcom{list.length} returns the length of the list. In this way, all the contents are printed out in the window. We use this \ilcom{getFileList} command to process multiple files automatically. 
+\item Line 4 to 6 is a loop. \ilcom{list.length} returns the length of the list. In this way, all the contents are printed out in the window. 
+We use this \ilcom{getFileList} command to process multiple files automatically. 
 \end{itemize}
 
 Let's modify code 22 so we can measure multiple stacks automatically. Code 23 (see below) works like this: You must first set two things: 
 
 \begin{enumerate}
-\item Full path to the destination folder where the results will be saved. Macro \ilcom{Set Directory to save Results}
+\item Full path to the destination folder where the results will be saved. 
+Macro \ilcom{Set Directory to save Results}
 \item Threshold level for the particle analysis. Macro \ilcom{set the threshold lower level}
 \end{enumerate}
 
-The first setting task is the same as you did in code 22. The second setting is done by manually opening a stack (may be the first one in the files) and manually setting the threshold as you like, then execute the second macro below. In both these settings, parameters will be saved in global variables and will be used in the main program. 
+The first setting task is the same as you did in code 22. 
+The second setting is done by manually opening a stack 
+(may be the first one in the files) and manually setting the threshold as you like, 
+then execute the second macro below. In both these settings, 
+parameters will be saved in global variables and will be used in the main program. 
 
-When you run the main macro (\ilcom{Multiple measurement}) after these two settings, the program asks you where the files are. As soon as you select a folder where files are contained, then processing and saving just proceeds automatically. 
+When you run the main macro (\ilcom{Multiple measurement}) 
+after these two settings, the program asks you where the files are. 
+As soon as you select a folder where files are contained, 
+then processing and saving just proceeds automatically. 
 
 \lstinputlisting[morekeywords={*, }]{code/code23_FileIO_02.ijm}
 
@@ -1429,36 +1627,65 @@ Now we have three macros and four global variables.
 
 \item Macro \ilcom{Set Directory to save Results}: Line 9 to 12: First macro. This is used to set the path to the destination folder. The function is same as code 22.
  
-\item Macro \ilcom{set the threshold lower level}: Line 14 to 20: This macro is for storing the lower value of the threshold in global variables, the values of which will be used in the main macro. You might have seen a similar code already: code 17, function for checking if the image is thresholded. Only difference is that in this code 23, lower threshold value is stored in the global variable defined in line 5. Upper value is not touched, kept to 255. 
+\item Macro \ilcom{set the threshold lower level}: Line 14 to 20: 
+This macro is for storing the lower value of the threshold in global variables, 
+the values of which will be used in the main macro. You might have seen a similar code already: code 17, 
+function for checking if the image is thresholded. 
+Only difference is that in this code 23, 
+lower threshold value is stored in the global variable defined in line 5. 
+Upper value is not touched, kept to 255. 
 
-\item Macro \ilcom{Multiple measurement}: Line 22 to 28: This is the main macro (third one in this macro set). Line 23 asks the user where the files are. This path to the source file is stored in the global variable defined in line 3. Then in line 24, a list of files contained in source folder is generated and stored in the array \ilcom{list}. From line 25 to 27 is a small for-loop, the number of loop is same as the length of the list. In this loop, name of file is passed one by one to the function \ilcom{NucAnalysis()} that does the actual analysis\ldots Thatï¿½Eï¿½s all!
+\item Macro \ilcom{Multiple measurement}: Line 22 to 28: This is the main macro (third one in this macro set). 
+Line 23 asks the user where the files are. 
+This path to the source file is stored in the global variable defined in line 3. 
+Then in line 24, a list of files contained in source folder is generated and stored in the array \ilcom{list}. 
+From line 25 to 27 is a small for-loop, the number of loop is same as the length of the list. 
+In this loop, name of file is passed one by one to the 
+function \ilcom{NucAnalysis()} that does the actual analysis\ldots
 
-\item function \ilcom{NucAnalysis(img\_filename)}: Line 30 to 51 is the core of analysis. \ilcom{img\_filename} is string variable for file names in the list array, given as argument. 
+\item function \ilcom{NucAnalysis(img\_filename)}: Line 30 to 51 is the core of analysis. 
+\ilcom{img\_filename} is string variable for file names in the list array, given as argument. 
 \begin{itemize}
 \item Line 31: Using \ilcom{img\_filename},  the full path name is constructed by combining two strings. 
 \item Line 32: A file is opened by \ilcom{open(path)} command. 
 \begin{indentCom}
 \textbf{open(path)}\\
-Opens and displays a tiff, dicom, fits, pgm, jpeg, bmp, gif, lut, roi, or text file. Displays an error message and aborts the macro if the specified file is not in one of the supported formats, or if the file is not found. Displays a file open dialog box if path is an empty string or if there is no argument. Use the File>Open command with the command recorder running to generate calls to this function. With 1.41k or later, opens images specified by a URL.
+Opens and displays a tiff, dicom, fits, pgm, jpeg, bmp, gif, lut, roi, or text file. 
+Displays an error message and aborts the macro if the specified file is not in one of the supported formats, 
+or if the file is not found. 
+Displays a file open dialog box if path is an empty string or if there is no argument. 
+Use the File>Open command with the command recorder running to generate calls to this function. 
+With 1.41k or later, opens images specified by a URL.
 \end{indentCom}
 \item Line 33: After opening image, its \ilcom{ImageID} is stored in the variable \ilcom{sourceID}. 
 \item Line 34, the image is thresholded according to the global variables for the lower and the upper values. 
 \item Line 35: Title of the image, which actually is the file name, is retrieved and stored in the variable \ilcom{img\_title}. 
 \item Line 38: The particle analysis is then applied to the image (Lines 34 to 37 are same as lines 14 to 17 in code 21). 
-\item Line 38: Source image you opened from the hard disk is activated and then closed in line 39. Activation of the image by \ilcom{selectImage()} is required, because there is already a new stack (outline stack!), so that original stack is already behind. Therefore to close the original, one must activate the image by using \ilcom{selectImage()} command.  
-\item After all these processing and measurement, results will be saved. Lines 42 to 45 saves the outline stack. Outline stack is also closed after saved (line 45). Line 47 to 50 is exactly same as the Result table saving you did in code 21 (lines 18 to 20). Line 49 is added, just for an additional information printout in Log window. 
+\item Line 38: Source image you opened from the hard disk is activated and then closed in line 39. 
+Activation of the image by \ilcom{selectImage()} is required, 
+because there is already a new stack (outline stack!), 
+so that original stack is already behind. Therefore to close the original, 
+one must activate the image by using \ilcom{selectImage()} command.  
+\item After all these processing and measurement, results will be saved. 
+Lines 42 to 45 saves the outline stack. Outline stack is also closed after saved (line 45). 
+Line 47 to 50 is exactly same as the Result table saving you did in code 21 (lines 18 to 20). 
+Line 49 is added, just for an additional information printout in Log window. 
 \end{itemize}
 \end{itemize}
 \newpage
 \section{Secondary Measurement}
-In this section we learn a macro usage which you may often encounter in actual situations: We do certain measurement first. We then use results from this first measurement for setting parameters of second measurement.  
+In this section we learn a macro usage which you may often encounter in actual situations: 
+We do certain measurement first. We then use results from this first measurement for 
+setting parameters of second measurement.  
 
 We take following example of secondary measurement: 
 \begin{enumerate}
 \item We first measure XY coordinates of moving particles by particle tracking.  
 \item Using these XY data, we measure changes in pixel intensity of the particle.
 \end{enumerate} 
-There could be two cases of how you get the data out and load it into currently running macro. First is to do so directly from data table within ImageJ, and the other is to access data file saved in hard disk. We learn both. 
+There could be two cases of how you get the data out and load it into currently running macro. 
+First is to do so directly from data table within ImageJ, 
+and the other is to access data file saved in hard disk. We learn both. 
 
 \subsection{Using Values in Results Window}
 
@@ -1485,7 +1712,21 @@ Now, you should see a results window that looks like figure \ref{fig:particletra
 \label{fig:particletrackingresults}
 \end{center}
 \end{figure}
-In there, it should be reported that over 100 trajectories were detected. You could see how they look like by clicking "Visualize All Trajectories". Another window overlaid with colorful tracks appears (Fig. \ref{fig:particletrackingTracks}). Click "Filter Options" and input 10, so that short trajectories become invisible in the window. Use your mouse and select one of trajectory by clicking. Rectangle ROI is created in the surrounding of the selected track. Go back to the Results window (Fig. \ref{fig:particletrackingresults}) and click "Focus on Selected Trajectory". Then you will see another window is created with only the track you chose (Fig. \ref{fig:particletrackingTrackFocused}). Check carefully if the tracking was done properly. If you are satisfied, go back to the result window (Fig. \ref{fig:particletrackingresults}) again then click "selected trajectory to Table". You will then find the trajectory data is transferred to the Results table of ImageJ (Fig. \ref{fig:particletrackingTransferred}). 
+In there, it should be reported that over 100 trajectories were detected. You could see how they look like by clicking "Visualize All Trajectories". 
+Another window overlaid with colorful tracks appears 
+(Fig. \ref{fig:particletrackingTracks}). 
+Click "Filter Options" and input 10, so that short trajectories become invisible in the window. 
+Use your mouse and select one of trajectory by clicking. 
+Rectangle ROI is created in the surrounding of the selected track. 
+Go back to the Results window (Fig. \ref{fig:particletrackingresults}) 
+and click "Focus on Selected Trajectory". 
+Then you will see another window is created with only the track you chose 
+(Fig. \ref{fig:particletrackingTrackFocused}). 
+Check carefully if the tracking was done properly. 
+If you are satisfied, go back to the result window (Fig. \ref{fig:particletrackingresults}) 
+again then click "selected trajectory to Table". 
+You will then find the trajectory data is transferred to the Results table of ImageJ 
+(Fig. \ref{fig:particletrackingTransferred}). 
  
 
 %double figure
@@ -1506,22 +1747,42 @@ In there, it should be reported that over 100 trajectories were detected. You co
 \end{center}
 \end{figure}
 
-So now, what we have to do is access results table, get XY coordinates from there and do intensity measurements at corresponding positions. To get data out of results table, we use the following macro command:
+So now, what we have to do is access results table, 
+get XY coordinates from there and do intensity measurements at corresponding positions. 
+To get data out of results table, we use the following macro command:
 \begin{indentCom}
 \textbf{getResult("Column", row)}\\
-Returns a measurement from the ImageJ results table or NaN if the specified column is not found. The first argument specifies a column in the table. It must be a "Results" window column label, such as "Area", "Mean" or "Circ.". The second argument specifies the row, where 0<=row<nResults. nResults is a predefined variable that contains the current measurement count. (Actually, it's a built-in function with the "()" optional.) Omit the second argument and the row defaults to nResults-1 (the last row in the results table). See also: nResults, setResult, isNaN, getResultLabel.
+Returns a measurement from the ImageJ results table or NaN if the specified column is not found. 
+The first argument specifies a column in the table. 
+It must be a "Results" window column label, such as "Area", "Mean" or "Circ.". 
+The second argument specifies the row, where 0<=row<nResults. 
+nResults is a predefined variable that contains the current measurement count. 
+(Actually, it's a built-in function with the "()" optional.) 
+Omit the second argument and the row defaults to nResults-1 (the last row in the results table). 
+See also: nResults, setResult, isNaN, getResultLabel.
 \end{indentCom}
-Let's first test with a short macro that reads data from Results table and print out XY coordinates in the Log window. 
+Let's first test with a short macro that reads data from Results table and 
+print out XY coordinates in the Log window. 
 
 \lstinputlisting[morekeywords={*, getResult, nResults}]{code/code24.ijm}
 
-At line 1, \ilcom{nResults} is a command that returns number of rows in the Results table. Frame number is added with 1 in the line 2  because frame number in ParticleTracker plugin starts from 0, while it starts from 1 in ImageJ. In line 3 and 4, xpos and ypos is inverted, because ParticleTracker program was originally wrote in Matlab and for that convention (in Matlab, vertical diretion is called "X" and horizontal direction is called "Y", and this is common to matrix calculation software since row = X and column = Y), XY data should be inverted for use in in ImageJ. 
+At line 1, \ilcom{nResults} is a command that returns number of rows in the Results table. 
+Frame number is added with 1 in the line 2  because frame number in ParticleTracker plugin starts from 0, 
+while it starts from 1 in ImageJ. 
+In line 3 and 4, xpos and ypos is inverted, 
+because ParticleTracker program was originally wrote in Matlab and for that convention 
+(in Matlab, vertical diretion is called "X" and horizontal direction is called "Y", 
+and this is common to matrix calculation software since row = X and column = Y), 
+XY data should be inverted for use in in ImageJ. 
 
-If you check the log window and if you are confident with data read out from Results window, we could now add the code with lines to measure intensity by placing circular ROI at XY coordinates of trajectory. Here we go. 
+If you check the log window and if you are confident with data read out from Results window, 
+we could now add the code with lines to measure intensity by 
+placing circular ROI at XY coordinates of trajectory. Here we go. 
 
 \lstinputlisting[morekeywords={*, getResult, makeOval}]{code/code24_5.ijm}
 
-Running this macro, you should see a new column in Results window with header title "RoiInt", where measured intensity is listed (Fig. \ref{fig:PTResultsTableAfter}).
+Running this macro, you should see a new column in Results window with header title "RoiInt", 
+where measured intensity is listed (Fig. \ref{fig:PTResultsTableAfter}).
 
 %figure 
 \begin{figure}[htbp]
@@ -1532,23 +1793,32 @@ Running this macro, you should see a new column in Results window with header ti
 \end{center}
 \end{figure}
 
-Explanation of the code: In the first line, we set the name of the image stack so that we are sure with which window to be measured with intensity. Line 2 and 3 are for setting the size of oval ROI. 
+Explanation of the code: In the first line, 
+we set the name of the image stack so that we are sure with which window to be measured with intensity. 
+Line 2 and 3 are for setting the size of oval ROI. 
 
-The way oval ROI is created is what you have learned already in detail in the section \ref{sec:dotmove}. \ilcom{getRawStatistics()} returns basic parameters of the selected ROI, and is more convenient than using \ilcom{run("Measure")}. 
+The way oval ROI is created is what you have learned already in detail in the section 
+\ref{sec:dotmove}. \ilcom{getRawStatistics()} returns basic parameters of the selected ROI, 
+and is more convenient than using \ilcom{run("Measure")}. 
 
 \begin{indentCom}
 \textbf{getRawStatistics(nPixels, mean, min, max, std, histogram)}\\
-This function is similar to getStatistics except that the values returned are uncalibrated and the histogram of 16-bit images has a bin width of one and is returned as a max+1 element array. For examples, refer to the ShowStatistics macro set. See also: calibrate and List.setMeasurements
+This function is similar to getStatistics except that the values returned 
+are uncalibrated and the histogram of 16-bit images has a bin width of one and is returned 
+as a max+1 element array. For examples, refer to the ShowStatistics macro set. 
+See also: calibrate and List.setMeasurements
 \end{indentCom} 
 
 \subsection{Using values in non-Results table}
-Next, we study a case when data are shown in non-Results Table. Manual Tracking plugin is another way of measuring particle movement, and utilizes non-Results table. 
+Next, we study a case when data are shown in non-Results Table. 
+Manual Tracking plugin is another way of measuring particle movement, and utilizes non-Results table. 
 
 \begin{indentexercise}{1}
 Open sample image stack \textbf{TransportOfEndosomalVirus.tif} 
 and track at least two virus manually\footnote{ For detailed instruction on how to use Manual tracker, 
 see corresponding section in CMCI Image Processing and Analysis Course I Basic.}. 
-In ImageJ, you should install this plugin by yourself. In Fiji, Manual Tracking plugin could be found at \ijmenu{[Plugins > tracking >]}.
+In ImageJ, you should install this plugin by yourself. 
+In Fiji, Manual Tracking plugin could be found at \ijmenu{[Plugins > tracking >]}.
 \end{indentexercise}
 
 After the tracking, we have a results table that looks like figure \ref{fig:manualtrackingresults}.
@@ -1566,25 +1836,29 @@ you might immediately think of using \ilcom{getResult(column header, row)}
 as we did in the previous subsection.
 
 That should then be pretty straight forward\ldots 
-But if you try this, you would see that this function returns error and does not work in case of Manual Tracking plugin. 
+But if you try this, you would see that this function returns error and 
+does not work in case of Manual Tracking plugin. 
 This is because result table created by Manual Tracking plugin is not the genuine ImageJ Results window. 
 For such non-genuine results window, we retrieve data using the following command. 
 \begin{indentCom}
 \textbf{getInfo("window.contents")}\\
 If the front window is a text window, returns the contents of that window. 
 If the front window is an image, returns a string containing the text that would be displayed by 
-Image>Show Info. Note that \ilcom{getImageInfo()} is a more reliable way to retrieve information about an image. Use \\
+Image>Show Info. Note that \ilcom{getImageInfo()} is a more reliable way to retrieve information 
+about an image. Use \\
 \ilcom{split(getInfo(),"\textbackslash{}n")} \\
 to break the string returned by this function into separate lines. Replaces the \ilcom{getInfo()} function.
 \end{indentCom}
 
-This command returns a string with the content of the table. Try the following two lines to see how it works. \\
+This command returns a string with the content of the table. 
+Try the following two lines to see how it works. \\
 
 \begin{lstlisting}[numbers=none, morekeywords={*, getInfo}]
 str = getInfo("window.contents");
 print(str);
 \end{lstlisting}
-If you run these two lines, you will see data printed out in the Log window (Fig. \ref{fig:manualtrackingresultsLog}). 
+If you run these two lines, you will see data printed out in the Log window 
+(Fig. \ref{fig:manualtrackingresultsLog}). 
 %figure 
 \begin{figure}[htbp]
 \begin{center}
@@ -1706,7 +1980,8 @@ We then successfully measured the intensity dynamics of moving object again.
 
 \newpage
 \subsection{Accessing Data File: Simple Case}
-In this section and in the next section, we study how to access data in saved file for secondary measurements. 
+In this section and in the next section, 
+we study how to access data in saved file for secondary measurements. 
 
 Two cases we studied so far were both accessing data listed in a table that is already loaded in ImageJ 
 (data is already an instance of ImageJ). What if we want to use data that is saved as a file? For example, 
@@ -1715,7 +1990,8 @@ you want to use its data for secondary measurement. More generally, you did part
 such as Imaris Track, and you want to use  coordinate data from that analysis for intensity measurement to be done in ImageJ. 
 In such cases, we should access tabulated data in file accessing from ImageJ. 
 
-In this section, we try accessing data saved by Manual Tracking. Loading data file could be done by a small modification 
+In this section, we try accessing data saved by Manual Tracking. 
+Loading data file could be done by a small modification 
 of the code we studied in the previous section. Instead of command 
 \ilcom{getInfo("window.content")} in line 3 of code 25.5, we use \ilcom{FileOpenAsString(path)} to retrieve 
 file content into a string variable.  By leaving the argument \ilcom{path} blank (""), user will be asked for choosing a file. 
@@ -2424,8 +2700,7 @@ the ImagePlus instance \textit{imp}. In the 4th line, a new instance of
 ImagePlus is created using what we call ``constructor'' (see ImagePlus API for
 a list of constructor), using the ip that is actually associated with the
 preexisting ImagePlus \textit{imp}. Finally, the 5th line shows the second
-window (\texit{imp2}), the image content of which is shared with \textit{imp}. 
-
+window \textit{imp2}, the image content of which is shared with \textit{imp}. 
  
 \end{indentexercise}
 
@@ -2539,7 +2814,8 @@ and their inter-operability.
 \end{quote}
 \end{shaded}
 
-\href{http://spaceroots.org/software/mantissa/index.html}{Mantissa (Mathematical Algorithms for Numerical Tasks In Space System Applications)}
+\href{http://spaceroots.org/software/mantissa/index.html}
+{Mantissa (Mathematical Algorithms for Numerical Tasks In Space System Applications)}
 \begin{shaded}
 \begin{quote}
 Mantissa is a collection of various mathematical tools aimed towards for simulation. 
@@ -2564,7 +2840,8 @@ Some other packages\dots
 \begin{itemize}
 \item \href{http://www.imagescience.org/meijering/software/}{ImageScience} - 
 Implemented as plugins for filtering but valuable for use as a library. 
-\item \href{http://www.f4.htw-berlin.de/~barthel/ImageJ/ImageJ3D/ImageJ3D.html}{ImageJ3D - JRenderer3D} -3D renderer. 
+\item \href{http://www.f4.htw-berlin.de/~barthel/ImageJ/ImageJ3D/ImageJ3D.html}
+{ImageJ3D - JRenderer3D} -3D renderer. 
 \item kfschmidt.*  - Numerical analysis tools: Simplex, GLM analyzer, Matrix
 calculations
 \item math3D -Matrix calculation, 3D tools.  
@@ -2576,7 +2853,8 @@ Following will be some examples of using Apache Commons Math library.
 
 \lstinputlisting{code/code32.js}
 
-When you use a package, you should first import it. The first line is doing this by using a method \ilcom{importPackage}. 
+When you use a package, you should first import it. 
+The first line is doing this by using a method \ilcom{importPackage}. 
 One could also import a single class, using \ilcom{importClass} method. 
 In line 4, a new object of Class DescriptiveStatistics is created. Line 5 and 6 stores data in this object, 
 and calculates statistics in line 9, 10 and 11.
