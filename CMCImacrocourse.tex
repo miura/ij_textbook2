@@ -2922,8 +2922,9 @@ mm:ss \\
 (two-digits minutes and two digits seconds)
 \end{itemize}
 Hint: Use following: for-statement, 
-\ilcom{nSlices, setSlice, getNumber,\\ setForegroundcolor, setBackgroundColor, drawString}. 
-(refer to the Build-in Macro Function page in ImageJ web site!)
+\ilcom{nSlices, setSlice, getNumber,\\ setForegroundcolor, setBackgroundColor,
+drawString, IJ.pad}. (refer to the Build-in Macro Function page in ImageJ web
+site!)
 
 \subsubsection{Assignment 4} 
 Modify code 14 so that the macro does not use "while" loop. For example with the following way. 
@@ -2935,7 +2936,7 @@ Modify code 14 so that the macro does not use "while" loop. For example with the
 
 \subsection{Homework for the Second Day}
 
-\subsubsection{Assignment 1}
+\subsubsection{Assignment 5}
 Write a elementary calculator macro with single dialog box that does:
 \begin{itemize}
 \item user input two numbers
@@ -2943,5 +2944,12 @@ Write a elementary calculator macro with single dialog box that does:
 \item answer appears in the Log window. 
  \end{itemize}
 Hint: use \ilcom{Dialog.addChoice Dialog.getChoice} command.   
+
+\subsubsection{Assignment 6}
+Write a macro that does pseudo high-pass filtering by Gaussian blurred image
+(duplicate an image, do Gaussian blurring with a large kernel to create
+background and subtract it from the original). If you could successfully write a
+macro, then convert it to a function and use it from a macro.
+Hint: use \ilcom{getImageID(), selectImage(id)} command.   
 
 \end{document}
