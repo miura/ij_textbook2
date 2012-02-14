@@ -340,16 +340,19 @@ This is convenient when the code becomes long.
 Macro can be written in any text editor such as "Notepad" in Windows but of course 
 there is no debugger function available in this case.}. 
 To open the editor, select \ijmenu{[PlugIns -> New -> Macro]} from the menu.  
-This will create a new window where you can write macro (we call this ''macro editor''). 
+This will create a new window where you can write macro (we call this ''macro
+editor'', fig\ref{fig_MacroEditor}).
 \begin{indentFiji}
 Fiji: You could use more advanced interface called ''script editor'' 
-by \ijmenu{[Plugins -> Scripting -> Script Editor]}. 
-Then select \ijmenu{[Language -> ImageJ Macro]}. 
+by \ijmenu{[File -> New -> Script]}. It should look like \ref{fig_ScriptEditor}. 
+From its menu, select \ijmenu{[Language -> ImageJ Macro]}. 
 Syntax high lighter offers automatic coloring of ImageJ functions. 
 \end{indentFiji}
-Then write a program as follows
-\footnote{NOTE: DON'T FORGET TO TABULATE THE SECOND LINE!}. 
-Omit the line numbers! These numbers were added just for explanation. 
+Then write your first macro as shown below. In the second line DON'T forget to
+indent the line using tab or spaces\footnote{In ImageJ macro, indenting is not a required
+syntax for commands but doing this will be very very helpful afterwards. You
+will understand it as the macro you write becomes longer}. Omit the line
+numbers! These numbers were added just for explanation.
 
 %Code 1
 %\begin{lstlisting}
@@ -375,14 +378,17 @@ Omit the line numbers! These numbers were added just for explanation.
 \end{center}
 \end{figure}
 
-Click "Macros" in the menu at the top of the macro editing window 
-("Macros" in the menu appears only when the macro editing window is active). 
-In the first line, there is "Run Macro". 
-Try running it from editor menu \ijmenu{[Macros-> Run Macro]} 
+From the macro editor menu, running the code by \ijmenu{[Macros->
+Run Macro]}\footnote{"Macros" in the menu appears only when the macro editing
+window is active}. You could also run the code by shortcut keys (Windows:
+ctrl-r, OSX command-r) as well. 
+ 
 \begin{indentFiji}
-Fiji:  Use \ijmenu{[Run -> Run]}. 
+Fiji:  Use \ijmenu{[Run -> Run]} from the script editor menu. Shorcut keys are
+same as in ImageJ. You could also use ``run'' button in the script editor. 
 \end{indentFiji}
-This will create a new window "Log", with "Hello World" printed. 
+This will create a new window "Log". Within the log window, "Hello World" will
+be printed.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -398,8 +404,8 @@ curly braces \{\}. "print\_out" will be the name of macro.
 
 \item line2: print() command orders ImageJ to print out the content within the parenthesis 
 in the "Log" window. The text to be printed must be contained within the double quotes (""). 
-The best reference to macro functions of ImageJ is in the ImageJ web site
-\footnote{ http://rsbweb.nih.gov/ij/developer/macro/functions.html}. 
+The best reference for ImageJ macro functions is in the ImageJ web site
+\footnote{\url{http://rsbweb.nih.gov/ij/developer/macro/functions.html}}. 
 For example, you could find definition of print("") command in the web site as quoted in below:\\
 %\item
 \begin{indentCom}
@@ -454,8 +460,9 @@ and check that the modified text will be printed in the "Log" window. \\
 
 \begin{indentexercise}{3}
 \item Multiple macros can exist in a single file. We call this \textbf{"macro sets"}. 
-Duplicate the code you wrote by copying and pasting under the original. 
-The second macro should have a different name. In the example below, the second macro is named "pirnt\_out2".
+Duplicate the code you wrote by copying and pasting it under the first macro. 
+The second macro should have a different name. In the example shown in fig.
+\ref{fig_MacroSetInMenu}, the second macro is named "pirnt\_out2".
 \end{indentexercise}
 
 \begin{figure}[htbp]
@@ -467,7 +474,7 @@ The second macro should have a different name. In the example below, the second 
 
 \subsection{Variables and Strings}
 Texts such as "Hello World!" can substituted by variables 
-(there is no distinction of number variable and string variable in ImageJ macro.). 
+(there is no declaration of types, such as number or string, in ImageJ macro.).
 Let's understand this by examining a short macro below.
 \lstinputlisting{code/code02.ijm}
 \lstinputlisting{code/code03.ijm}
@@ -532,8 +539,9 @@ Modify the code 4, so that the calculation involves subtraction (-), multiplicat
 \end{indentexercise}
 
 \subsection{Parameter Input by User}
-In many cases you may want to make a macro to ask the user to input some numerical values, 
-file names. We learn how to do this here by first examining the following code. 
+At some point you might want to make a macro to ask the user to input numerical
+values or file names. We now learn how to do that, by first examining the
+following code. Run the code first.
 \lstinputlisting{code/code05.ijm}
 Running this macro,  a dialogue window pops-up.
 
@@ -548,28 +556,34 @@ The command \textit{getNumber} consists of two parameters (programmers call such
 \begin{indentCom}
 \textbf{getNumber}(message string, default number)
 \end{indentCom}
-The first parameter is a string bounded with double quotes (see code 5, line 3 and 4). 
-This string will appear in the dialogue window such as shown above. 
-Default number will also appear in the dialogue window, 
-and the user modifies this number. 
-Then the number will be returned and then substituted to the variable a in the macro. 
-
-To ask a string to users, following is an easy example. 
+The first parameter is a string wrapped by double quotes (see code 5, line 3
+and 4). This string will appear in the dialogue window such as shown above. 
+Default number will appear in the input field in the dialogue window, 
+and the user is expected to modifies this default number. 
+When OK button is clicked, the number given by the user will be returned to
+the macro and then substituted to a variable. In the above case, this could be
+either \textit{a} or \textit{b}.
+ 
+To ask a user for providing a string in dialog, following is an example. 
 \lstinputlisting[morekeywords={*, getString}]{code/code06.ijm}
 
-The command \textbf{getString} also has two arguments, and only the difference is that the user input will be treated as string parameter. \\
+The command \textbf{getString} also has two arguments, 
+and only the difference is that the user input will be treated as a string. \\
 
 \begin{indentexercise}{1}
 Run the code 6 and input 1 for a and 2 for b. What happened? Explain the reason. 
 \end{indentexercise}
 
 \subsection{Including ImageJ commands into a macro}
-There are many functions in ImageJ. All these commands can be accessed from macro. 
+There are many functions in ImageJ as you could see them by exploring the menu.
+Almost all of these commands can be accessed from macro\footnote{Some plugins
+are not macro-ready.}.
 
-We will make a macro that creates a new image, add noise,  blurs this image by Gaussian blur, 
-and then thresholding the image. To know the commands we need there is a very convenient tool called 
-"Command Recorder". 
-Do \ijmenu{[PlugIns -> Macros -> Record\ldots]}. A window like below then opens. 
+We will make a macro that creates a new image, add noise, blurs this image by
+Gaussian blurring, and then thresholding the image. To know the commands 
+there is a very convenient tool called \textbf{Command Recorder}. 
+Do \ijmenu{[PlugIns -> Macros -> Record\ldots]}. A window like figure
+\ref{fig_macroRecorderBlank} opens.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -578,12 +592,19 @@ Do \ijmenu{[PlugIns -> Macros -> Record\ldots]}. A window like below then opens.
 \end{center}
 \end{figure}
 
-All the commands you will execute will be recorded in this window. 
-So we first do the processing manually. 
-Prepare a new image using [File -> New] command. 
-Size of the image can be anything. 
-Then do \ijmenu{[Process -> Noise -> Salt and Pepper]} (Fig. \ref{fig_SaltAndPepper}).
-
+All the commands that you execute will be recorded in this window. 
+For composing a macro using this recorder, we first do the processing
+manually from the menu as follows. 
+\begin{itemize}
+  \item Prepare a new image using \ijmenu{[File -> New]} command. Size of the
+  image can be anything.
+  \item Then do \ijmenu{[Process -> Noise -> Salt and Pepper]} (Fig.
+  \ref{fig_SaltAndPepper}).
+  \item \ijmenu{[Process -> Filters -> Gaussian Blur]} (use Sigma = 2.0).
+  \item \ijmenu{[Image -> Adjust -> Threshold\ldots]}. Toggle the slider to make
+  signals red. Check "Dark Background", then click "Apply".
+\end{itemize}
+ 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{fig/SaltandPepper300.png}
@@ -591,11 +612,6 @@ Then do \ijmenu{[Process -> Noise -> Salt and Pepper]} (Fig. \ref{fig_SaltAndPep
 \label{fig_SaltAndPepper}
 \end{center}
 \end{figure}
-
-\ijmenu{[Process -> Filters -> Gaussian Blur]} (use Sigma = 2.0).
-then
-\ijmenu{[Image -> Adjust -> Threshold\ldots]}. 
-Toggle the slider to make signals red. Then click "Apply". Check "Dark Background" and OK. 
 
 Now, check the Command Recorder window. 
 It should now look like Fig. \ref{fig_macroRecorderFilled}. 
@@ -609,18 +625,20 @@ Lines appeared after your operations are corresponding commands.
 \end{center}
 \end{figure}
 
-These lines appeared in the recorder can be used as it is. 
-So you could copy and paste them to your macro. 
-Prepare a macro like below, by copy and pasting the commands in the recorder. 
-Delete the lines that is commented out 
-(lines that begins with "//" are lines that are skipped by the macro interpreter).
+These texts generated in in the recorder can be used as it is in your macro. 
+You could copy and paste them\footnote{In case of OSX, you might probably need
+to click ``Create'' button to create a duplicate of commands in a new script
+window. Then you could copy the commands from there.}. Compose a macro like
+below by copy and pasting the commands in the recorder. 
+Delete the lines that is commented out (lines that begins with "//" are lines that are skipped by the macro interpreter).
 \lstinputlisting{code/code07.ijm}
 
-Try the macro! (I hope that you are amazed by now with the power of Macro Recorder!)\\
+Run the macro! (I hope that you are amazed by now with the power of Macro
+Recorder!)\\
  
-The second line in the above macro creates a new image. 
-This command has many parameters (in coding jargon, we say "5 arguments"). 
-To know what these parameters are, 
+The second line in the above macro has a command \ilcom{newImage()}. This
+command creates a new image. It has five parameters (in coding jargon, we say
+there are "five arguments"). To know what these parameters are, 
 the quickest way is to read the Build-In Macro Function page in ImageJ web site  
 (the reference is attached to this manual so take a look).  
 In case of newImage command, the description looks like this. 
@@ -635,8 +653,9 @@ Width and height specify the width and height of the image in pixels.
 Depth specifies the number of stack slices.
 \end{indentCom}
 Using this information, you can modify the macro to change the size of the image. 
-It is also possible to use variables as parameter. 
-You could modify macro, so that the macro asks you width and height of the new image such as:
+It is also possible to use variables and pass it to the command as a parameter. 
+For example, you could modify macro so that the macro asks you width and height
+of the new image and use those imput values to create a new image, such as:
 \lstinputlisting{code/code08.ijm}
 
 \begin{indentexercise}{1}
@@ -651,9 +670,9 @@ To apply such commands for many images in a single folder
 (say you have one-thousand images you want to contrast enhance and also to Gaussian-blur), 
 there are two ways. One way is to further extend the macro by adding file-accessing command and 
 looping the commands (you will learn this later). 
-Another way is to do such "batch processing" by copy and pasting list of commands 
-in previous section to batch-processing interface. 
-This function could be called by \ijmenu{[Process -> Batch -> Macro]}
+Another way is to do such "batch processing" by copy and pasting list of
+macro commands to batch-processing interface. 
+This interface could be used by \ijmenu{[Process -> Batch -> Macro]}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -758,12 +777,13 @@ Result will be recorded in the memory and will be displayed in the Results table
 Open an example stack \textbf{1703-2(3s-20s).stk}
 \footnote{Some of you may realize that you used this sequence 
 in the Image Processing / Analysis Course for learning 
-Time Series Analyzer Plugin. Now, you can program similar 
+stack measurements using Z-profiler. Now, you can program similar 
 device in macro. Good thing about the custom program 
-is that you will be able to modify the program further to add more functions.}. 
-This is a short sequence of FRAP analysis, 
+is that you will be able to modify the program further to add more functions.
+For example, You could measure the time course of standard deviation of
+intensity within the selectd ROI.}. This is a short sequence of FRAP analysis,
 so edge of the one of the cells is bleached and then fluorescence recovers by time. 
-Select FRAPped region by ROI tool (such as in the figure below). 
+Select the frapped region by ROI tool (such as in the figure below). 
 Execute the macro. Results will be printed in the Results window (see see the table in the figure left). 
 
 %%%figure frap seq and quantification
@@ -2897,7 +2917,7 @@ Turn it in, regardless of whether its working or not.
 
 \section{Homework!}
 
-\subsection{Homework for the First Day} 
+\subsection{Homework for basics} 
 
 \subsubsection{Assignment 1}
 Change code 12.75 so that 
@@ -2908,14 +2928,54 @@ Change code 12.75 so that
 
 Comment: This is also a test if you can think things logically\ldots Thanks to Prof. Boole. 
 
-\subsubsection{Assignment 2}  
+\subsubsection{Assignment 2}
+
+Write a macro that draws gird (lattice) in a image (see example, attached).
+If you have time, modify the macro so that the macro plots diagonal lattice.
+Steps should be something like:
+\begin{enumerate}
+\item creat a new image
+\item loop in x direction and draw vertical line
+\dots for this, use command \ilcom{drawLine(x1, y1, x2, y2)}
+\dots see
+\url{http://rsb.info.nih.gov/ij/developer/macro/functions.html#drawLine}
+\item loop in y direction and draw horizontal line
+\end{enumerate}
+
+
+Hints: if you want to draw white lines on black image
+ \begin{itemize}
+\item you need to select black background when you make a new image
+\item you need to set the drawing color using \ilcom{setColor()}
+\item see
+\url{http://rsb.info.nih.gov/ij/developer/macro/functions.html#setColor}
+\end{itemize}
+%composing grids
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{fig/grid.png}
+\caption{Composing grid image}
+\label{fig_homeworkGrid}
+\end{center}
+\end{figure}
+
+%composing diagonalgrids
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{fig/gridDiagonal.png}
+\caption{Composing grid image}
+\label{fig_homeworkGridDiagonal}
+\end{center}
+\end{figure}
+
+\subsubsection{Assignment 3}  
 Write a macro that deletes every second frame (even-numbered frames) in a stack. 
 
 Hint: use \ilcom{run("Delete Slice");} to delete a single slice. 
 
 Comment: it might be tricky.
 
-\subsubsection{Assignment 3} 
+\subsubsection{Assignment 4} 
 Write a time stamping macro for t-stacks. You should implement following functions. 
 \begin{itemize}
 \item User inputs the time resolution of the recording (how many seconds per frame).
@@ -2929,7 +2989,7 @@ Hint: Use following: for-statement,
 drawString, IJ.pad}. (refer to the Build-in Macro Function page in ImageJ web
 site!)
 
-\subsubsection{Assignment 4} 
+\subsubsection{Assignment 5} 
 Modify code 14 so that the macro does not use "while" loop. For example with the following way. 
 \begin{itemize}
 \item Macro measures the integrated density of all area in the first frame ( = ref\_int).
@@ -2937,9 +2997,9 @@ Modify code 14 so that the macro does not use "while" loop. For example with the
 \item Decrease the lower for the thresholding by temp\_int/ref\_int.
  \end{itemize}
 
-\subsection{Homework for the Second Day}
+\subsection{Homework for a bit advanced}
 
-\subsubsection{Assignment 5}
+\subsubsection{Assignment 6}
 Write a elementary calculator macro with single dialog box that does:
 \begin{itemize}
 \item user input two numbers
@@ -2948,7 +3008,7 @@ Write a elementary calculator macro with single dialog box that does:
  \end{itemize}
 Hint: use \ilcom{Dialog.addChoice Dialog.getChoice} command.   
 
-\subsubsection{Assignment 6}
+\subsubsection{Assignment 7}
 Write a macro that does pseudo high-pass filtering by Gaussian blurred image
 (duplicate an image, do Gaussian blurring with a large kernel to create
 background and subtract it from the original). If you could successfully write a
