@@ -142,7 +142,7 @@ morestring=[b]",
 
 {\bfseries EMBL-CMCI course II}\\[\baselineskip]
 {\textcolor{Medium}{\Huge Macro Programming in ImageJ}}\\[\baselineskip]
-{\small ver 2.0.2}\par
+{\small ver 2.0.3}\par
 \vfill
 
 %{\Large Centre for Molecular \& Cellular Imaging\\EMBL Heidelberg\\\plogo}\par
@@ -933,8 +933,9 @@ A macro program could have different subroutines which are executed depending on
 \begin{itemize}
 \item Line 3 The macro asks user to input a number and the number is substituted to the variable input\_num.
 \item Line 4 Content of input\_num is evaluated. If input\_num is equal to 5, line 5 is executed and prints out the message in the Log window. Otherwise macro interpreter jumps to line 7, and ends the operation.  By adding "else" which will be executed if input\_num is not 5, the macro prints out message in all cases (see code 12.5 for this if - else case). 
+\item Line 4 We used double equal signs for comparison (e.g. "if (a==5)"
+). Note that this functional role is different from assignments, or substitution (e.g. "a = b + c").
 \end{itemize}
-
 %figure
 \begin{figure}[htbp]
 \begin{center}
@@ -944,12 +945,50 @@ A macro program could have different subroutines which are executed depending on
 \end{center}
 \end{figure} 
 
+Above example might be already clear, but we examine the detail of the
+content between parenthesis after ``if''. Write the following code in
+your script editor and run it.
+\lstinputlisting[morekeywords={*, ==}]{code/code12_1.ijm}
+The output in the log window should be \textit{1} indicating that \ilcom{(5 ==
+5)} returned \textit{1}. Next, modify the code like below and run it.
+\lstinputlisting[morekeywords={*, ==}]{code/code12_2.ijm}
+The output becomes \text{0}. The second line \ilcom{(5 == 4)} is 0. 
+What double equal sign is doing in these
+examples is a comprison of numbers in the left and the right side, and if
+the number is same, it returns 1 and if they are not equal, it returns 0. 1 and
+0 actually are representing \textbf{true} (= 1) or \textbf{false} (= 0). 
+
+We could also test if they are NOT equal. For this, replace \ilcom{==} by
+\ilcom{!=}.
+\lstinputlisting[morekeywords={*, !=}]{code/code12_3.ijm}
+Run the code above, and it returns 1, because 5 is NOT 4 and that is true. Now,
+you could introduce the \textit{if} again as follows.
+\lstinputlisting[morekeywords={*, if, else}]{code/code12_35.ijm}
+In the parenthesis after ``if'', there is obvious TRUE statement (5 is not 4).
+This is true, so the command bounded by curly braces is executed, which is to
+print out ``true!'' in the log window.
+
+Try changing the line two to \ilcom{if (5 == 4)}. Running this prints nothing
+in the log window, because 5 is not 4 (FALSE!) so that the command in
+the line 3 is ignored. To avoid such ignorant no-output behaviour, you could add
+``else'' as follows.
+
+\lstinputlisting[morekeywords={*, if, else}]{code/code12_4.ijm}
+
+The code works also with the direct true or false
+declaration inside the if parenthesis. Try the follwoing code.
+
 \lstinputlisting[morekeywords={*, if, else}]{code/code12_5.ijm}
 
-We used double equal signs for comparison (e.g. "if (a==5)" ). Note that this functional role is different from assignments, or substitution (e.g. "a = b + c").
+The above prints two lines of ``false!'' in the log window. You could replace
+the if parenthesis values to 1 and ture to check that it works as well. 
+
+By now, you probabaly are pretty clear with what is going on in the code below. 
+\lstinputlisting[morekeywords={*, if, else}]{code/code12_6.ijm}
 
 \subsubsection{Complex Conditions}
-In many cases, you might need to evaluate the condition of multiple parameters at once. For such demands, several different comparisons can be combined by using following Boolean operators. 
+In many cases, you might need to evaluate the condition of multiple parameters at once. 
+For such demands, several different comparisons can be combined by using following Boolean operators. 
 
 \begin{indentCom}
  \begin{tabular*}{0.5\textwidth}{ l l }
@@ -957,7 +996,31 @@ In many cases, you might need to evaluate the condition of multiple parameters a
 || & boolean OR\\
 \end{tabular*}
 \end{indentCom}
-Hers is an example.
+
+Let's first test what they do with very a simple example directly using
+\ilcom{true} and \ilcom{false}.
+\lstinputlisting[morekeywords={*, if, else}]{code/code12_65.ijm}
+When you run this code as it is, line 4 and line 8 are both excecuted and prints
+the messages. For the first \ilcom{if} parenthesis, \ilcom{&&} operator tests if
+both sides are true. If both are indeed true, it returs true (1), and that is
+the case above. If one of them or both are false, then \ilcom{&&}
+operator returns false(0). 
+
+On the other hand, in the second if parenthesis,
+\ilcom{||} operator tests if one of the two sides is true. Since both are
+true in the above code, OR operator returns true because at least one of them is
+true. Only when both sides are false, the returned value becomes false (0).
+
+\begin{indentexercise}{1}
+Change the values of \ilcom{a} and \ilcom{b} in code 12\_65 to \ilcom{false} and
+compose other three possible combinations (e.g. a = true, b = false will print
+only one line).
+Check the output. Change the values of \ilcom{a} and \ilcom{b} also to 0 and/or
+1 and check the results. 
+\end{indentexercise}
+
+Here is a bit more realistic example (though very useless), an extended version
+of code 16\_6.
 \lstinputlisting[morekeywords={*, if, else}]{code/code12_75.ijm}
 \begin{itemize}
 \item Line 4 and 5 Ask user to input two parameters.
@@ -989,7 +1052,7 @@ Creates an elliptical selection, where (x,y) define the upper left corner of the
 \item Line 27: Shifts the x position of the dot by ``speed'' distance. 
 \item Line 28: if the position calculated in the line 27 exceeds the boundary, either left \ilcom{(x\_position < 0)} OR right \ilcom{(x\_position > (w-sizenum))}, then the direction of movement is switched by multiplying -1.
 \end{itemize}
-\begin{indentexercise}{1}
+\begin{indentexercise}{2}
 Modify code 13 that the dot moves up and down vertically. Change the stack width and height as well. 
 \end{indentexercise}
 
