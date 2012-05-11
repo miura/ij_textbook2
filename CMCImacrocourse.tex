@@ -928,7 +928,9 @@ Modify code 11 so that the macro prints out numbers from 200 to 100, with an inc
 
 \subsection{Conditions: if-else statements}
 \subsubsection{Introducing if-else}
-A macro program could have different subroutines which are executed depending on the conditions. Here is an example of macro with conditions.  
+A macro program could have parts which are executed depending some
+conditions.
+Here is an example of macro with conditions.
 \lstinputlisting[morekeywords={*, if}]{code/code12.ijm}
 \begin{itemize}
 \item Line 3 The macro asks user to input a number and the number is substituted to the variable input\_num.
@@ -945,18 +947,20 @@ A macro program could have different subroutines which are executed depending on
 \end{center}
 \end{figure} 
 
-Above example might be already clear, but we examine the detail of the
-content between parenthesis after ``if''. Write the following code in
-your script editor and run it.
+Now, we examine the content between 
+parenthesis after ``if'' in more detail. 
+Write the following code in your script editor and run it.
 \lstinputlisting[morekeywords={*, ==}]{code/code12_1.ijm}
 The output in the log window should be \textit{1} indicating that \ilcom{(5 ==
 5)} returned \textit{1}. Next, modify the code like below and run it.
 \lstinputlisting[morekeywords={*, ==}]{code/code12_2.ijm}
-The output becomes \text{0}. The second line \ilcom{(5 == 4)} is 0. 
+The output becomes \text{0}, indicating that the second line \ilcom{(5 == 4)} is
+0.
 What double equal sign is doing in these
 examples is a comprison of numbers in the left and the right side, and if
 the number is same, it returns 1 and if they are not equal, it returns 0. 1 and
-0 actually are representing \textbf{true} (= 1) or \textbf{false} (= 0). 
+0 actually are representing \textbf{true} (= 1) or \textbf{false} (= 0), the
+\textbf{boolean values}.
 
 We could also test if they are NOT equal. For this, replace \ilcom{==} by
 \ilcom{!=}.
@@ -1032,7 +1036,11 @@ of code 16\_6.
 From line 10 to 17, there are several layers of conditions. Macro programmer should use tab-shifting for deeper condition layers as above for the visibility of code. Easy-to-understand code helps the programmer oneself to debug afterward, and also for other programmers who might reuse the code.
 \subsubsection{Application of if-statement}
 \label{sec:dotmove}
-We make a macro that produces an animation of moving dot. User inputs the speed of the dot, and then the animation is generated. The dot moves horizontally and bounces back from the edge of the frame. â€œifâ€�Eis used to switch the movement direction. 
+
+We write a macro that produces an animation of moving dot. User inputs the speed
+of the dot, and then the animation is generated. In the animation (which
+actually is a stack) the dot moves horizontally and bounces back from the edge
+of the frame. \ilcom(if) operator is used to switch the movement direction.
 \lstinputlisting[morekeywords={*, setForegroundColor, setBackgroundColor, if}]{code/code13.ijm}
 
 \begin{itemize}
