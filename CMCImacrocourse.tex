@@ -926,6 +926,28 @@ Condition for the while-statement could be various. Here is a small list of comp
 Modify code 11 so that the macro prints out numbers from 200 to 100, with an increment of -10. 
 \end{indentexercise}
 
+\subsubsection{Why is there while-loop?}
+
+An often raised question with while-loop is why do we have two types of loops, 
+the for-loop and the while-loop. Answering to this question, they have different
+flexibility. For-loop is rather solid and whil-loop is more flexible. In the
+example code below, the user is asked for a correct number and if the answer is wrong, the
+question is asked 5 times repeatedly. Number of loop is not determined by the
+programmer, but interactively when the code is running. We will study
+branching of the prgram based on if-else in the next section.  
+
+\lstinputlisting[morekeywords={*, while}]{code/code11_6.ijm}
+
+Writing a similar code using for-loop is possible but the code becomes tricky.
+Below is the for-loop version of the above code.  
+
+\lstinputlisting[morekeywords={*, for}]{code/code11_7.ijm}
+
+Note that the third argument of for-loop is missing. Since variable
+\ilcom{correct} does not change as long as the answer is wrong, we leave it not
+incrementing nor decrementing. In such case we can leave the third argument
+vacant. 
+
 \subsection{Conditions: if-else statements}
 \subsubsection{Introducing if-else}
 A macro program could have parts which are executed depending some
@@ -951,12 +973,12 @@ Now, we examine the content between
 parenthesis after ``if'' in more detail. 
 Write the following code in your script editor and run it.
 \lstinputlisting[morekeywords={*, ==}]{code/code12_1.ijm}
-The output in the log window should be \textit{1} indicating that \ilcom{(5 ==
-5)} returned \textit{1}. Next, modify the code like below and run it.
+The output in the log window should be \textit{1} indicating that ``\ilcom{(5 ==
+5)}'' is \textit{1}. Next, modify the code like below and run it.
 \lstinputlisting[morekeywords={*, ==}]{code/code12_2.ijm}
-The output becomes \text{0}, indicating that the second line \ilcom{(5 == 4)} is
+The output becomes \text{0}, indicating that ``\ilcom{(5 == 4)}'' is
 0.
-What double equal sign is doing in these
+What double equal signs \ilcom{==} are doing in these
 examples is a comprison of numbers in the left and the right side, and if
 the number is same, it returns 1 and if they are not equal, it returns 0. 1 and
 0 actually are representing \textbf{true} (= 1) or \textbf{false} (= 0), the
@@ -1373,10 +1395,23 @@ Here is a macro using the EMBL array example.
 \lstinputlisting[morekeywords={*, newArray}]{code/code20.ijm}
 
 \begin{itemize}
-\item Line 2 uses a command that creates a new array (\ilcom{newArray()}), defined by a parameter for number of array elements (in the example case its 5) and its name \ilcom{EMBL}. 
-\item From line 3 to 7, each array from position 0 to 4 will be filled with names (Array starts with 0th element). 
-\item Line 8 asks the user to input the address (position) within the array. Then this input address is examined if the address exists within the \ilcom{EMBL} array in line 9. \ilcom{EMBL.length} returns the number of "boxes" within the array. If this is satisfied, then line 10 prints out the string in that address.
+\item Line 3 uses a command that creates a new array (\ilcom{newArray()}),
+defined by a parameter for number of array elements (in the example case its 5) and its name \ilcom{EMBL}.
+\item From line 4 to 8, each array from position 0 to 4 will be filled with
+names (Array starts with 0th element).
+\item Line 9 asks the user to input the address (position) within the array.
+Then this input address is examined if the address exists within the
+\ilcom{EMBL} array in line 10. \ilcom{EMBL.length} returns the number of "boxes"
+within the array. If this is satisfied, then line 10 prints out the string in that address.
 \end{itemize}
+
+Array could be created and initialized with actual values at the
+same time, so line 3 to 8 could be written in a single line like this: 
+\begin{lstlisting}[numbers=none]
+EMBL = newArray("Heidelberg","Hamburg","Hixton","Grenoble","Monterotondo");
+for (i = 0; i < EMBL.length; i++)
+	print(EMBL[i]);
+\end{lstlisting}
 
 \subsection{Numerical Array}
 
@@ -1427,6 +1462,48 @@ Modify code 20.5 that the macro calculates the sum of all intensity.\\
 \item Hint: use \ilcom{tempProfile.length}
 \end{enumerate}
 \end{indentexercise}
+
+\subsection{Array Functions}
+
+Arrays could be directly treated using arary funcitons. These functions are:
+\begin{shaded}\begin{indentCom}
+\item \textbf{Array.concat(array1,array2)} Returns a new array created by
+joining two or more arrays or values. 
+\item \textbf{Array.copy(array)} Returns a copy of array. 
+\item \textbf{Array.fill(array, value)} Assigns the specified numeric value to
+each element of array.
+\item \textbf{Array.getStatistics(array, min, max, mean, stdDev)} Returns the
+min, max, mean, and stdDev of array, which must contain all numbers.
+\item \textbf{Array.print(array)} Prints the array on a single line. 
+\item \textbf{Array.rankPositions(array)} Returns, as an array, the rank
+positions of array, which must contain all numbers or all strings. 
+\item \textbf{Array.reverse(array)} Reverses (inverts) the order of the
+elements in array. 
+\item \textbf{Array.slice(array,start,end)} Extracts a part of an array and
+returns it. 
+\item \textbf{Array.sort(array)} Sorts array, which must contain all numbers
+or all strings. String sorts are case-insensitive in v1.44i or later.
+\item \textbf{Array.trim(array, n)} Returns an array that contains the first n
+elements of array.
+\end{indentCom}\end{shaded}
+For example, array could be sorted and reversed.
+\begin{lstlisting}[numbers=none]
+EMBL = newArray("Heidelberg","Hamburg","Hixton","Grenoble","Monterotondo");
+Array.print(EMBL);
+Array.sort(EMBL);
+Array.print(EMBL);
+Array.reverse(EMBL);
+Array.print(EMBL);
+\end{lstlisting} 
+The output of this code is:
+\begin{lstlisting}[numbers=true]
+Heidelberg,Hamburg,Hixton,Grenoble,Monterotondo
+Grenoble,Hamburg,Heidelberg,Hixton,Monterotondo
+Monterotondo,Hixton,Heidelberg,Hamburg,Grenoble
+\end{lstlisting} 
+The first line is printed in the order when the array was initialized. After
+sorting, names are in alphabetical order. Third line shows the reversed
+elements. 
 
 \subsection{Application of Array in Image Analysis}
 
