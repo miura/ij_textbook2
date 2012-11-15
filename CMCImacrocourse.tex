@@ -976,7 +976,7 @@ Write the following code in your script editor and run it.
 The output in the log window should be \textit{1} indicating that ``\ilcom{(5 ==
 5)}'' is \textit{1}. Next, modify the code like below and run it.
 \lstinputlisting[morekeywords={*, ==}]{code/code12_2.ijm}
-The output becomes \text{0}, indicating that ``\ilcom{(5 == 4)}'' is
+The output is now 0, indicating that ``\ilcom{(5 == 4)}'' is
 0.
 What double equal signs \ilcom{==} are doing in these
 examples is a comprison of numbers in the left and the right side, and if
@@ -1027,9 +1027,9 @@ Let's first test what they do with very a simple example directly using
 \ilcom{true} and \ilcom{false}.
 \lstinputlisting[morekeywords={*, if, else}]{code/code12_65.ijm}
 When you run this code as it is, line 4 and line 8 are both excecuted and prints
-the messages. For the first \ilcom{if} parenthesis, \ilcom{&&} operator tests if
-both sides are true. If both are indeed true, it returs true (1), and that is
-the case above. If one of them or both are false, then \ilcom{&&}
+the messages. For the first \ilcom{if} parenthesis, \ilcom{\&\&} operator tests if
+both sides are true. If both are indeed true, it returns true (1), and that is
+the case above. If one of them or both are false, then \ilcom{\&\&}
 operator returns false(0). 
 
 On the other hand, in the second if parenthesis,
@@ -1301,7 +1301,8 @@ We use \ilcom{Dialog} functions.
 Line 2 to 9 creates a dialog box that has multiple input boxes that looks like Fig. \ref{figGenericDialog}. 
 
 \begin{itemize}
-\item Line 3 defines the title of the dialog window. 
+\item Line 3 defines the title of the dialog window. 
+
 
 \item Line 4 texts will be shown within the window. 
 
@@ -1496,7 +1497,7 @@ Array.reverse(EMBL);
 Array.print(EMBL);
 \end{lstlisting} 
 The output of this code is:
-\begin{lstlisting}[numbers=true]
+\begin{lstlisting}[numbers=left]
 Heidelberg,Hamburg,Hixton,Grenoble,Monterotondo
 Grenoble,Hamburg,Heidelberg,Hixton,Monterotondo
 Monterotondo,Hixton,Heidelberg,Hamburg,Grenoble
@@ -3153,7 +3154,7 @@ Modify code 14 so that the macro does not use "while" loop. For example with the
 \subsection{Homework for a bit advanced}
 
 \subsubsection{Assignment 6}
-Write a elementary calculator macro with single dialog box that does:
+Write an elementary calculator macro with single dialog box that does:
 \begin{itemize}
 \item user input two numbers
 \item user selects either one of addition, subtraction, multiplication or division. 
