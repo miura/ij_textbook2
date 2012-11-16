@@ -27,9 +27,10 @@ macro "Generate Dot Animation back and forth" {
 		x_position += speed;
 		if ((x_position > (w-sizenum)) || (x_position < 0) ) { 
 			speed*=-1;
-			x_position += speed*2;
+			x_position += speed*2;  //avoids penetrating boundary
 		}
 		makeOval(x_position, y_position, sizenum, sizenum);
 		run("Fill", "slice");
 	}
+	run("Select None");
 }
