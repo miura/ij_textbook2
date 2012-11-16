@@ -277,22 +277,23 @@ IN Fiji, you could use the following languages:
 
 \begin{itemize}
  \item Javascript
- \item Jython (Java-Python)
- \item JRuby (Java-Ruby)
+ \item BeanShell
+ \item Jython (Java implemented Python)
+ \item JRuby (Java implemented Ruby)
  \item Clojure
  \end{itemize}
 
 If you set up environment by yourself, you could also use other languages such as Scala and Groovy. 
-Compared to ImageJ macro language, all these languages are more general and widely used. 
+Compared to the ImageJ macro language, all these languages are more general and widely used. 
 
-Merits of using ImageJ Macro compared to these scripting languages are: 
+Merits of using the ImageJ Macro compared to these scripting languages are: 
 \begin{itemize}
 \item Easy to learn. 
 Functions are mirrors of ImageJ menu, so scripting is intuitive if you know ImageJ already. 
 Macro recorder is a handy tool for finding out the right commands. 
 
-\item Macro set allows you to contain multiple macros in one file (called 'Macro-set"). 
-This is useful for complex processing is required (see Advanced Macro Programming section for more details). 
+\item You could have multiple macros in one file (called 'Macro-set"). 
+This is useful for packaging complex processing tasks (see Advanced Macro Programming section for more details). 
 
 \item A significant hurdle for coding with general scripting languages is that one must know the 
 \textbf{ImageJ Java API} well, meaning that you basically have to know 
@@ -303,34 +304,32 @@ Thus, ImageJ macro language is the easiest way to access the scripting
 capability of ImageJ.
 
 There are several disadvantages of ImageJ macro compared to other
-scripting languages. First is its generality. Since other scripting
-languages are based on major scripting languages, you do not have
-to learn a lot if you know one of them already. For example, if you know
-Python already, you do not need to do much to learn the basics of Jython. Second
-disadvantage is it its extendability.
-Code you write could not be recycled except by copy and pasting
+scripting languages. First is its generality. Since others are based on major scripting languages, you do not need to learn a lot if you know one of them already. For example, if you know Python already, 
+it should be easy for you to start writing codes in Jython. 
+
+Second disadvantage is extendability.
+Codes you wrote could only be recycled by copy and pasting
 \footnote{One could also use getArgument() and File related functions to pass
 arguments from a macro file to the other, but ImageJ macro is not designed to
 construct a library of functions.}.
-With other scripting languages available for ImageJ, one could write more object-oriented programs 
-and once you write, code could be recycled in other programs
-\footnote{ Calling other Javascript file from another Javascript file had been
-difficult but became easily possibe in Fiji from March 2012.}.
+With other scripting languages, one could write object-oriented programs 
+and once you write them, code could be used from other programs
+\footnote{ Calling other Javascript file from another Javascript file had been difficult but became easily possible in Fiji from March 2012.}.
+
 Lastly, although ImageJ Macro processes with a speed comparable to
-Javasccript and Jython, it is slow compared to Clojure and Scala. 
+Javascript and Jython, it is slow compared to Clojure and Scala. 
 
 \subsection{Summary}
-Macro programming enables you to ease the work loads by automating sequence of commands. 
-Accessing single pixels from macro is also possible. 
-The potential of the macro is similar to PlugIn, but for interactive functions PlugIn works better. 
-Macro is also slower than plugin. 
+By programming ImageJ Macro, your work load radically decreases by automating sequence of commands - less clicking. 
+In addition, capability to access single pixels allows you to analyze details of images. 
+The potential of the macro is similar to PlugIn, both adding capability for tailoring your original functions. But for interactive functions PlugIn works better and macro cannot be used as a library.  
+Image processing by Macro is slower than by Plugin. 
 
 \textbf{How to learn Macro programming:} 
 In this course, you will encounter many example codes. 
-You will write the example codes using your own computer and run the macro. 
+You will write example codes using your own computer and run those macros. 
 Modifying these examples by yourself is a very important exercise since in most
-cases, you start writing your macro by modifying some parts of the macro that is
-available already \footnote{200+ macros are available in ImageJ web site. 
+cases, you start writing your macro by modifying some parts of the macro that are available already \footnote{200+ macros are available in ImageJ web site. 
 \href{http://rsb.info.nih.gov/ij/macros/}{http://rsb.info.nih.gov/ij/macros/}}.
  
 \newpage
@@ -338,7 +337,7 @@ available already \footnote{200+ macros are available in ImageJ web site.
 
 \subsection{''Hello World!''}
 
-We first try writing a simple macro that prints out''Hello World!''. 
+We first try writing a simple macro that prints ''Hello World!''. 
 ImageJ has a macro editor with simple debugger function
 \footnote{Debugger assists you to correct mistakes in the code. 
 This is convenient when the code becomes long. 
@@ -355,7 +354,7 @@ Syntax high lighter offers automatic coloring of ImageJ functions.
 \end{indentFiji}
 Then write your first macro as shown below. In the second line DON'T forget to
 indent the line using tab or spaces\footnote{In ImageJ macro, indenting is not a required
-syntax for commands but doing this will be very very helpful afterwards. You
+syntax for commands but doing this will be very very helpful afterward. You
 will understand it as the macro you write becomes longer}. Omit the line
 numbers! These numbers were added just for explanation.
 
