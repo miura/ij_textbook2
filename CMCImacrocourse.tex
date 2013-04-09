@@ -323,7 +323,7 @@ Javascript and Jython, it is slow compared to Clojure and Scala.
 By programming ImageJ Macro, your work load radically decreases by automating sequence of commands - less clicking. 
 In addition, capability to access single pixels allows you to analyze details of images. 
 The potential of the macro is similar to PlugIn, both adding capability for tailoring your original functions. But for interactive functions PlugIn works better and macro cannot be used as a library.  
-Image processing by Macro is slower than by Plugin. 
+Image processing by Macro is slower than by PlugIn. 
 
 \textbf{How to learn Macro programming:} 
 In this course, you will encounter many example codes. 
@@ -388,7 +388,7 @@ window is active}. You could also run the code by shortcut keys (Windows:
 ctrl-r, OSX command-r) as well. 
  
 \begin{indentFiji}
-Fiji:  Use \ijmenu{[Run -> Run]} from the script editor menu. Shorcut keys are
+Fiji:  Use \ijmenu{[Run -> Run]} from the script editor menu. Shortcut keys are
 same as in ImageJ. You could also use ``run'' button in the script editor. 
 \end{indentFiji}
 This will create a new window "Log". Within the log window, "Hello World" will
@@ -421,7 +421,7 @@ If the first argument is a file handle returned by File.open(path),
 then the second is saved in the referred file (see SaveTextFileDemo).
 
 Numeric expressions are automatically converted to strings using four decimal places, 
-or use the d2s function to specify the decimal places. 
+or use the \ilcom{d2s} function to specify the decimal places. 
 For example, print(2/3) outputs "0.6667" but print(d2s(2/3,1)) outputs "0.7".
 \end{indentCom}
 
@@ -1193,10 +1193,10 @@ All these knowledge are required for advanced programming.
 Ability to do complex image processing using macro widens your view on planning experiments also.
 
 \subsection{User-defined Functions}
-As the code you write becomes longer, 
+As your code becomes longer, 
 you will start to realize that similar processing or 
 calculation appears several times in a macro or through macro sets. 
-To simplify this redundancy, one could write a 
+To simplify such redundancy, one could write a 
 separate \ilcom{function} that works as a module for macros. 
 For example, if you have a simple code like:
 \lstinputlisting[morekeywords={*,}]{code/code15.ijm}
