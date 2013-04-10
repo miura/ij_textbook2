@@ -434,6 +434,7 @@ Fiji: [Run -> Install Macro]).
 \end{indentFiji}
 Check IJ menu \ijmenu{[Macros -> ]} to see that the macro is now in the menu.\\
 
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{fig/firstMacroInMenu.png}
@@ -476,6 +477,7 @@ The second macro should have a different name. In the example shown in fig.
 \end{center}
 \end{figure}
 
+
 \subsection{Variables and Strings}
 Texts such as "Hello World!" can substituted by variables 
 (there is no declaration of types, such as number or string, in ImageJ macro.).
@@ -493,7 +495,7 @@ It is also possible to substitute the content with numbers, such as\\
 \begin{lstlisting}[numbers=none]
 message_text = 256;
 \end{lstlisting}
-With this assignment, the variable is now a "Numerical variable" or simply "variable". 
+With this assignment, the variable is now a "numerical variable" or simply "variable". 
 In other programming languages such as C or Java, difference between numbers and characters matters a lot. 
 In ImageJ you do not have to care whether the variable is number or string, 
 but in some cases this may cause problem 
@@ -508,17 +510,16 @@ You might have noticed a strange expression at line 8, in the way it assigns the
 It starts with double quotation marks. \\
 %\lstinputlisting[language=Java, linerange={8-8}, numbers=none]{code/code04.ijm}
 \begin{lstlisting}[numbers=none]
-txt="" + a + "+"+ b + "="+c;
+txt= "" + a + "+" + b + "=" + c;
 \end{lstlisting}
 Seemingly this looks like meaningless. 
 If you define txt without the first "useless" quotation marks, then it will be like\\
 \begin{lstlisting}[numbers=none]
-txt=a + "+"+ b + "="+c;
+txt= a + "+"+ b + "=" + c;
 \end{lstlisting}
 Theoretically this should work also, 
-since the double quotes does not have any content so it shouldn't matter 
-whether if it is there. But if you try this what seems to be straight-forward assignment, 
-ImageJ returns error message when you run it. 
+since the double quotes does not have any content so it's presence should be meaningless. But if you try to run this what it seems to be straight-forward assignment, 
+ImageJ returns an error message. 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -527,16 +528,16 @@ ImageJ returns error message when you run it.
 \end{center}
 \end{figure}
 
-This is because when ImageJ scans through the macro from top to bottom line by line, 
-it reaches the txt substitution line and first sees the variable a and interprets that txt should be a numerical variable 
-(or function), since a is a number. Then ImageJ goes on with the scanning and then sees "+" which is a character. 
-ImageJ cannot interpret String variable within a numerical function. 
+This is because when ImageJ scans through the macro from top to bottom, line by line, 
+it reaches the line for the assignment of the variable \ilcom{txt} and first sees the variable \ilcom{a} and interprets that \ilcom{txt} should be a numerical variable 
+(or function), since \ilcom{a} is known to be a number as it was defined so in one of the lines above. Then ImageJ goes on interpreting rightward thinking that this is math. Then finding a "+" which surprizingly is a character
+ImageJ cannot interpret string variable within a numerical function, so it returns an error message. The macro aborts.  
 
-Instead, the programmer can tell ImageJ that 
-\textit{txt} is a string function at the beginning of the function 
-by putting a set of double quote at the beginning. 
-ImageJ does handle numerical variables within string function, 
-so the line works and prints out the result successfully.  
+To overcome this problem, the programmer can tell ImageJ that 
+\textit{txt} is a string function at the beginning of the assignment 
+by putting a set of double quote. This tells the interpreter that this assignment is a string concatenation assignment and not a numerical assignment. 
+ImageJ does handle numerical values within string function, 
+so the line is interpreted without problem and prints out the result successfully.  
 
 \begin{indentexercise}{2}
 Modify the code 4, so that the calculation involves subtraction (-), multiplication (*) and division (/). 
