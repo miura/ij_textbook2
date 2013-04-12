@@ -470,7 +470,7 @@ The second macro should have a different name. In the example shown in fig.
 \ref{fig_MacroSetInMenu}, the second macro is named "pirnt\_out2".
 \end{indentexercise}
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
 \begin{center}
 \includegraphics[scale=0.6]{fig/editor_MacroSet.png}
 \caption{Macro Set} \label{fig_MacroSetInMenu}
@@ -479,25 +479,30 @@ The second macro should have a different name. In the example shown in fig.
 
 
 \subsection{Variables and Strings}
-Texts such as "Hello World!" can substituted by variables 
+Texts such as "Hello World!" can be represented by a variable 
 (there is no declaration of types, such as number or string, in ImageJ macro.).
 Let's understand this by examining a short macro below.
 \lstinputlisting{code/code02.ijm}
+
+\ilcom{text} is a "String Variable" or simply a "String". 
+ImageJ prepares a memory space for this variable, and you can change the content by re-defining the content. Two (or maybe more) variables could be used to construct another variable. 
+
 \lstinputlisting{code/code03.ijm}
+
+The above operation concatenates content of \ilcom{text2} to the content of \ilcom{text1} and produces a third variable \ilcom{text3} that holds the result of concatenation. 
 
 \begin{indentexercise}{1}
 \item Add more string variables and make a longer sentence.\\
 \end{indentexercise}
 
-Message\_text is a "String Variable" or simply a "String". 
-ImageJ prepares a memory space for this variable, and you can change the content by re-defining the content. 
-It is also possible to substitute the content with numbers, such as\\
+
+It is also possible to substitute the variable content with numbers, such as\\
 \begin{lstlisting}[numbers=none]
-message_text = 256;
+text = 256;
 \end{lstlisting}
 With this assignment, the variable is now a "numerical variable" or simply "variable". 
 In other programming languages such as C or Java, difference between numbers and characters matters a lot. 
-In ImageJ you do not have to care whether the variable is number or string, 
+In ImageJ macro you do not have to care whether the variable is number or string, 
 but in some cases this may cause problem 
 so it's better to just keep this difference in your mind. We will see an example of such confusion, 
 and also a way to avoid the confusion. 
@@ -636,11 +641,14 @@ to click ``Create'' button to create a duplicate of commands in a new script
 window. Then you could copy the commands from there.}. Compose a macro like
 below by copy and pasting the commands in the recorder. 
 Delete the lines that is commented out (lines that begins with "//" are lines that are skipped by the macro interpreter).
+
+\lstinputlisting{code/code06_9.ijm}
+
+Run the macro! \ldots I hope that you are amazed by now with the power of Macro
+Recorder! Now, you could simple add a line at the top and bottom to package this in a named macro. This is optional in the current case, but it's always good to keep your macro like this since boundary of the macro becomes clear. 
+
 \lstinputlisting{code/code07.ijm}
 
-Run the macro! (I hope that you are amazed by now with the power of Macro
-Recorder!)\\
- 
 The second line in the above macro has a command \ilcom{newImage()}. This
 command creates a new image. It has five parameters (in coding jargon, we say
 there are "five arguments"). To know what these parameters are, 
@@ -666,6 +674,10 @@ of the new image and use those imput values to create a new image, such as:
 \begin{indentexercise}{1}
 Modify the code 8, so that user can input the desired Gaussian sigma.
 \end{indentexercise}
+
+Another optional lines you could add to the macro are ``comments''. This does not affect the macro but adding some comment about what the macro does helps you to understand what the macro is doing when you open the file some time later. There are two ways to add comment. One is block comment. Texts bounded by \ilcom{ /*} and \ilcom{*/} will be ignored by interpreter. Another is line commnet. Texts in a line starting with double slash \ilcom{//} will be ignored by the interpreter. Below is an example of commenting code 07. 
+
+\lstinputlisting{code/code07_1.ijm}
 
 
 \subsection{Batch Processing using "batch macro" function}
@@ -723,26 +735,13 @@ The result should look like:
 If user does not change the default text ("whatever") and click "OK", 
 then the command interpreter proceeds to line 4.
 
-\item Line 4 \ilcom{for(i=0; i<5; i+=1)} sets the number of looping. 
-Three parameters are required for "for" loop. The first parameter defines the variable used for the counting loop and 
-its initial value (\ilcom{i=0}). The second parameter sets the condition for exiting from the loop (\ilcom{i<5}). 
-Third parameter sets the step size of i, meaning that how much value is added per loop (\ilcom{i +=1}, 
-could also be subtraction, multiplication, division e.g. \ilcom{i-= 1}). 
-\item After this \ilcom{for(\ldots;\ldots;\ldots)} command, there is a brace (\{) one at the end of line 4 (\{) and 
-the second one in the line 6. These braces tell ImageJ to loop commands in between so command in line 5 will be iterated 
-according to the parameters defined in the parenthesis of for. 
-Between braces, you could add more lines of functions as much as you want.  
+\item Line 4 \ilcom{for( i = 0 ; i < 5 ; i+= 1)} sets the number of loops. 
+Three parameters are required for "for" loop. The first parameter defines the variable used for the counting loop and its initial value (\ilcom{i = 0}). The second parameter sets the condition for exiting from the loop (\ilcom{i < 5}). Third parameter sets the step size of i, meaning that how much value is added per loop (\ilcom{i += 1}, could also be subtraction, multiplication, division e.g. \ilcom{i -= 1}). 
+\item After this \ilcom{for(\ldots;\ldots;\ldots)} command, there is a brace (\{) at the end of line 4 and the second one in the line 6. These curly braces tell ImageJ to loop commands in between so the command in line 5 will be iterated according to the parameters defined in the parenthesis of \ilcom{for}. Between braces, you could add more lines of commands as many as you want.  
 \end{itemize}
-So when the command interpreter reaches line 4 and sees \ilcom{for(}, 
-it starts looking inside the parenthesis and defines that the counting starts with 0 using a variable \ilcom{i}, 
-and then line 5 is executed. The macro prints out "0 \ensuremath\colon whatever" 
-using the content of \ilcom{i}, string \ilcom{\ensuremath\colon} and the string variable \ilcom{message\_txt}. 
-Then in line 6, interpreter sees \ilcom{\}} and goes back to line 4 and adds 1 (because of \ilcom{i+=1}). 
-i is still 1 so \ilcom{i<5} is true. The interpreter goes to line 5 and 
-executes the command and prints out "1\ensuremath\colon whatever". 
-Such looping will continue until i becomes 5, since when i becomes 5, 
-\ilcom{i<5} is no longer true so interpreter goes out 
-from the for-loop. \\
+So when the command interpreter reaches line 4 and sees \ilcom{for(}, it starts looking inside the parenthesis and defines that the counting starts with 0 using a variable \ilcom{i}, and then line 5 is executed. The macro prints out "0 \ensuremath\colon whatever" using the content of \ilcom{i}, string \ilcom{\ensuremath\colon} and the string variable \ilcom{txt}. 
+Then in line 6 interpreter sees the boundary \ilcom{\}} and goes back to line 4 and adds 1 to i (because of \ilcom{i+=1}). i = 1 then, so \ilcom{i<5} is true. The interpreter proceeds to line 5 and executes the command and prints out "1\ensuremath\colon whatever".  Such looping will continue until i = 5, since only by then \ilcom{i<5} is no longer true so interpreter exits from the for-loop. \\
+
 
 \begin{indentexercise}{1}
 (1) Change the first parameter in \ilcom{for(i=0;i<5;i+=1)} so that the macro prints out only 1 line. 
@@ -752,7 +751,7 @@ from the for-loop. \\
 (3) Change the third parameter in \ilcom{for(i=0;i<5;i+=1)} so that the macro prints out 10 lines. 
 \end{indentexercise}
 
-\subsection{Stack Management by for-statement}
+\subsection{Stack Analysis by for-looping}
 One of powerful application of for-loop in biological image processing is image stack management, 
 such as measuring dynamics or multi-frame processing. 
 Many ImageJ commands works with only single frame within a stack. 
@@ -786,7 +785,7 @@ stack measurements using Z-profiler. Now, you can program similar
 device in macro. Good thing about the custom program 
 is that you will be able to modify the program further to add more functions.
 For example, You could measure the time course of standard deviation of
-intensity within the selectd ROI.}. This is a short sequence of FRAP analysis,
+intensity within the selected ROI.}. This is a short sequence of FRAP analysis,
 so edge of the one of the cells is bleached and then fluorescence recovers by time. 
 Select the frapped region by ROI tool (such as in the figure below). 
 Execute the macro. Results will be printed in the Results window (see see the table in the figure left). 
