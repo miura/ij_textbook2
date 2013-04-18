@@ -1,0 +1,9 @@
+.DS_Store
+*.aux
+*.log
+*.out
+*.pdfsync
+*.toc
+*.synctex.gz
+*Thums.db
+*Thumbs.db

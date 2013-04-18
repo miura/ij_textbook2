@@ -244,8 +244,7 @@ If you use job array many jobs could be done in parallel so you could finish you
 
 \subsection{Limitations compared to Plugins written in Java}
 
-In addition to Macro programming, ImageJ has plugin-writing capability. 
-This enables one to add new functions to ImageJ by coding in Java programming language. 
+In addition to Macro programming, ImageJ has plugin-writing capability.  This enables one to add new functions to ImageJ by coding in Java programming language. 
 This capability affords almost infinite possibility to process and analyze images; 
 you could create any kind of processing / analysis functions you could imagine. 
 Compared to plugins, ImageJ Macro language has some limitations: 
@@ -253,27 +252,29 @@ Compared to plugins, ImageJ Macro language has some limitations:
 \begin{enumerate}
 \item If you need to process large images or stacks with many steps, 
 you might recognize that it is slow. 
-Some benchmarks indicates that a Plugin would be about 40 times faster than Macro. 
+Some benchmarks indicates that a plugin would be about 40 times faster than Macro. 
 
 \item Macro cannot be used as a library
 \footnote{It is possible to write a macro in a library fashion and use it from another macro, 
-but this is not as robust and clear as it is in java, which is a language designed to be so.}. 
+but this is not as robust and as clear as it is in java, which is a language designed to be so.}. 
 In Java, once a class is written, this could be used later again from another class . 
 
 \item Macro is not efficient in implementing real-time interactive input 
-during the macro command is executed; 
+during when the macro command is executed; 
 \textit{e.g.} If you want to design a program that requires real-time user input 
 to select a ROI interactively.  
 Macro could only do such interactive tasks by separating the program into several different commands. 
+
+\item Macro is tightly coupled to GUI (Image Window), so that when you want to process images without showing them on desktop, macros are not really an optimal solution.  
 \end{enumerate}
 
 If you become unsatisfied with these limitations, 
-learning more complicated but more flexible PlugIn programming is recommended. 
+learning more complicated but more flexible java plugin development is recommended. 
 
 \subsection{Comparison with Other scripting languages}
-In addition to ImageJ macro, there are several other scripting languages that
-could be used for programming. ImageJ natively supports Javascript (Rhino).
-IN Fiji, you could use the following languages:
+Besides ImageJ macro, there are several scripting languages that
+could be used for programming. Bare ImageJ supports Javascript (Rhino).
+In the Fiji distribution, you could use the following languages:
 
 \begin{itemize}
  \item Javascript
@@ -290,7 +291,7 @@ Merits of using the ImageJ Macro compared to these scripting languages are:
 \begin{itemize}
 \item Easy to learn. 
 Functions are mirrors of ImageJ menu, so scripting is intuitive if you know ImageJ already. 
-Macro recorder is a handy tool for finding out the right commands. 
+Macro recorder is a handy tool for finding out the right macro functions. 
 
 \item You could have multiple macros in one file (called 'Macro-set"). 
 This is useful for packaging complex processing tasks (see Advanced Macro Programming section for more details). 
@@ -354,7 +355,7 @@ Syntax high lighter offers automatic coloring of ImageJ functions.
 \end{indentFiji}
 Then write your first macro as shown below. In the second line DON'T forget to
 indent the line using tab or spaces\footnote{In ImageJ macro, indenting is not a required
-syntax for commands but doing this will be very very helpful afterward. You
+syntax for writing macros but doing this will be very very helpful afterward. You
 will understand it as the macro you write becomes longer}. Omit the line
 numbers! These numbers were added just for explanation.
 
@@ -406,11 +407,11 @@ Explanation for the Code 1:\\
 \item line 1: You are declaring that a macro code starts and the code is contained between 
 curly braces \{\}. "print\_out" will be the name of macro. 
 
-\item line2: print() command orders ImageJ to print out the content within the parenthesis 
+\item line2: print() function orders ImageJ to print out the content within the parenthesis 
 in the "Log" window. The text to be printed must be contained within the double quotes (""). 
 The best reference for ImageJ macro functions is in the ImageJ web site
 \footnote{\url{http://rsbweb.nih.gov/ij/developer/macro/functions.html}}. 
-For example, you could find definition of print("") command in the web site as quoted in below:\\
+For example, you could find definition of print("") function in the web site as quoted in below:\\
 %\item
 \begin{indentCom}
 \textbf{print(string)}\\
@@ -453,7 +454,7 @@ Select the macro file you want to install.\\
 \item Add another line \texttt{"print("\textbackslash{}\textbackslash{}Clear");"} 
 after the second line (below, code 1.5. don't forget the semi-colon at the end!). 
 \item \lstinputlisting{code/code01_5.ijm}
-Then test also another macro when you insert the same command in the third line (code 1.75). 
+Then test also another macro when you insert the same function in the third line (code 1.75). 
 What happened?  
 \item \lstinputlisting{code/code01_75.ijm}
 \end{indentexercise}
@@ -562,11 +563,11 @@ Running this macro,  a dialogue window pops-up.
 \end{center}
 \end{figure}
 
-The command \textit{getNumber} consists of two parameters (programmers call such parameters "arguments").
+The function \textit{getNumber} consists of two parameters (programmers call such parameters "arguments" so we use this word in the reminder of this textbook).
 \begin{indentCom}
 \textbf{getNumber}(message string, default number)
 \end{indentCom}
-The first parameter is a string wrapped by double quotes (see code 5, line 3
+The first argument is a string wrapped by double quotes (see code 5, line 3
 and 4). This string will appear in the dialogue window such as shown above. 
 Default number will appear in the input field in the dialogue window, 
 and the user is expected to modifies this default number. 
@@ -577,7 +578,7 @@ either \textit{a} or \textit{b}.
 To ask a user for providing a string in dialog, following is an example. 
 \lstinputlisting[morekeywords={*, getString}]{code/code06.ijm}
 
-The command \textbf{getString} also has two arguments, 
+The function \textbf{getString} also has two arguments, 
 and only the difference is that the user input will be treated as a string. \\
 
 \begin{indentexercise}{1}
@@ -590,7 +591,7 @@ Almost all of these commands can be accessed from macro\footnote{Some plugins
 are not macro-ready.}.
 
 We will make a macro that creates a new image, add noise, blurs this image by
-Gaussian blurring, and then thresholding the image. To know the commands 
+Gaussian blurring, and then thresholding the image. To know macro functions mirroring the menu commands 
 there is a very convenient tool called \textbf{Command Recorder}. 
 Do \ijmenu{[PlugIns -> Macros -> Record\ldots]}. A window like figure
 \ref{fig_macroRecorderBlank} opens.
@@ -602,7 +603,7 @@ Do \ijmenu{[PlugIns -> Macros -> Record\ldots]}. A window like figure
 \end{center}
 \end{figure}
 
-All the commands that you execute will be recorded in this window. 
+All the menu commands that you execute will be recorded in this window as macro functions. 
 For composing a macro using this recorder, we first do the processing
 manually from the menu as follows. 
 \begin{itemize}
@@ -625,7 +626,7 @@ manually from the menu as follows.
 
 Now, check the Command Recorder window. 
 It should now look like Fig. \ref{fig_macroRecorderFilled}. 
-Lines appeared after your operations are corresponding commands.
+Lines appeared after your operations are corresponding macro functions.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -637,9 +638,9 @@ Lines appeared after your operations are corresponding commands.
 
 These texts generated in in the recorder can be used as it is in your macro. 
 You could copy and paste them\footnote{In case of OSX, you might probably need
-to click ``Create'' button to create a duplicate of commands in a new script
-window. Then you could copy the commands from there.}. Compose a macro like
-below by copy and pasting the commands in the recorder. 
+to click ``Create'' button to create a duplicate of macro functions in a new script
+window. Then you could copy the macro functions from there.}. Compose a macro like
+below by copy and pasting the macro functions in the recorder. 
 Delete the lines that is commented out (lines that begins with "//" are lines that are skipped by the macro interpreter).
 
 \lstinputlisting{code/code06_9.ijm}
@@ -649,12 +650,12 @@ Recorder! Now, you could simple add a line at the top and bottom to package this
 
 \lstinputlisting{code/code07.ijm}
 
-The second line in the above macro has a command \ilcom{newImage()}. This
-command creates a new image. It has five parameters (in coding jargon, we say
-there are "five arguments"). To know what these parameters are, 
+The second line in the above macro has a function \ilcom{newImage()}. This
+function creates a new image. It has five arguments (in coding jargon, we say
+there are "five arguments"). To know what these arguments are, 
 the quickest way is to read the Build-In Macro Function page in ImageJ web site  
 (the reference is attached to this manual so take a look).  
-In case of newImage command, the description looks like this. 
+In case of newImage function, the description looks like this. 
 
 \begin{indentCom}
 \textbf{newImage}(title, type, width, height, depth)\\
@@ -666,7 +667,7 @@ Width and height specify the width and height of the image in pixels.
 Depth specifies the number of stack slices.
 \end{indentCom}
 Using this information, you can modify the macro to change the size of the image. 
-It is also possible to use variables and pass it to the command as a parameter. 
+It is also possible to use variables and pass them to the macro function as arguments. 
 For example, you could modify macro so that the macro asks you width and height
 of the new image and use those imput values to create a new image, such as:
 \lstinputlisting{code/code08.ijm}
@@ -681,14 +682,14 @@ Another optional lines you could add to the macro are ``comments''. This does no
 
 
 \subsection{Batch Processing using "batch macro" function}
-In above macro, list of commands were wrapped inside macro "title"\{ code \} 
-so that the commands could be executed by single selection from menu. 
-To apply such commands for many images in a single folder 
+In above macro, list of functions were wrapped inside macro "title"\{ code \} 
+so that these macro functions could be executed by single command from menu. 
+To apply such a sequence of macro functions for many images in a single folder 
 (say you have one-thousand images you want to contrast enhance and also to Gaussian-blur), 
-there are two ways. One way is to further extend the macro by adding file-accessing command and 
-looping the commands (you will learn this later). 
+there are two ways. One way is to further extend the macro by adding file-accessing macro functions and 
+looping those functions (you will learn this later). 
 Another way is to do such "batch processing" by copy and pasting list of
-macro commands to batch-processing interface. 
+macro functions to batch-processing interface. 
 This interface could be used by \ijmenu{[Process -> Batch -> Macro]}
 
 \begin{figure}[htbp]
@@ -700,7 +701,7 @@ This interface could be used by \ijmenu{[Process -> Batch -> Macro]}
 
 In "Input" field, select the folder where image files are stored. 
 In output field, select a destination folder where processed images will be stored. 
-You then copy and paste the list of commands in the code field such as 
+You then copy and paste the list of macro functions in the code field such as 
 shown in Fig. \ref{fig_BatchProcessInterface}. 
 In the case shown in this figure, line 6 to 9 was copied and pasted. 
 Clicking "Process" button will start the processing.
@@ -733,14 +734,14 @@ The result should look like:
 \begin{itemize}
 \item Line 3 asks the user to input a string (we did this already). 
 If user does not change the default text ("whatever") and click "OK", 
-then the command interpreter proceeds to line 4.
+then the macro interpreter proceeds to line 4.
 
 \item Line 4 \ilcom{for( i = 0 ; i < 5 ; i+= 1)} sets the number of loops. 
 Three parameters are required for "for" loop. The first parameter defines the variable used for the counting loop and its initial value (\ilcom{i = 0}). The second parameter sets the condition for exiting from the loop (\ilcom{i < 5}). Third parameter sets the step size of i, meaning that how much value is added per loop (\ilcom{i += 1}, could also be subtraction, multiplication, division e.g. \ilcom{i -= 1}). 
-\item After this \ilcom{for(\ldots;\ldots;\ldots)} command, there is a brace (\{) at the end of line 4 and the second one in the line 6. These curly braces tell ImageJ to loop commands in between so the command in line 5 will be iterated according to the parameters defined in the parenthesis of \ilcom{for}. Between braces, you could add more lines of commands as many as you want.  
+\item After this \ilcom{for(\ldots;\ldots;\ldots)} statement, there is a brace (\{) at the end of line 4 and the second one in the line 6. These curly braces tell ImageJ to loop macro functions in between so the functions in line 5 will be iterated according to the parameters defined in the parenthesis of \ilcom{for}. Between braces, you could add more lines of macro functions as many as you want.  
 \end{itemize}
-So when the command interpreter reaches line 4 and sees \ilcom{for(}, it starts looking inside the parenthesis and defines that the counting starts with 0 using a variable \ilcom{i}, and then line 5 is executed. The macro prints out "0 \ensuremath\colon whatever" using the content of \ilcom{i}, string \ilcom{\ensuremath\colon} and the string variable \ilcom{txt}. 
-Then in line 6 interpreter sees the boundary \ilcom{\}} and goes back to line 4 and adds 1 to i (because of \ilcom{i+=1}). i = 1 then, so \ilcom{i<5} is true. The interpreter proceeds to line 5 and executes the command and prints out "1\ensuremath\colon whatever".  Such looping will continue until i = 5, since only by then \ilcom{i<5} is no longer true so interpreter exits from the for-loop. \\
+So when the macro interpreter reaches line 4 and sees \ilcom{for(}, it starts looking inside the parenthesis and defines that the counting starts with 0 using a variable \ilcom{i}, and then line 5 is executed. The macro prints out "0 \ensuremath\colon whatever" using the content of \ilcom{i}, string \ilcom{\ensuremath\colon} and the string variable \ilcom{txt}. 
+Then in line 6 interpreter sees the boundary \ilcom{\}} and goes back to line 4 and adds 1 to i (because of \ilcom{i+=1}). i = 1 then, so \ilcom{i<5} is true. The interpreter proceeds to line 5 and executes the macro function and prints out "1\ensuremath\colon whatever".  Such looping will continue until i = 5, since only by then \ilcom{i<5} is no longer true so interpreter exits from the for-loop. \\
 
 
 \begin{indentexercise}{1}
@@ -754,13 +755,13 @@ Then in line 6 interpreter sees the boundary \ilcom{\}} and goes back to line 4 
 \subsection{Stack Analysis by for-looping}
 One of powerful application of for-loop in biological image processing is image stack management, 
 such as measuring dynamics or multi-frame processing. 
-Many ImageJ commands works with only single frame within a stack. 
-Without macro programming, you need to execute the command while you flip the frame manually. 
+Many ImageJ functions works with only single frame within a stack. 
+Without macro programming, you need to execute the menu command while you flip the frame manually. 
 Macro programming enables you to automate this process. 
 Here is an example of measuring intensity change over time. 
 \lstinputlisting[morekeywords={*, run, setSlice, nSlices}]{code/code10.ijm}
 \begin{itemize}
-\item Line 3: \ilcom{nSlices} is a command that returns number of slices in the active slice. 
+\item Line 3: \ilcom{nSlices} is a function that returns number of slices in the active stack. 
 
 \item Line 4: Sets measurement parameters. In this case "mean" intensity will be measured. 
 You do not have to care for now about the "redirect" parameter. "decimal" This is the number of digits to 
@@ -772,7 +773,7 @@ the right of the decimal point in real numbers displayed in the results table.
 
 \item Line 7: calculates the current frame number. 
 
-\item Line 8: \ilcom{setSlice} command set the frame according to the frame number calculated in line6. 
+\item Line 8: \ilcom{setSlice} function set the frame according to the frame number calculated in line6. 
 
 \item Line 9:  actual measurement is done. 
 Result will be recorded in the memory and will be displayed in the Results table window. 
@@ -828,7 +829,7 @@ Execute the macro. Results will be printed in the Results window (see see the ta
 \end{figure}
 
 
-Measurement parameters can be added by modifying the line 4 in the code 10. "Set Measurement" could be added with more parameters to be measured, and decimals could be increased (highlighted in bold).
+Measurement parameters can be added as arguments by modifying the line 4 in the code 10. "Set Measurement" could be added with more parameters to be measured, and decimals could be increased (highlighted in bold).
 \begin{indentCom}
 \textbf{run}("Set Measurements\ldots", "  mean min integrated redirect=None decimal=4")
 \end{indentCom}
@@ -867,7 +868,7 @@ This macro prints out characters 0 to 90 with a 10 increment.
 \begin{itemize}
 \item line 3: The macro interpreter first assigns 0 to the counter.
 \item line 4: The interpreter evaluates if the counter value is less than or equal to 90. Since counter is initially 0\ldots 
-\item line 5 Printing command is executed. 
+\item line 5 Printing function is executed. 
 \item line 6: counter is added with 10. 
 \item line 7: the interpreter realizes the end of "while" boundary and goes back to line 4. Since counter= 10 <= 90, line 5 is again executed\ldots and so on. When counter becomes 100 in line 6 after several more loops, counter is no longer <=90. So the interpreter goes out from the loop, moves to line 8. Then the macro is terminated.
 \end{itemize}
@@ -894,7 +895,7 @@ counter++;
  or 
 counter--;
 \end{lstlisting}
-These two last commands are said to work faster than +=1 or -=1, but I myself do not see much difference. Computer is fast enough these days. 
+These two last macro functions are said to work faster than +=1 or -=1, but I myself do not see much difference. Computer is fast enough these days. 
 
 \begin{indentexercise}{1}
 (1) Try changing code 11 so that it uses "+=" sign.\\
@@ -990,11 +991,11 @@ Run the code above, and it returns 1, because 5 is NOT 4 and that is true. Now,
 you could introduce the \textit{if} again as follows.
 \lstinputlisting[morekeywords={*, if, else}]{code/code12_35.ijm}
 In the parenthesis after ``if'', there is obvious TRUE statement (5 is not 4).
-This is true, so the command bounded by curly braces is executed, which is to
+This is true, so the macro function bounded by curly braces is executed, which is to
 print out ``true!'' in the log window.
 
 Try changing the line two to \ilcom{if (5 == 4)}. Running this prints nothing
-in the log window, because 5 is not 4 (FALSE!) so that the command in
+in the log window, because 5 is not 4 (FALSE!) so that the macro function in
 the line 3 is ignored. To avoid such ignorant no-output behaviour, you could add
 ``else'' as follows.
 
@@ -1012,7 +1013,7 @@ By now, you probabaly are pretty clear with what is going on in the code below.
 \lstinputlisting[morekeywords={*, if, else}]{code/code12_6.ijm}
 
 \subsubsection{Complex Conditions}
-In many cases, you might need to evaluate the condition of multiple parameters at once. 
+In many cases, you might need to evaluate the condition of multiple variables at once. 
 For such demands, several different comparisons can be combined by using following Boolean operators. 
 
 \begin{indentCom}
@@ -1069,10 +1070,10 @@ of the frame. \ilcom(if) operator is used to switch the movement direction.
 \end{itemize}
 A short note on the x-y coordinate system in digital images: Since digital image is a matrix of numbers, each pixel position is represented as coordinates. The top left corner of image is the position (x, y) = (0, 0). X increases horizontally towards right side of the image. Y increases vertically towards the bottom of the image.  In line 9, y-position of the dot is defined to be placed in the middle of the vertical axis. 
 \begin{itemize}
-\item Lines 14, 15: These lines set the drawing and background color. Three parameters are for each RGB components. Here the image is in grayscale so all the RGB components are set to the same value. 0 is black, and int = 255 = white.
+\item Lines 14, 15: These lines set the drawing and background color. Three arguments are for each RGB components. Here the image is in grayscale so all the RGB components are set to the same value. 0 is black, and int = 255 = white.
 \item Line 14 asks the user to input the speed of the dot movement.
 \item Lines 16, 17 prepares a new stack with parameters defined in lines 7, 8 and 9.
-\item Lines 21 to 34 is the loop for drawing moving dot. Loop will be iterated from the starting frame until the last frame. Line 21 creates an oval ROI, which will be filled in line 22 with the foreground color that was already set in the line 14. \ilcom{makeOval} command is explained in the Built-on function page as follows.
+\item Lines 21 to 34 is the loop for drawing moving dot. Loop will be iterated from the starting frame until the last frame. Line 21 creates an oval ROI, which will be filled in line 22 with the foreground color that was already set in the line 14. \ilcom{makeOval} function is explained in the Built-on function page as follows.
 
 \begin{indentCom}
 \textbf{makeOval}(x, y, width, height)\\
@@ -1160,7 +1161,7 @@ Returns the unique ID (a negative number) of the active image. Use the selectIma
 
 \item Line 25: Loop for the frames starts. 
 
-\item Lines 26, 7: Select the original stack and sets the frame number according to the loop number. \ilcom{selectImageID} works with \ilcom{getImageID} command in line 14. 
+\item Lines 26, 7: Select the original stack and sets the frame number according to the loop number. \ilcom{selectImageID} works with \ilcom{getImageID} function in line 14. 
 
 
 \begin{indentCom}
@@ -1305,7 +1306,7 @@ Line 2 to 9 creates a dialog box that has multiple input boxes that looks like F
 
 \item Line 4 texts will be shown within the window. 
 
-\item Line 5 to 11 defines the parameter input fields. Fields appear in the dialog box in the order of lines with Dialog.addNumber command in the macro. When you press OK button in the dialog box, parameter will be stored in the same order. 
+\item Line 5 to 11 defines the parameter input fields. Fields appear in the dialog box in the order of lines with Dialog.addNumber function in the macro. When you press OK button in the dialog box, parameter will be stored in the same order. 
 
 \item Line 15 to 19 These values then are assigned to each variable by Dialog.getNumber(). 
 
@@ -1395,7 +1396,7 @@ Here is a macro using the EMBL array example.
 \lstinputlisting[morekeywords={*, newArray}]{code/code20.ijm}
 
 \begin{itemize}
-\item Line 3 uses a command that creates a new array (\ilcom{newArray()}),
+\item Line 3 uses a function that creates a new array (\ilcom{newArray()}),
 defined by a parameter for number of array elements (in the example case its 5) and its name \ilcom{EMBL}.
 \item From line 4 to 8, each array from position 0 to 4 will be filled with
 names (Array starts with 0th element).
@@ -1576,7 +1577,7 @@ line width is set to that value.
 any element. This new array will store the profile data of full ROI.
 
 \item Line 9 - 13: Profile measurement by placing straight line ROI,
-for wach segment of the original ROI. \ilcom{makeLine} command is used for this
+for wach segment of the original ROI. \ilcom{makeLine} function is used for this
 purpose, and \ilcom{getProfile} returns intensity profile of the corresponding
 line ROI. Profile data in \ilcom{thisprofile} array are concatenated to
 \ilcom{totalprofile} array using \ilcom{Array.concat}.
@@ -1593,7 +1594,7 @@ Creates a new straight line selection. The origin (0,0) is assumed to be the upp
 (Lines 32 - 39).
 
 \item Line 20 - 27: Function for plotting the intensity profile.
-\item Line 21 : Use \ilcom{Array.getStatistics} command to know the minimum and
+\item Line 21 : Use \ilcom{Array.getStatistics} function to know the minimum and
 the maximum value of the array that was given as argument.
 \item Line 22: Creates the window and axes of the plot. 
 \item Line 23: Set the range for x and y axis using the results of line 21
@@ -1602,7 +1603,7 @@ margins below and above.
 \item Line 24: Sets the color of the plot. 
 \item Line 25: Plot the profile. 
 \item Line 26: Show the plot on the screen (lot is hidden until this show()
-command).
+function).
 
 \item Line 30 - 37: Function for outputting the profile array in the result
 table. This function is exactly the same function you already used in the
@@ -1686,7 +1687,7 @@ Global variable is a string variable that stores the path to the location where 
 (note: path is differently written in MacOS. It uses slash instead of back-slash). 
 The first macro \ilcom{Set Directory to save Results} is for setting the path to the folder 
 (or directory) where the file will be saved. 
-We use a command \ilcom{getDirectory(title)} to get user choice of a destination folder. 
+We use a macro function \ilcom{getDirectory(title)} to get user choice of a destination folder. 
 
 \begin{indentCom}
 \textbf{getDirectory(title)}\\
@@ -1715,13 +1716,13 @@ The measurement macro starts from the Line 9.
 \item Line 15: Gets the title of the image window for later use. We use this for 
 generating name of the results file.
 \item Line 16: to 17: Sets the measurement parameter and does the actual 
-particle analysis. Commands are direct copies from the recorder. 
+particle analysis. Macro functions are direct copies from the recorder. 
 \end{itemize}
 After the analysis, we want to save the results. 
 \begin{itemize}
 \item Line 18: Generates the file name using the image file name stored in the line 15 by concatenating concatenate image title with \ilcom{\_measure.xls}. 
 \item Line 19: The full path file name is constructed by adding the result filename generated in line 18 with path stored in the global variable. 
-\item Line 20: Saving the result table as an excel-readable file uses a new command \ilcom{saveAs}:
+\item Line 20: Saving the result table as an excel-readable file uses a new macro function \ilcom{saveAs}:
 \begin{indentCom}
 \textbf{saveAs(format, path)}
 Saves the active image, lookup table, selection, measurement results, selection XY coordinates or text window to the specified file path. The format argument must be "tiff", "jpeg", "gif", "zip", "raw", "avi", "bmp", "fits", "png", "pgm", "text image", "lut", "selection", "measurements", "xy Coordinates" or "text". Use saveAs(format) to have a "Save As" dialog displayed.
@@ -1750,7 +1751,7 @@ A very useful function for task a is \ilcom{getFileList(path)}.
 Returns an array containing the names of the files in the specified directory path. The names of subdirectories have a "/" appended.
 \end{indentCom}
  
-You need to set the path to the source image containing folder (directory). We learn this command in the following short macro. 
+You need to set the path to the source image containing folder (directory). We learn this macro function in the following short macro. 
 
 \lstinputlisting[morekeywords={*, getDirectory, getFileList}]{code/code22.ijm}
 
@@ -1766,9 +1767,9 @@ Run this macro and if you choose a folder in the sample image folder containing 
 
 \begin{itemize}
 \item Line 2: Asks the user to select a folder. Variable \ilcom{dir} is then stored with the full path to the folder. 
-\item Line3 uses the \ilcom{getFileList} command, and reads out the file names as a string array and stored in List (array). 
+\item Line3 uses the \ilcom{getFileList} function, and reads out the file names as a string array and stored in List (array). 
 \item Line 4 to 6 is a loop. \ilcom{list.length} returns the length of the list. In this way, all the contents are printed out in the window. 
-We use this \ilcom{getFileList} command to process multiple files automatically. 
+We use this \ilcom{getFileList} function to process multiple files automatically. 
 \end{itemize}
 
 Let's modify code 22 so we can measure multiple stacks automatically. Code 23 (see below) works like this: You must first set two things: 
@@ -1820,7 +1821,7 @@ function \ilcom{NucAnalysis()} that does the actual analysis\ldots
 \ilcom{img\_filename} is string variable for file names in the list array, given as argument. 
 \begin{itemize}
 \item Line 31: Using \ilcom{img\_filename},  the full path name is constructed by combining two strings. 
-\item Line 32: A file is opened by \ilcom{open(path)} command. 
+\item Line 32: A file is opened by \ilcom{open(path)} function. 
 \begin{indentCom}
 \textbf{open(path)}\\
 Opens and displays a tiff, dicom, fits, pgm, jpeg, bmp, gif, lut, roi, or text file. 
@@ -1838,7 +1839,7 @@ With 1.41k or later, opens images specified by a URL.
 Activation of the image by \ilcom{selectImage()} is required, 
 because there is already a new stack (outline stack!), 
 so that original stack is already behind. Therefore to close the original, 
-one must activate the image by using \ilcom{selectImage()} command.  
+one must activate the image by using \ilcom{selectImage()} function.  
 \item After all these processing and measurement, results will be saved. 
 Lines 42 to 45 saves the outline stack. Outline stack is also closed after saved (line 45). 
 Line 47 to 50 is exactly same as the Result table saving you did in code 21 (lines 18 to 20). 
@@ -1922,7 +1923,7 @@ You will then find the trajectory data is transferred to the Results table of Im
 
 So now, what we have to do is access results table, 
 get XY coordinates from there and do intensity measurements at corresponding positions. 
-To get data out of results table, we use the following macro command:
+To get data out of results table, we use the following macro function:
 \begin{indentCom}
 \textbf{getResult("Column", row)}\\
 Returns a measurement from the ImageJ results table or NaN if the specified column is not found. 
@@ -1939,7 +1940,7 @@ print out XY coordinates in the Log window.
 
 \lstinputlisting[morekeywords={*, getResult, nResults}]{code/code24.ijm}
 
-At line 1, \ilcom{nResults} is a command that returns number of rows in the Results table. 
+At line 1, \ilcom{nResults} is a function that returns number of rows in the Results table. 
 Frame number is added with 1 in the line 2  because frame number in ParticleTracker plugin starts from 0, 
 while it starts from 1 in ImageJ. 
 In line 3 and 4, xpos and ypos is inverted, 
@@ -2012,7 +2013,7 @@ That should then be pretty straight forward\ldots
 But if you try this, you would see that this function returns error and 
 does not work in case of Manual Tracking plugin. 
 This is because result table created by Manual Tracking plugin is not the genuine ImageJ Results window. 
-For such non-genuine results window, we retrieve data using the following command. 
+For such non-genuine results window, we retrieve data using the following function. 
 \begin{indentCom}
 \textbf{getInfo("window.contents")}\\
 If the front window is a text window, returns the contents of that window. 
@@ -2023,7 +2024,7 @@ about an image. Use \\
 to break the string returned by this function into separate lines. Replaces the \ilcom{getInfo()} function.
 \end{indentCom}
 
-This command returns a string with the content of the table. 
+This function returns a string with the content of the table. 
 Try the following two lines to see how it works. \\
 
 \begin{lstlisting}[numbers=none, morekeywords={*, getInfo}]
@@ -2045,7 +2046,7 @@ So far so good, we succeeded in getting data out of the results table.
 Then what we need to do now is to play around with \ilcom{str} variable, 
 where all the data is now contained as a chunk.  Since this chunk of data is not usable directly, 
 we first split the \ilcom{str} to single lines of string array. 
-For this we use \ilcom{split} command, the definition of which is 
+For this we use \ilcom{split} function, the definition of which is 
 
 \begin{indentCom}
 \textbf{split(string, delimiters)}\\
@@ -2056,7 +2057,7 @@ The default delimiter set " \textbackslash{}t\textbackslash{}n\textbackslash{}r"
 Returns a one element array if no delimiter is found. 
 \end{indentCom}
 
-Using this command to convert the string to a string array and adding two more lines to check the content of array, 
+Using this function to convert the string to a string array and adding two more lines to check the content of array, 
 code now looks like this:\\
 \begin{lstlisting}[numbers=none, morekeywords={*, split}]
 str = getInfo("window.contents");
@@ -2065,7 +2066,7 @@ strA = split(str, "\n");
 print(strA[0]);
 print(strA[1]);
 \end{lstlisting}
-We use delimiter \ilcom{\textbackslash{}n} which means "new line", a hidden command in \ilcom{str} 
+We use delimiter \ilcom{\textbackslash{}n} which means "new line", a hidden character in \ilcom{str} 
 that feeds new line to form a table. When we run above code we will see two data shown in the log window (Fig. \ref{fig:splittedLine}).
 %figure 
 \begin{figure}[htbp]
@@ -2104,7 +2105,7 @@ by first splitting it with delimiter  \ilcom{\textbackslash{}n} and then by
 \lstinputlisting[morekeywords={*, split}]{code/code25.ijm}
 
 If you encounter error message with \ilcom{lineA[]} such as shown in fig.\ref{fig:fig262_ErrorMessage}, 
-this is just because there is another text widow opened and \ilcom{getInfo()}command worked on 
+this is just because there is another text widow opened and \ilcom{getInfo()} function worked on 
 that window rather than the results table of the Manual Tracking. To avoid such error, 
 close extra text windows and then try running the macro again. 
 %figure  
@@ -2165,7 +2166,7 @@ In such cases, we should access tabulated data in file accessing from ImageJ.
 
 In this section, we try accessing data saved by Manual Tracking. 
 Loading data file could be done by a small modification 
-of the code we studied in the previous section. Instead of command 
+of the code we studied in the previous section. Instead of the function 
 \ilcom{getInfo("window.content")} in line 3 of code 25.5, we use \ilcom{FileOpenAsString(path)} to retrieve 
 file content into a string variable.  By leaving the argument \ilcom{path} blank (""), user will be asked for choosing a file. 
 Since this is a simple one-line replacement of line 3 of code 25.5, below is the new code but only showing its first 10 lines.  
@@ -2228,13 +2229,13 @@ You now have all the values in the log window, that should look like fig. \ref{f
 Before getting into data file structure, let's look at what we have done in the code above. 
 You might then study about how to deal with string, extracting parts of it. 
 \begin{itemize}
-\item Line 2: \ilcom{getDirectory} command with option \ilcom{("image")} 
+\item Line 2: \ilcom{getDirectory} function with option \ilcom{("image")} 
 will return a path of the last-opened image location. 
 This will be where the file "\textbf{TransportOfEndosomalVirus.tif}", inside the sample image folder. 
 \item Line 3: Filename of the image  "\textbf{TransportOfEndosomalVirus.tif}" is acquired. 
 \item Line 4: Generating the file name of the data file. "Traj\_" is the prefix that was automatically added to 
-the data file name. Command \ilcom{substring} extracts part of the string variable, and in our case, 
-we try to get the image file name without ".tif". Definition of \ilcom{substring} command is as follows.
+the data file name. Function \ilcom{substring} extracts part of the string variable, and in our case, 
+we try to get the image file name without ".tif". Definition of \ilcom{substring} function is as follows.
 
 \begin{indentCom}
 \textbf{substring(string, index1, index2)}\\
@@ -2243,7 +2244,7 @@ See also: indexOf, startsWith, endsWith, replace.
 \end{indentCom}
 
 index1 should be 0, as we want from the beginning of the file name, and index2 should be 4 strings before the 
-last string so we need the total length of the string. For this we use \ilcom{lengthOf} command. 
+last string so we need the total length of the string. For this we use \ilcom{lengthOf} function. 
 \begin{indentCom}
 \textbf{lengthOf(str)}\\
 Returns the length of a string or array.
@@ -2322,7 +2323,7 @@ This is required for removing comma character in some cases (this happens when t
 You probably do not need this line and function as we are using the data file directly after saving them. I left it in the code for your future usage. 
 
 Just to be sure with data content, line 33 and 34 double-check that the line indeed contains several data. 
-Line 35 to 38 writes trajectory ID, Frame number and XY coordinates into Results window by \ilcom{setResult} command.
+Line 35 to 38 writes trajectory ID, Frame number and XY coordinates into Results window by \ilcom{setResult} function.
 
 \begin{indentexercise}{2}
 \item Finally, we can combine several macros and functions we studied so far to make a new macro 
@@ -2376,7 +2377,7 @@ Java programming is largely helpful but if not, there is also some way around
 to learn quickly. 
 
 When we are programming ImageJ macro, we often refer to the
-web site listing ImageJ macro language functions to look for a macro command. 
+web site listing ImageJ macro language functions to look for a macro function. 
 In similar way, we access so called API (Application Programming Interface) 
 for coding with Javascript. ImageJ API is in the following page:
 
@@ -2388,9 +2389,9 @@ to code your Javascript.
 
 OK, let's start. 
 
-\subsection{A trial with Javascript commands}
+\subsection{A trial with Javascript}
 %
-Let us first try using Javascript (JS) commands. 
+Let us first try using Javascript (JS). 
 
 From menu, do \ijmenu{[Plugins > Scripting > Javascript Interpreter]}. 
 You will then see a new interface that looks like Fig \ref{fig:JSinterpreter}. 
