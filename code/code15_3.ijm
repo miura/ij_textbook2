@@ -4,3 +4,8 @@ macro "addition with function2" {
 	b = 2;
 	print(ReturnAdd(a, b));
 }
+//Code 15.1
+function ReturnAdd(n, m) {
+	p = n + m;
+	return p;
+}

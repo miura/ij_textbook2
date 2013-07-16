@@ -5,3 +5,8 @@ macro "addition with function1" {
 	c = ReturnAdd(a, b);
 	print(c);
 }
+//Code 15.1
+function ReturnAdd(n, m) {
+	p = n + m;
+	return p;
+}
