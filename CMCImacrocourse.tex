@@ -536,7 +536,7 @@ ImageJ returns an error message.
 
 This is because when ImageJ scans through the macro from top to bottom, line by line, 
 it reaches the line for the assignment of the variable \ilcom{txt} and first sees the variable \ilcom{a} and interprets that \ilcom{txt} should be a numerical variable 
-(or function), since \ilcom{a} is known to be a number as it was defined so in one of the lines above. Then ImageJ goes on interpreting rightward thinking that this is math. Then finding a "+" which surprizingly is a character
+(or function), since \ilcom{a} is known to be a number as it was defined so in one of the lines above. Then ImageJ goes on interpreting rightward thinking that this is math. Then finding a "+" which surprisingly is a character
 ImageJ cannot interpret string variable within a numerical function, so it returns an error message. The macro aborts.  
 
 To overcome this problem, the programmer can tell ImageJ that 
@@ -568,8 +568,8 @@ The function \textit{getNumber} consists of two parameters (programmers call suc
 \textbf{getNumber}(message string, default number)
 \end{indentCom}
 The first argument is a string wrapped by double quotes (see code 5, line 3
-and 4). This string will appear in the dialogue window such as shown above. 
-Default number will appear in the input field in the dialogue window, 
+and 4). This string will appear in the dialog window such as shown above. 
+Default number will appear in the input field in the dialog window, 
 and the user is expected to modifies this default number. 
 When OK button is clicked, the number given by the user will be returned to
 the macro and then substituted to a variable. In the above case, this could be
