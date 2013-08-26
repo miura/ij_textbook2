@@ -8,7 +8,7 @@ macro "Calculate Distance" {
 	sum_difference_squared = pow((p2x - p1x),2) + pow((p2y - p1y),2);
 	distance = pow(sum_difference_squared, 0.5);
 
-	print("p1:" + p1x + "," + p1y);
-	print("p2:" + p2x + "," + p2y);
+	print("p1:", p1x, ",", p1y);
+	print("p2:", p2x, ",", p2y);
 	print("distance:" + distance);
 }
