@@ -1,7 +1,7 @@
 // Code 23
 
-var G_Sdir = "D:\\_Kota\\CMCI\\"
-var G_Ddir = "D:\\_Kota\\CMCI\\"
+var G_Sdir = "D:\\_Kota\\CMCI\\";
+var G_Ddir = "D:\\_Kota\\CMCI\\";
 var G_threshold_lower = 20;
 var G_threshold_upper = 255;
 
