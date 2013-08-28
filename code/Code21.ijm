@@ -1,5 +1,6 @@
 // Code 21
-var G_Ddir = "D:\\_Kota\\CMCI\\course_macro\\"
+var G_Ddir = "D:\\_Kota\\CMCI\\course_macro\\"; //Windows path 
+//var G_Ddir = "/Users/Kota/CMCI/course_macro/"; //OSX path 
 
 macro "Set Directory to save Results" {
 	G_Ddir = getDirectory("Choose Destination Directory");
@@ -13,7 +14,7 @@ macro "auto save results" {
 	}
 	setThreshold(lower, 255);
 	img_title = getTitle();
-	run("Set Measurements...", "area mean centroid circularity slice limit redirect=None decimal=2");
+	run("Set Measurements...", "area mean centroid shape circularity slice limit redirect=None decimal=2");
 	run("Analyze Particles...", "size=10-Infinity circularity=0.50-1.00 show=Outlines display exclude clear stack");
 	dest_filename = img_title+"_measure.xls";
 	fullpath = G_Ddir + dest_filename;
