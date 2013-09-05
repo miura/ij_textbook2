@@ -1,5 +1,5 @@
 //Code 10
-macro "Measure Ave Intemsity Stack" {
+macro "Measure Ave Intensity Stack" {
 	frames=nSlices;
 	run("Set Measurements...", "  mean  min integrated redirect=None decimal=4");
 	run("Clear Results");

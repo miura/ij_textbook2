@@ -758,13 +758,12 @@ such as measuring dynamics or multi-frame processing.
 Many ImageJ functions works with only single frame within a stack. 
 Without macro programming, you need to execute the menu command while you flip the frame manually. 
 Macro programming enables you to automate this process. 
-Here is an example of measuring intensity change over time. 
-\lstinputlisting[morekeywords={*, run, setSlice, nSlices}]{code/code10.ijm}
+Here is an example of measuring intensity change over time.
 \begin{itemize}
 \item Line 3: \ilcom{nSlices} is a function that returns number of slices in the active stack. 
 
-\item Line 4: Sets measurement parameters. In this case "mean" intensity will be measured. 
-You do not have to care for now about the "redirect" parameter. "decimal" This is the number of digits to 
+\item Line 4: Sets measurement parameters, from the menu would be \ilcom{[Analyze > Set measurements\ldots]}. In this case "mean min integrated" is added as part of the second argument. ``mean'' is the mean intensity, ``min'' is the minimum intensity and ``integrated'' is integrated density (total intensity). These keys for measured parameters could be known by using the command recorder. 
+You do not have to care for now about the "redirect" argument. "decimal" This is the number of digits to 
 the right of the decimal point in real numbers displayed in the results table. 
 
 \item Line 5: clears the results table. 
@@ -782,11 +781,11 @@ Result will be recorded in the memory and will be displayed in the Results table
 Open an example stack \textbf{1703-2(3s-20s).stk}
 \footnote{Some of you may realize that you used this sequence 
 in the Image Processing / Analysis Course for learning 
-stack measurements using Z-profiler. Now, you can program similar 
-device in macro. Good thing about the custom program 
+stack measurements using Z-profiler \ilcom{[Image > Stacks > Plot Z-Profile]}. Now, you can program similar 
+device in macro. Good thing about a custom macro 
 is that you will be able to modify the program further to add more functions.
 For example, You could measure the time course of standard deviation of
-intensity within the selected ROI.}. This is a short sequence of FRAP analysis,
+intensity within the selected ROI or minimum intensity}. This is a short sequence of FRAP analysis,
 so edge of the one of the cells is bleached and then fluorescence recovers by time. 
 Select the frapped region by ROI tool (such as in the figure below). 
 Execute the macro. Results will be printed in the Results window (see see the table in the figure left). 
@@ -828,11 +827,10 @@ Execute the macro. Results will be printed in the Results window (see see the ta
  \label{fig:frapresults}
 \end{figure}
 
-
-Measurement parameters can be added as arguments by modifying the line 4 in the code 10. "Set Measurement" could be added with more parameters to be measured, and decimals could be increased (highlighted in bold).
-\begin{indentCom}
-\textbf{run}("Set Measurements\ldots", "  mean min integrated redirect=None decimal=4")
-\end{indentCom}
+Measurement parameters can be added as argument by modifying the line 4 in the code 10. "Set Measurement" could be added with more parameters to be measured, and the digits after the decimal point could be increased by increasing the number after ``decimal=''. For example, 
+\begin{lstlisting}[numbers=none]
+run("Set Measurements...", "area mean standard modal min centroid center perimeter bounding integrated median stack redirect=None decimal=5");
+\end{lstlisting}
 
 \begin{indentexercise}{1}
 Modify code 10 to include more measurement parameters (whatever you like), and test the macro. Check the results. 
@@ -1506,9 +1504,9 @@ The first line is printed in the order when the array was initialized. After
 sorting, names are in alphabetical order. Third line shows the reversed
 elements. 
 
-\subsection{Application of Array in Image Analysis}
+\subsection{Build-in Macro Functions using Array}
 
-Array is used in many built-in macro functions, especially for storing array of numerical values. Here is a list of functions which use array. 
+Array is used in many built-in macro functions, especially as the array of numerical values. Here is a list of functions which use array. 
 
 \begin{indentCom}
 \texttt{
@@ -1536,8 +1534,42 @@ Array is used in many built-in macro functions, especially for storing array of 
 }
 \end{indentCom}
 
-To learn the actual use of Array in Image analysis, we use some of these functions and 
-create a macro that reads and shows the line-profile from segmented line ROI. 
+\subsection{Application of Array in Image Analysis}
+
+To learn the actual use of Array in Image analysis, I will introduce several example applications.
+
+\subsubsection{Extending Stack Analysis by Direct Measurements}
+
+We studied how to use for-loops to measure each frame/slice within a stack (\ref{sec:forloopStack}). There we did measurements using \ilcom{run("Set Measurements...")} and \ilcom{run("Measure")} and then results were shown in the Results Table. To use those values in the table for such as to calculate statistics or to plot the results, one needs to access the results table and parse all the values. Writing all this in a macro is possible but it will be indirect as the values we measured are only accessible via the Results Table. We could now try to do measurement directly and store results in arrays. There are two ways. 
+
+\begin{enumerate}
+\item \ilcom{getRawStatistics(nPixels, mean, min, max, std, histogram)}
+\item \ilcom{List.setMeasurement}
+\end{enumerate}
+The function \ilcom{getRawStatistics} will measure statistical parameters from the image and returns those values in the variables declared as arguments. In other words after having this command, variable \ilcom{mean} will have the mean intensity of the image. If a ROI is selected, mean intensity of that ROI will be the value of \ilcom{mean}. We could loop each slices/frames within a stack and for each loop we could do \ilcom{getRawStatistics} and store measured values in arrays. This is doable, but has a demerit of using this function: the available parameters to measure is limited. 
+
+The second method using \ilcom{List.setMeasurement} does not have this demerit. One could measure many more parameters because all the available parameters in \ilcom{[Analyze > Set Measurements...]} are accessible with this function. The basic usage is like shown in below.
+
+\begin{lstlisting}
+List.setMeasurements;
+mean = List.getValue("Mean");
+print(mean)
+\end{lstlisting}
+
+This code measures currently active image, extracts specific measurement value (in the above case ``Mean'' intensity) and then prints out that value in the log window. We could do this measurement for every loop for stack slices/frames and store the results in arrays. Here is the code, a modified version of code 10. 
+
+\lstinputlisting[morekeywords={*, List, setMeasurements, getValue, newArray}]{code/code10_1.ijm}
+\begin{itemize}
+  \item Line 2: Checks the ImageJ version, since \ilcom{List.setMeasurements} function is only available after version 1.42i.
+  \item Line 5, 6: Create new arrays with a lenght same as the number of frames within the stack. These arrays will be uses to store measurement results. 
+  \item Line7: for-looping to go through each frames in the stack.
+  \item Line 10: Do measurement. All the parameters will be stored in the List. 
+  \item Line 11, 12: Retrieve the results, mean intensity and standard deviation. 
+  \item Line 15, 16: Prints out results in the log window. 
+\end{itemize}
+
+\subsubsection{Acquiring intensity profile from segmented line ROI}
+ 
 In recent version of ImageJ, selection thickness controls the width of segmented
 line ROI when you do \ijmenu{[Analyze > Plot Profile])}. We try to mimick this
 behavior in macro, and instead of choosing the line ROI thickness using GUI, the
