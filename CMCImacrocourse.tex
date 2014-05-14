@@ -2283,15 +2283,15 @@ From line 4 to 7, new arrays are generated to store data from four columns in th
 \end{figure}
 
 Check the log window (Fig. \ref{fig:fig253_CoordinatesPrintedOut}), 
-compare the output with manual tracker results table, and if you are confident that you are accessing data in table, 
-you could then use XY coordinates to place a circular ROI, 
-measure average intensity in that area and list them in ImageJ Results window.
+compare the output with the manual tracker results table, and if you are confident that you are accessing the right data in the table, 
+you could then use the XY coordinates to place a circular ROI, 
+measure the average intensity in that area and list them in the ImageJ Results window.
 
 \lstinputlisting[morekeywords={*, split}]{code/code25_5.ijm}
 
-Running this code, you should see Results window that looks like figure 
+Running this code, you should see a Results window that looks like figure 
 \ref{fig:fig262_ManualTrackIntfinalResults}, tracking data plus measured intensity is shown in 
-column titled "RoiInt". The way oval ROI is used to measure mean intensity is similar to what 
+the column titled "RoiInt". The way the oval ROI is used to measure the mean intensity is similar to what 
 we have coded in the previous subsection. A difference is that this time, we use arrays that store data 
 extracted by splitting the chunk of string data. 
 
