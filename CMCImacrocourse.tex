@@ -760,7 +760,7 @@ Without macro programming, you need to execute the menu command while you flip t
 Macro programming enables you to automate this process. 
 Here is an example of measuring intensity change over time.
 \begin{itemize}
-\item Line 3: \ilcom{nSlices} is a function that returns number of slices in the active stack. 
+\item Line 3: \ilcom{nSlices} is a function that returns the number of slices in the active stack. 
 
 \item Line 4: Sets measurement parameters, from the menu would be \ilcom{[Analyze > Set measurements\ldots]}. In this case "mean min integrated" is added as part of the second argument. ``mean'' is the mean intensity, ``min'' is the minimum intensity and ``integrated'' is integrated density (total intensity). These keys for measured parameters could be known by using the command recorder. 
 You do not have to care for now about the "redirect" argument. "decimal" This is the number of digits to 
@@ -2094,7 +2094,7 @@ print out XY coordinates in the Log window.
 
 \lstinputlisting[morekeywords={*, getResult, nResults}]{code/code24.ijm}
 
-At line 1, \ilcom{nResults} is a function that returns number of rows in the Results table. 
+At line 1, \ilcom{nResults} is a function that returns the number of rows in the Results table. 
 Frame number is added with 1 in the line 2  because frame number in ParticleTracker plugin starts from 0, 
 while it starts from 1 in ImageJ. 
 In line 3 and 4, xpos and ypos is inverted, 
@@ -2197,10 +2197,10 @@ If you run these two lines, you will see data printed out in the Log window
 \end{figure}
 
 So far so good, we succeeded in getting data out of the results table. 
-Then what we need to do now is to play around with \ilcom{str} variable, 
-where all the data is now contained as a chunk.  Since this chunk of data is not usable directly, 
-we first split the \ilcom{str} to single lines of string array. 
-For this we use \ilcom{split} function, the definition of which is 
+Then what we need to do now is to play around with the \ilcom{str} variable, 
+where all the data is now contained as a chunk. Since this chunk of data is not usable directly, 
+we first split the \ilcom{str} to single lines of a string array. 
+For this we use the \ilcom{split} function, the definition of which is 
 
 \begin{indentCom}
 \textbf{split(string, delimiters)}\\
@@ -2211,8 +2211,8 @@ The default delimiter set " \textbackslash{}t\textbackslash{}n\textbackslash{}r"
 Returns a one element array if no delimiter is found. 
 \end{indentCom}
 
-Using this function to convert the string to a string array and adding two more lines to check the content of array, 
-code now looks like this:\\
+Using this function to convert the string to a string array and adding two more lines to check the content of the array, 
+the code now looks like this:\\
 \begin{lstlisting}[numbers=none, morekeywords={*, split}]
 str = getInfo("window.contents");
 //print(str);
@@ -2220,8 +2220,8 @@ strA = split(str, "\n");
 print(strA[0]);
 print(strA[1]);
 \end{lstlisting}
-We use delimiter \ilcom{\textbackslash{}n} which means "new line", a hidden character in \ilcom{str} 
-that feeds new line to form a table. When we run above code we will see two data shown in the log window (Fig. \ref{fig:splittedLine}).
+We use the delimiter \ilcom{\textbackslash{}n} which means "new line", a hidden character in \ilcom{str} 
+that feeds a new line to form a table. When we run the above code we will see two lines of data shown in the log window (Fig. \ref{fig:splittedLine}).
 %figure 
 \begin{figure}[htbp]
 \begin{center}
@@ -2239,7 +2239,7 @@ lineA = split(strA[1], "\t");
 print(lineA[3]);
 \end{lstlisting}
 
-We use delimiter \ilcom{\textbackslash{}t}, which means "tab", to convert single line to an array of data. each for a column. 
+We use the delimiter \ilcom{\textbackslash{}t}, which means "tab", to convert a single line to an array of individual pieces of data (one element for each column). 
 %figure 
 \begin{figure}[htbp]
 \begin{center}
@@ -2250,18 +2250,18 @@ We use delimiter \ilcom{\textbackslash{}t}, which means "tab", to convert single
 \end{figure}
 
 The value shown in the Log window (Fig. \ref{fig:doublesplittedLine}) 
-should be the same as X value in the first row of the original table (Fig. \ref{fig:manualtrackingresults}). 
+should be the same as the X value in the first row of the original table (Fig. \ref{fig:manualtrackingresults}). 
 
 We now know how to access individual data values within \ilcom{str}, 
-by first splitting it with delimiter  \ilcom{\textbackslash{}n} and then by  
-\ilcom{\textbackslash{}t}. We can print all XY coordinates in Log window by following code.  
+by first splitting it with delimiter \ilcom{\textbackslash{}n} and then by
+\ilcom{\textbackslash{}t}. We can print all XY coordinates in the Log window with the following code.  
 
 \lstinputlisting[morekeywords={*, split}]{code/code25.ijm}
 
-If you encounter error message with \ilcom{lineA[]} such as shown in fig.\ref{fig:fig262_ErrorMessage}, 
-this is just because there is another text widow opened and \ilcom{getInfo()} function worked on 
+If you encounter an error message with \ilcom{lineA[]} such as shown in fig.\ref{fig:fig262_ErrorMessage}, 
+this is just because there is another text widow open and the \ilcom{getInfo()} function worked on 
 that window rather than the results table of the Manual Tracking. To avoid such error, 
-close extra text windows and then try running the macro again. 
+close the extra text windows and then try running the macro again. 
 %figure  
 \begin{figure}[htbp]
 \begin{center}
