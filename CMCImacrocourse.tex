@@ -251,30 +251,30 @@ Compared to plugins, ImageJ Macro language has some limitations:
 
 \begin{enumerate}
 \item If you need to process large images or stacks with many steps, 
-you might recognize that it is slow. 
-Some benchmarks indicates that a plugin would be about 40 times faster than Macro. 
+you might recognize that it is slow. Some benchmarks indicate that a plugin would be about 40 times faster than Macro. 
 
 \item Macro cannot be used as a library
-\footnote{It is possible to write a macro in a library fashion and use it from another macro, 
-but this is not as robust and as clear as it is in java, which is a language designed to be so.}. 
-In Java, once a class is written, this could be used later again from another class . 
+  \footnote{It is possible to write a macro in a library fashion using the function \ilcom{eval} and use it from another macro, 
+but this is not as robust and as clear as it is in Java, which is a language designed to be so.}. 
+In Java, once a class is written, this could be used later again for another class. 
 
 \item Macro is not efficient in implementing real-time interactive input 
-during when the macro command is executed; 
+during when the macro function is executed; 
 \textit{e.g.} If you want to design a program that requires real-time user input 
 to select a ROI interactively.  
-Macro could only do such interactive tasks by separating the program into several different commands. 
+Macro could only do such interactive tasks by closely related macro set with each macro doing each step of interaction. 
 
-\item Macro is tightly coupled to GUI (Image Window), so that when you want to process images without showing them on desktop, macros are not really an optimal solution.  
+\item Macro is tightly coupled to GUI (Image Window), so that when you want to process images without showing them on desktop, macros are not really an optimal solution.
 \end{enumerate}
 
 If you become unsatisfied with these limitations, 
-learning more complicated but more flexible java plugin development is recommended. 
+learning more complicated but more flexible Java plugin development is recommended. 
+
 
 \subsection{Comparison with Other scripting languages}
 Besides ImageJ macro, there are several scripting languages that
-could be used for programming. Bare ImageJ supports Javascript (Rhino).
-In the Fiji distribution, you could use the following languages:
+could be used for programming with ImageJ. The bare ImageJ supports Javascript (Rhino). Recent version of ImageJ (> 1.47m,  since 6 March 2013), Jython became included in the menu as well. 
+In the Fiji distribution, you could use the following languages off the shelf:
 
 \begin{itemize}
  \item Javascript
@@ -284,21 +284,22 @@ In the Fiji distribution, you could use the following languages:
  \item Clojure
  \end{itemize}
 
-If you set up environment by yourself, you could also use other languages such as Scala and Groovy. 
-Compared to the ImageJ macro language, all these languages are more general and widely used. 
+If you set up an environment by yourself, other languages such as Scala and Groovy are also available. 
+Compared to the ImageJ macro language, all these languages are more general scripting languages also used outside ImageJ. 
 
-Merits of using the ImageJ Macro compared to these scripting languages are: 
+There are pros and cons. Merits of using the ImageJ Macro compared to these scripting languages are: 
 \begin{itemize}
 \item Easy to learn. 
-Functions are mirrors of ImageJ menu, so scripting is intuitive if you know ImageJ already. 
-Macro recorder is a handy tool for finding out the right macro functions. 
-
-\item You could have multiple macros in one file (called 'Macro-set"). 
-This is useful for packaging complex processing tasks (see Advanced Macro Programming section for more details). 
+ImageJ macro build-in functions are mirrors of ImageJ menu, so scripting is intuitive if you know ImageJ already. 
+Macro recorder is a handy tool for finding out the macro function you need. 
 
 \item A significant hurdle for coding with general scripting languages is that one must know the 
 \textbf{ImageJ Java API} well, meaning that you basically have to know 
 fundamentals of Java programming language for using these scripting languages. 
+
+\item You could have multiple macros in one file (called 'Macro-set"). 
+This is useful for packaging complex processing tasks.
+
 \end{itemize}
 
 Thus, ImageJ macro language is the easiest way to access the scripting
@@ -306,16 +307,15 @@ capability of ImageJ.
 
 There are several disadvantages of ImageJ macro compared to other
 scripting languages. First is its generality. Since others are based on major scripting languages, you do not need to learn a lot if you know one of them already. For example, if you know Python already, 
-it should be easy for you to start writing codes in Jython. 
+it should be easy for you to start writing codes in Jython (note: but you also need to know about Java). 
 
-Second disadvantage is extendability.
-Codes you wrote could only be recycled by copy and pasting
+The second disadvantage of ImageJ macro is its extendability.
+Codes you wrote could only be recycled by copying and pasting
 \footnote{One could also use getArgument() and File related functions to pass
 arguments from a macro file to the other, but ImageJ macro is not designed to
 construct a library of functions.}.
-With other scripting languages, one could write object-oriented programs 
-and once you write them, code could be used from other programs
-\footnote{ Calling other Javascript file from another Javascript file had been difficult but became easily possible in Fiji from March 2012.}.
+With other scripting languages, once you write a code, it could be used from other programs
+\footnote{ Calling other Javascript file from another Javascript file had been difficult but became easily possible in the Fiji distribution from March 2012.}.
 
 Lastly, although ImageJ Macro processes with a speed comparable to
 Javascript and Jython, it is slow compared to Clojure and Scala. 
@@ -376,10 +376,10 @@ numbers! These numbers were added just for explanation.
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[hbtp]
 \begin{center}
-\includegraphics[scale=0.6]{fig/editor_helloworld_fiji.png}
-\caption{Script Editor of Fiji} \label{fig_ScriptEditor}
+\includegraphics[scale=1.0]{fig/editor_helloworld_singleline.png}
+\caption{Script Editor of the Fiji distribution} \label{fig_ScriptEditor}
 \end{center}
 \end{figure}
 
@@ -395,10 +395,10 @@ same as in ImageJ. You could also use ``run'' button in the script editor.
 This will create a new window "Log". Within the log window, "Hello World" will
 be printed.
 
-\begin{figure}[htbp]
+\begin{figure}[hbtp]
 \begin{center}
-\includegraphics[scale=0.6]{fig/Log_HelloWorld.png}
-\caption{Output in Log Window for Code 1} \label{fig23-1}
+\includegraphics[scale=1.0]{fig/helloworld_logwindow.png}
+\caption{Hello World Output} \label{fig_HelloWorldLog}
 \end{center}
 \end{figure}
 
@@ -411,7 +411,7 @@ curly braces \{\}. "print\_out" will be the name of macro.
 in the "Log" window. The text to be printed must be contained within the double quotes (""). 
 The best reference for ImageJ macro functions is in the ImageJ web site
 \footnote{\url{http://rsbweb.nih.gov/ij/developer/macro/functions.html}}. 
-For example, you could find definition of print("") function in the web site as quoted in below:\\
+For example, you could find definition of print("") function on the web site as quoted below:\\
 %\item
 \begin{indentCom}
 \textbf{print(string)}\\
@@ -477,11 +477,16 @@ The second macro should have a different name. In the example shown in fig.
 \caption{Macro Set} \label{fig_MacroSetInMenu}
 \end{center}
 \end{figure}
+When macro is properly declared in this way, you could install the macro to have it as a menu item. To do so, in the editor menu select: 
+\begin{indentFiji}
+[Run -> Install Macro]).
+\end{indentFiji}
+In the main menu you should no be able to see the macro names under \ijmenu{[Plugins > Macros > ]}.
 
 
 \subsection{Variables and Strings}
 Texts such as "Hello World!" can be represented by a variable 
-(there is no declaration of types, such as number or string, in ImageJ macro.).
+\footnote{there is no declaration of types, such as number or string, in ImageJ macro.}.
 Let's understand this by examining a short macro below.
 \lstinputlisting{code/code02.ijm}
 
@@ -497,14 +502,13 @@ The above operation concatenates content of \ilcom{text2} to the content of \ilc
 \end{indentexercise}
 
 
-It is also possible to substitute the variable content with numbers, such as\\
+It is also possible to store a number in a variable. For example, \\
 \begin{lstlisting}[numbers=none]
 text = 256;
 \end{lstlisting}
 With this assignment, the variable is now a "numerical variable" or simply "variable". 
 In other programming languages such as C or Java, difference between numbers and characters matters a lot. 
-In ImageJ macro you do not have to care whether the variable is number or string, 
-but in some cases this may cause problem 
+In ImageJ macro you do not have to care whether the variable is number or string,  but in some cases this may cause problem 
 so it's better to just keep this difference in your mind. We will see an example of such confusion, 
 and also a way to avoid the confusion. 
 
@@ -524,7 +528,7 @@ If you define txt without the first "useless" quotation marks, then it will be l
 txt= a + "+"+ b + "=" + c;
 \end{lstlisting}
 Theoretically this should work also, 
-since the double quotes does not have any content so it's presence should be meaningless. But if you try to run this what it seems to be straight-forward assignment, 
+since the double quote does not have any content so it's presence should be meaningless. But if you try to run this what it seems to be straight-forward assignment, 
 ImageJ returns an error message. 
 
 \begin{figure}[htbp]
@@ -603,12 +607,9 @@ Do \ijmenu{[PlugIns -> Macros -> Record\ldots]}. A window like figure
 \end{center}
 \end{figure}
 
-All the menu commands that you execute will be recorded in this window as macro functions. 
-For composing a macro using this recorder, we first do the processing
-manually from the menu as follows. 
+All the menu commands that you execute will be printed out as a history of macro functions in this window. For composing a macro using this recorder, we first do the processing manually from the menu as follows. 
 \begin{itemize}
-  \item Prepare a new image using \ijmenu{[File -> New]} command. Size of the
-  image can be anything.
+  \item Prepare a new image using \ijmenu{[File -> New]} command. The size of the image can be anything.
   \item Then do \ijmenu{[Process -> Noise -> Salt and Pepper]} (Fig.
   \ref{fig_SaltAndPepper}).
   \item \ijmenu{[Process -> Filters -> Gaussian Blur]} (use Sigma = 2.0).
@@ -626,7 +627,7 @@ manually from the menu as follows.
 
 Now, check the Command Recorder window. 
 It should now look like Fig. \ref{fig_macroRecorderFilled}. 
-Lines appeared after your operations are corresponding macro functions.
+Each line is a macro function that corresponds to a menu command you selected.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -636,47 +637,38 @@ Lines appeared after your operations are corresponding macro functions.
 \end{center}
 \end{figure}
 
-These texts generated in in the recorder can be used as it is in your macro. 
-You could copy and paste them\footnote{In case of OSX, you might probably need
-to click ``Create'' button to create a duplicate of macro functions in a new script
-window. Then you could copy the macro functions from there.}. Compose a macro like
-below by copy and pasting the macro functions in the recorder. 
-Delete the lines that is commented out (lines that begins with "//" are lines that are skipped by the macro interpreter).
-
+These texts generated in in the recorder can be used as it is in your macro.  You could copy and paste them\footnote{In case of OSX, you might probably need to click ``Create'' button to generate a duplicate of macro functions in a new script window. Then you could copy the macro functions from there.}. Compose a macro like below by copying and pasting the macro functions in the recorder.  Delete the lines that are commented out (lines that begin with "//" are lines that are skipped by the macro interpreter).
 \lstinputlisting{code/code06_9.ijm}
 
 Run the macro! \ldots I hope that you are amazed by now with the power of Macro
 Recorder! Now, you could simple add a line at the top and bottom to package this in a named macro. This is optional in the current case, but it's always good to keep your macro like this since boundary of the macro becomes clear. 
-
+ 
 \lstinputlisting{code/code07.ijm}
 
 The second line in the above macro has a function \ilcom{newImage()}. This
 function creates a new image. It has five arguments (in coding jargon, we say
 there are "five arguments"). To know what these arguments are, 
-the quickest way is to read the Build-In Macro Function page in ImageJ web site  
-(the reference is attached to this manual so take a look).  
-In case of newImage function, the description looks like this. 
+the quickest way is to read the Build-In Macro Function page in ImageJ web site\footnote{\url{http://rsbweb.nih.gov/ij/developer/macro/functions.html}}.  
+In case of the function \ilcom{newImage}, the description looks like this. 
 
 \begin{indentCom}
+
+\fbox{
+\parbox[b][16em][c]{0.80\textwidth}{
 \textbf{newImage}(title, type, width, height, depth)\\
 Opens a new image or stack using the name title. 
 The string type should contain "8-bit", "16-bit", "32-bit" or "RGB". 
 In addition, it can contain "white", "black" or "ramp" (the default is "white"). 
-As an example, use "16-bit ramp" to create a 16-bit image containing a grayscale ramp. 
-Width and height specify the width and height of the image in pixels. 
-Depth specifies the number of stack slices.
+As an example, use "16-bit ramp" to create a 16-bit image containing a grayscale ramp.  Width and height specify the width and height of the image in pixels.  Depth specifies the number of stack slices.
+}}
 \end{indentCom}
-Using this information, you can modify the macro to change the size of the image. 
-It is also possible to use variables and pass them to the macro function as arguments. 
-For example, you could modify macro so that the macro asks you width and height
-of the new image and use those imput values to create a new image, such as:
-\lstinputlisting{code/code08.ijm}
+Using this information, you can modify the macro to change the size of the image.
 
 \begin{indentexercise}{1}
 Modify the code 8, so that user can input the desired Gaussian sigma.
 \end{indentexercise}
 
-Another optional lines you could add to the macro are ``comments''. This does not affect the macro but adding some comment about what the macro does helps you to understand what the macro is doing when you open the file some time later. There are two ways to add comment. One is block comment. Texts bounded by \ilcom{ /*} and \ilcom{*/} will be ignored by interpreter. Another is line commnet. Texts in a line starting with double slash \ilcom{//} will be ignored by the interpreter. Below is an example of commenting code 07. 
+Other optional lines you could add to the macro are ``comments''. This does not affect the macro but adding some comment about what the macro does helps you to understand what the macro is doing when you open the file some time later. There are two ways to add comment. One is the \textbf{block comment}. Texts bounded by \ilcom{ /*} and \ilcom{*/} will be ignored by interpreter. Another is the line comment. Texts in a line starting with double slash \ilcom{//} will be ignored by the interpreter. Below is an example of commenting code 07. 
 
 \lstinputlisting{code/code07_1.ijm}
 
@@ -712,8 +704,8 @@ In many cases, we want to iterate certain processing many times ("Loops": see mi
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=0.55]{fig/fig23_1_ScriptSchemes.png}
-\caption{Schematic view of conditions and loops. Single line by line processing and macro with loops (middle) or with condition (right).} \label{fig_scriptscheme}
+\includegraphics[width=\textwidth]{fig/fig23_1_ScriptSchemes.png}
+\caption{Schematic view of conditions and loops. Straightly top to bottom, line by line processing (left) and macro with loops (middle) and with a condition (right).} \label{fig_scriptscheme}
 \end{center}
 \end{figure}
 
@@ -752,15 +744,18 @@ Then in line 6 interpreter sees the boundary \ilcom{\}} and goes back to line 4 
 (3) Change the third parameter in \ilcom{for(i=0;i<5;i+=1)} so that the macro prints out 10 lines. 
 \end{indentexercise}
 
-\subsection{Stack Analysis by for-looping}
-One of powerful application of for-loop in biological image processing is image stack management, 
+
+\subsubsection{Stack Analysis by for-looping}
+\label{sec:forloopStack}
+One of frequently encountered task is image stack management, 
 such as measuring dynamics or multi-frame processing. 
-Many ImageJ functions works with only single frame within a stack. 
-Without macro programming, you need to execute the menu command while you flip the frame manually. 
+Many ImageJ functions work with only single frame within a stack. 
+Without macro programming, you need to execute the command while you flip the frame manually. 
 Macro programming enables you to automate this process. 
-Here is an example of measuring intensity change over time.
+Here is an example of measuring intensity change over time\footnote{What we write as macro here could be done with a single command \ilcom{[Image > Stacks > Plot Z-Profile]} but this only measures intensity. If you want to measure other values such as the minimum intensity, a macro should be written. }. 
+\lstinputlisting[morekeywords={*, run, setSlice, nSlices}]{code/code10.ijm}
 \begin{itemize}
-\item Line 3: \ilcom{nSlices} is a function that returns number of slices in the active stack. 
+\item Line 3: \ilcom{nSlices} is a macro function that returns the number of slices in the active stack. 
 
 \item Line 4: Sets measurement parameters, from the menu would be \ilcom{[Analyze > Set measurements\ldots]}. In this case "mean min integrated" is added as part of the second argument. ``mean'' is the mean intensity, ``min'' is the minimum intensity and ``integrated'' is integrated density (total intensity). These keys for measured parameters could be known by using the command recorder. 
 You do not have to care for now about the "redirect" argument. "decimal" This is the number of digits to 
@@ -772,7 +767,7 @@ the right of the decimal point in real numbers displayed in the results table.
 
 \item Line 7: calculates the current frame number. 
 
-\item Line 8: \ilcom{setSlice} function set the frame according to the frame number calculated in line6. 
+\item Line 8: \ilcom{setSlice} function sets the frame according to the frame number calculated in line 6. 
 
 \item Line 9:  actual measurement is done. 
 Result will be recorded in the memory and will be displayed in the Results table window. 
@@ -785,38 +780,10 @@ stack measurements using Z-profiler \ilcom{[Image > Stacks > Plot Z-Profile]}. N
 device in macro. Good thing about a custom macro 
 is that you will be able to modify the program further to add more functions.
 For example, You could measure the time course of standard deviation of
-intensity within the selected ROI or minimum intensity}. This is a short sequence of FRAP analysis,
-so edge of the one of the cells is bleached and then fluorescence recovers by time. 
+intensity within the selected ROI.}. This is a short sequence of FRAP analysis,
+so the edge of the one of the cells is bleached and then fluorescence signal at that bleached position recovers by time. 
 Select the frapped region by ROI tool (such as in the figure below). 
-Execute the macro. Results will be printed in the Results window (see see the table in the figure left). 
-
-%%%figure frap seq and quantification
-%\begin{figure}[htbp]
-% \begin{minipage}{0.5\hsize}
-%  \begin{center}
-%   \includegraphics[height=50mm]{fig/fig2321a_frapimage.png}
-%  \end{center}
-%  \caption{Setting a Segmented ROI at the FRAPped area}
-%  \label{fig:FRAProi}
-% \end{minipage}
-% \begin{minipage}{0.5\hsize}
-% \begin{center}
-%  \includegraphics[height=50mm]{fig/fig2321b_frapResults.png}
-% \end{center}
-%  \caption{Results of Measuring Mean Intensity Dynamics}
-%  \label{fig:MeanIntensityTimeCourse}
-% \end{minipage}
-%\end{figure}
-
-%\begin{figure}[htbp]
-% \begin{center}
-%  \includegraphics[height=50mm]{fig/fig2321a_frapimage.png}
-%  \hspace{15mm}
-% \includegraphics[height=50mm]{fig/fig2321b_frapResults.png}
-% \caption{Left: Setting a Segmented ROI at the FRAPped area. Right: Results of Measuring Mean Intensity Dynamics.}
-% \label{FRAPdynamics}
-%\end{center}
-%\end{figure}
+Execute the macro. Results will be printed in the Results window (see the table in the figure left). 
 
 \begin{figure}[htbp]
  \centering
@@ -847,7 +814,7 @@ Modify code 10 to include more measurement parameters (whatever you like), and t
 
 \subsection{Loop: while-looping}
 
-Another way of letting part of macro to loop is \textbf{while}-statement. In this case, iteration is not defined strictly. Looping continues until certain condition is met. As soon as the condition is full-filled, macro interpreter goes out from the loop.
+Another way of letting a part of macro to loop is \textbf{while}-statement. In this case, iteration is not defined strictly. Looping continues until certain condition is met. As soon as the condition is full-filled, macro interpreter goes out from the loop.
 
 \subsubsection{Basics of while statement}
 Here is a simple example macro using \ilcom{while}.
@@ -893,7 +860,7 @@ counter++;
  or 
 counter--;
 \end{lstlisting}
-These two last macro functions are said to work faster than +=1 or -=1, but I myself do not see much difference. Computer is fast enough these days. 
+These two last macro functions are said to work faster than +=1 or -=1, but I myself do not see much difference. Computers are fast enough these days. 
 
 \begin{indentexercise}{1}
 (1) Try changing code 11 so that it uses "+=" sign.\\
@@ -926,37 +893,37 @@ Modify code 11 so that the macro prints out numbers from 200 to 100, with an inc
 
 \subsubsection{Why is there while-loop?}
 
-An often raised question with while-loop is why do we have two types of loops, 
+An often raised question with the while-loop is why do we have two types of loops, 
 the for-loop and the while-loop. Answering to this question, they have different
-flexibility. For-loop is rather solid and while-loop is more flexible. In the
+flexibility. The for-loop is rather solid and the while-loop is more flexible. In the
 example code below, the user is asked for a correct number and if the answer is wrong, the
 question is asked 5 times repeatedly. Number of loop is not determined by the
 programmer, but interactively when the code is running. We will study
-branching of the program based on if-else in the next section.  
+the branching of the program based on if-else in the next section.  
 
 \lstinputlisting[morekeywords={*, while}]{code/code11_6.ijm}
 
-Writing a similar code using for-loop is possible but the code becomes tricky.
+Writing a similar code using the for-loop is possible but the code becomes tricky.
 Below is the for-loop version of the above code.  
 
 \lstinputlisting[morekeywords={*, for}]{code/code11_7.ijm}
 
-Note that the third argument of for-loop is missing. Since variable
+Note that the third argument of for-loop is missing. Since the variable
 \ilcom{correct} does not change as long as the answer is wrong, we leave it not
 incrementing nor decrementing. In such case we can leave the third argument
 vacant. 
 
 \subsection{Conditions: if-else statements}
 \subsubsection{Introducing if-else}
-A macro program could have parts which are executed depending some
+A macro program could have parts which are executed depending on some
 conditions.
 Here is an example of macro with conditions.
 \lstinputlisting[morekeywords={*, if}]{code/code12.ijm}
 \begin{itemize}
 \item Line 3 The macro asks user to input a number and the number is substituted to the variable input\_num.
 \item Line 4 Content of input\_num is evaluated. If input\_num is equal to 5, line 5 is executed and prints out the message in the Log window. Otherwise macro interpreter jumps to line 7, and ends the operation.  By adding "else" which will be executed if input\_num is not 5, the macro prints out message in all cases (see code 12.5 for this if - else case). 
-\item Line 4 We used double equal signs for comparison (e.g. "if (a==5)"
-). Note that this functional role is different from assignments, or substitution (e.g. "a = b + c").
+\item Line 4 We used double equal signs for evaluating the value in the right side and the left side (e.g. \ilcom{if (a==5)}). 
+Note that the role of the sign \ilcom{=} is different from assignments, or substitution (e.g. \ilcom{a = b + c}).
 \end{itemize}
 %figure
 \begin{figure}[htbp]
@@ -978,7 +945,7 @@ The output is now 0, indicating that ``\ilcom{(5 == 4)}'' is
 0.
 What double equal signs \ilcom{==} are doing in these
 examples are comparison of numbers in the left and the right side, and if
-the number is same, it returns 1 and if they are not equal, it returns 0. 1 and
+the numbers are the same, it returns 1 and if they are not the same, it returns 0. 1 and
 0 actually are representing \textbf{true} (= 1) or \textbf{false} (= 0), the
 \textbf{boolean values}.
 
@@ -994,20 +961,20 @@ print out ``true!'' in the log window.
 
 Try changing the line two to \ilcom{if (5 == 4)}. Running this prints nothing
 in the log window, because 5 is not 4 (FALSE!) so that the macro function in
-the line 3 is ignored. To avoid such ignorant no-output behavior, you could add
+line 3 is ignored. To avoid such ignorant no-output behavior, you could add
 ``else'' as follows.
 
 \lstinputlisting[morekeywords={*, if, else}]{code/code12_4.ijm}
 
 The code works also with the direct true or false
-declaration inside the if parenthesis. Try the follwoing code.
+declaration inside the if parenthesis. Try the following code.
 
 \lstinputlisting[morekeywords={*, if, else}]{code/code12_5.ijm}
 
 The above prints two lines of ``false!'' in the log window. You could replace
-the if parenthesis values to 1 and ture to check that it works as well. 
+the if parenthesis values to 1 and true to check that it works as well. 
 
-By now, you probabaly are pretty clear with what is going on in the code below. 
+By now, it is probably pretty clear to you wi what is going on in the code below. 
 \lstinputlisting[morekeywords={*, if, else}]{code/code12_6.ijm}
 
 \subsubsection{Complex Conditions}
@@ -1057,14 +1024,14 @@ From line 10 to 17, there are several layers of conditions. Macro programmer sho
 \subsubsection{Application of if-statement}
 \label{sec:dotmove}
 
-We write a macro that produces an animation of moving dot. User inputs the speed
-of the dot, and then the animation is generated. In the animation (which
-actually is a stack) the dot moves horizontally and bounces back from the edge
-of the frame. \ilcom(if) operator is used to switch the movement direction.
+As an application of looping and conditions, we write a macro that produces an animation of moving dot. User inputs the speed of the dot, and then the animation is generated. 
+In the animation (which actually is a stack) the dot moves horizontally and bounces back from the edge
+of the frame. 
+\ilcom(if) operator is used to switch the movement direction.
 \lstinputlisting[morekeywords={*, setForegroundColor, setBackgroundColor, if}]{code/code13.ijm}
 
 \begin{itemize}
-\item Lines 4 to 11: Set parameters for drawing a dot. It is also possible to directly use numerical values in the later lines, but for the sake of readability of the code, and also for possible later extension of the code, it is always better to use easy-to-understand variables and explicitly define them like in these lines. 
+\item Lines 4 to 11: Set parameters for drawing a dot. It is also possible to directly use numerical values in the later lines, but for the sake of readability of the code, and also for possible later extension of the code, it is always better to use easy-to-understand variable names and explicitly define them before the main part starts. 
 \end{itemize}
 A short note on the x-y coordinate system in digital images: Since digital image is a matrix of numbers, each pixel position is represented as coordinates. The top left corner of image is the position (x, y) = (0, 0). X increases horizontally towards right side of the image. Y increases vertically towards the bottom of the image.  In line 9, y-position of the dot is defined to be placed in the middle of the vertical axis. 
 \begin{itemize}
@@ -1082,6 +1049,8 @@ Creates an elliptical selection, where (x,y) define the upper left corner of the
 \end{itemize}
 \begin{indentexercise}{2}
 Modify code 13 that the dot moves up and down vertically. Change the stack width and height as well. 
+
+If you are successful with this, try further on to extend the code so that the dot moves both in x and y directions. For this, you need to have two independent speed \ilcom{xspeed} and \ilcom{yspeed} since change in the direction by bouncing should be independent in x and y. 
 \end{indentexercise}
 
 \subsubsection{Application of "while" and "if" in image processing.}
@@ -1200,7 +1169,7 @@ separate \ilcom{function} that works as a module for macros.
 For example, if you have a simple code like:
 \lstinputlisting[morekeywords={*,}]{code/code15.ijm}
 It should be easy for you to expect that this macro will print out "3" in the Log window. 
-From this macro, we could extract part of it and and make a separate function. 
+From this macro, we could extract part of it and make a separate function. 
 \lstinputlisting[morekeywords={*,}]{code/code15_1.ijm}
 This is not a macro, but is a program that works as a unit. 
 Functions can be embedded in macro. \ilcom{ReturnAdd }(code 15.1) is the name of the function, 
@@ -1236,7 +1205,7 @@ fixing the function solves the problem in all places where the function is used.
 \item Long codes could be simplified to an explicit outline of events. Such as:
 \begin{lstlisting}[numbers=none]
 macro "whatever" {
-		function1;
+    	function1;
 		function2;
 		function3;
 }
@@ -1373,7 +1342,7 @@ For instance, if you have a following list of strings:
 
 \textit{Heidelberg, Hamburg, Hixton, Grenoble, Monterotondo}
 
-An array "EMBL" could be prepared that the array element will contain these 5 strings. 
+An array "EMBL" could be prepared and each array element could contain one of these five strings. 
 
  %figure
 \begin{figure}[htbp]
@@ -1384,7 +1353,7 @@ An array "EMBL" could be prepared that the array element will contain these 5 st
 \end{center}
 \end{figure} 
  
-Then when you want to retrieve some name, you refer to the address within the array. 
+Then when you want to retrieve some name from the array, you refer to the address within the array. 
 So EMBL[0] will be Heidelberg, EMBL[4] will be Monterotondo, and so on. 
 In such a way, files names contained in a folder could be listed and stored, 
 or x-y coordinates of free-hand ROI could be stored for further use. 
@@ -1409,7 +1378,7 @@ same time, so line 3 to 8 could be written in a single line like this:
 \begin{lstlisting}[numbers=none]
 EMBL = newArray("Heidelberg","Hamburg","Hixton","Grenoble","Monterotondo");
 for (i = 0; i < EMBL.length; i++)
-	print(EMBL[i]);
+    print(EMBL[i]);
 \end{lstlisting}
 
 \subsection{Numerical Array}
@@ -1464,7 +1433,7 @@ Modify code 20.5 that the macro calculates the sum of all intensity.\\
 
 \subsection{Array Functions}
 
-Arrays could be directly treated using arary funcitons. These functions are:
+Arrays could be directly treated using array functions. These functions are:
 \begin{shaded}\begin{indentCom}
 \item \textbf{Array.concat(array1,array2)} Returns a new array created by
 joining two or more arrays or values. 
@@ -1928,13 +1897,13 @@ subname = substring(name, 0, 3);
 print(subname);
 \end{lstlisting}
 
-In the log window, there should be ``exp''. The second argument in the code above is 0, and the third is 3. This tells the substring function to extract characters from the index 0 to index 2 should be extracted (so the third argument will be the index just after the last index that would be included in the substring). 
+In the log window, there should be ``exp''. The second argument in the code above is 0, and the third is 3. This tells the substring function to extract characters from the index 0 to the index 2 should be extracted (so the third argument will be the index just after the last index that would be included in the substring). 
 
 \begin{indentexercise}{1}
 Test changing the second and the third argument so that different part of the file name is extracted. 
 \end{indentexercise}
 
-So how do we know the index of dot? For this we use the \ilcom{indexOf(string, substring)}. Try the following code. 
+How could we know the index of the dot? For this we use the \ilcom{indexOf(string, substring)}. Try the following code. 
 
 \begin{lstlisting}
 name = "exp13_C0_Z10_T3.tif";
@@ -1969,7 +1938,9 @@ filename = substring(name, 0, dotindex);
 print(filename);
 \end{lstlisting}
 
-It should then working again as we want. Let's change our task: We now want to know the time point that this image was taken. How should we do that? Examining the file name again, we realize that the time point number appears after ``T''. The number could be any length of digits, but currently is 0. Then the dot comes right after the number. We then just need to know the index of ``T'' \ldots but wait, we might have ``T'' anywhere, as this is a single character alphabet that could easily be a file name. Therefore we find the index of ``\_T'' that looks like more specific. 
+It should then working again as we want. 
+
+Let's change our task: We now want to know the time point that this image was taken. How should we do that? Examining the file name again, we realize that the time point number appears after ``T''. The number could be any length of digits, but currently is 0. Then the dot comes right after the number. We then just need to know the index of ``T'' \ldots but wait, we might have ``T'' anywhere, as this is a single character alphabet that could easily be a file name. Therefore we find the index of ``\_T'' that looks like more specific. 
 
 \begin{lstlisting}
 name = "exp13._C0._Z10_T3.tif";
@@ -1987,7 +1958,7 @@ timepoint = substring(name, timeindex + 2, dotindex);
 print(timepoint);
 \end{lstlisting}
 
-The time point that you have just now captured is a string. You can not pass this to mathematical assignments. To do so, you need to convert this to a number. For doing so, you could use \ilcom(parseInt(string)). 
+The time point that you have just now captured is a string. You can not pass this to mathematical assignments. To do so, you need to convert this to a number. For doing so, you could use \ilcom{parseInt(string)}. 
 
 \begin{lstlisting}
 name = "exp13._C0._Z10_T3.tif";
@@ -1998,7 +1969,7 @@ timepoint = parseInt(timepoint);
 print(timepoint * 2);
 \end{lstlisting}
 
-An example case where conversion of string to number (in this case an integer) required is when you need to compare such file names and get the maximum time point from all the file names. Usage is diverse, but at some point you need to use this. If you need a Float number (numbers with decimal point), use \ilcom{parseFloat(string)}
+An example case where conversion of string to number (in this case an integer) required would be when you need to compare such file names and get the maximum time point from all the file names. Usage is diverse, but at some point you need to use this. If you need a Float number (numbers with decimal point), use \ilcom{parseFloat(string)}.
 
 
 \section{Secondary Measurement}
