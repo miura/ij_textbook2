@@ -755,12 +755,7 @@ Macro programming enables you to automate this process.
 Here is an example of measuring intensity change over time\footnote{What we write as macro here could be done with a single command \ilcom{[Image > Stacks > Plot Z-Profile]} but this only measures intensity. If you want to measure other values such as the minimum intensity, a macro should be written. }. 
 \lstinputlisting[morekeywords={*, run, setSlice, nSlices}]{code/code10.ijm}
 \begin{itemize}
-<<<<<<< HEAD
 \item Line 3: \ilcom{nSlices} is a macro function that returns the number of slices in the active stack. 
-=======
-\item Line 3: \ilcom{nSlices} is a function that returns the number of slices in the active stack. 
->>>>>>> 223305f57120dbf0ace6b71292d90de2ad2cb6b6
-
 \item Line 4: Sets measurement parameters, from the menu would be \ilcom{[Analyze > Set measurements\ldots]}. In this case "mean min integrated" is added as part of the second argument. ``mean'' is the mean intensity, ``min'' is the minimum intensity and ``integrated'' is integrated density (total intensity). These keys for measured parameters could be known by using the command recorder. 
 You do not have to care for now about the "redirect" argument. "decimal" This is the number of digits to 
 the right of the decimal point in real numbers displayed in the results table. 
