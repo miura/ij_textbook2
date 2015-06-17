@@ -1,0 +1,107 @@
+%%% Introduction for macro programming tutorial
+%%% Kota Miura (miura@embl.de)
+
+% \section{Introduction}
+
+\subsection{ImageJ macro makes your life easier}
+
+To customize functions in ImageJ, a typical way is to write a Java plugin that directly accesses the application interface of ImageJ. 
+This is a powerful method for customizing your own tool but in many cases is a bit too much for small tasks we often encounter in biological research projects. Compared to the Java programming, ImageJ macro is much easier for quickly solving problems.
+
+A typical usage is to automate repetitive tasks with hundreds of times of mouse clicking. Clicking ranges from menu selections to inspection of single pixel value. By writing a macro, we could save such exhausting job to a single execution of a macro file, which is a text file with a sequence of image processing commands. As ImageJ macro functions are directly mirroring the GUI menu items, one could intuitively learn how to write one's own macro even without much experiences in programming.
+
+Another important aspect of writing a macro is its role as a documentation: as the processing becomes complex, we easily forget the steps and details of the procedures and the values of parameters that were used for that task. Even if your job is not a repetitive one, a macro written for a task becomes a valuable record of what was done to the image, and ensures the \textbf{reproducibility} of your image analysis.  
+
+\subsection{Other ways to Customize ImageJ}
+
+This and the next section explain the general capability of extending ImageJ by programming. If you are not interested in general aspects, you could skip these sections.  
+
+ImageJ could be extended by writing a Java plugin. Though you need to know or learn the Java programming,  this capability affords almost infinite possibilities;  you could write any kind of processing / analysis functions you could imagine. Compared to the plugin development by Java, ImageJ Macro language is much easier and lighter but has some limitations. It might be worth mentioning here what would be the limitations. 
+
+\begin{enumerate}
+\item If you need to process large images or stacks with many steps, 
+you might recognize that it is slow. Some benchmarks indicate that a plugin would be about 40 times faster than a macro. 
+
+\item Macro cannot be used as a library
+  \footnote{It is possible to write a macro in a library fashion using the function \ilcom{eval} and use it from another macro, 
+but this is not as robust and as clear as it is in Java, which is a language designed to be so.}. 
+In Java, once a class is written, this could be used later again for another class. 
+
+\item Macro is not efficient in implementing real-time interactive input 
+during when the macro function is executed; 
+\textit{e.g.} If you want to design a program that requires real-time user input 
+to select a ROI interactively.  
+Macro could only do such interactive tasks by closely related macro set with each macro doing each step of interaction. 
+
+\item Macro is tightly coupled to GUI (Image Window), so that when you want to process images without showing them on desktop, macros are not really an optimal solution.
+\end{enumerate}
+
+If you become unsatisfied with these limitations, 
+learning more complicated but more flexible Java plugin development is recommended. 
+
+
+\subsection{Comparison with Other scripting languages}
+
+Besides ImageJ macro, there are several scripting languages that
+could be used for programming with ImageJ. The bare ImageJ supports Javascript (Rhino). Recent versions of ImageJ (> 1.47m,  since 6 March 2013), Jython became included in the menu as well. 
+In the Fiji distribution, you could use the following languages off the shelf
+\footnote{As of June, 2015}
+:
+
+\begin{itemize}
+ \item Javascript
+ \item BeanShell
+ \item Jython (Java implemented Python)
+ \item JRuby (Java implemented Ruby)
+ \item Clojure
+ \item Groovy
+ \end{itemize}
+
+If you set up an environment by yourself, other languages such as Scala can be used. 
+Compared to the ImageJ macro language, all these languages are more general scripting languages. 
+
+There are pros and cons. Pros of using the ImageJ Macro compared to these scripting languages are: 
+\begin{itemize}
+\item Easy to learn. 
+ImageJ macro build-in functions are mirrors of ImageJ menu, so scripting is intuitive if you know ImageJ already. 
+Macro recorder is a handy tool for finding out the macro function you need. 
+
+\item A significant hurdle for coding with general scripting languages is that one must know the 
+\textbf{ImageJ Java API} well, meaning that you basically have to know 
+fundamentals of Java programming language for using these scripting languages. 
+
+\item You could have multiple macros in one file (called 'Macro-set"). 
+This is useful for packaging complex processing tasks.
+
+\end{itemize}
+
+Thus, ImageJ macro language is the easiest way to access the scripting
+capability of ImageJ.
+
+There are several disadvantages of ImageJ macro compared to other
+scripting languages. First is its generality. Since others are based on major scripting languages, you do not need to learn a lot if you know one of them already. For example, if you know Python already, 
+it should be easy for you to start writing codes in Jython (note: but you also need to know about Java). 
+
+The second disadvantage of ImageJ macro is its extendability.
+Codes you wrote could only be recycled by copying and pasting
+\footnote{One could also use getArgument() and File related functions to pass
+arguments from a macro file to the other, but ImageJ macro is not designed to
+construct a library of functions.}.
+With other scripting languages, once you write a code, it could be used from other programs
+\footnote{ Calling other Javascript file from another Javascript file had been difficult but became easily possible in the Fiji distribution from March 2012.}.
+
+Lastly, although ImageJ Macro processes with a speed comparable to
+Javascript and Jython, it is slow compared to Clojure and Scala. 
+
+\subsection{How to learn Macro programming}
+
+In this course, you will encounter many example codes. 
+You will write example codes using your own computer and run those macros. 
+Modifying these examples by yourself is an important learning process as in most
+cases, that is the way to acquire programming literacy. There are many excellent macro codes you could find in Internet, which could be used as starting points for writing your code\footnote{200+ macros are available in ImageJ web site. 
+\href{http://rsb.info.nih.gov/ij/macros/}{http://rsb.info.nih.gov/ij/macros/}}.
+
+\subsection{Summary}
+ImageJ Macro radically decreases your work load and is a practical way to keep your image analysis workflow in text file. Less workload provides more time for us to analyze details of image data. 
+The potential of macro is similar to other scripting languages and Java Plugins, all adding capability to customize your image analysis. For coding interactive procedures PlugIn works better than macro. Macro cannot be used as a library.  
+Image processing by macro is slower than that by Java written plugins. 

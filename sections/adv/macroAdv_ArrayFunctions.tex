@@ -1,0 +1,49 @@
+\subsection{Array Functions}
+
+Arrays could be directly treated using array functions. These functions are:
+\begin{shaded}\begin{indentCom}
+\item \textbf{Array.concat(array1,array2)} Returns a new array created by
+joining two or more arrays or values. 
+\item \textbf{Array.copy(array)} Returns a copy of array. 
+\item \textbf{Array.fill(array, value)} Assigns the specified numeric value to
+each element of array.
+\item \textbf{Array.findMaxima(array, tolerance)} Returns an array holding the peak positions (sorted with descending strength). Tolerance is the minimum amplitude difference to needed to separate two peaks. There is an optional 'excludeOnEdges' argument that defaults to 'true'. Examples. Requires 1.48c.
+\item \textbf{Array.findMinima(array, tolerance)} Returns an array holding the minima positions. Requires 1.48c.
+\item \textbf{Array.fourier(array, windowType)} Calculates and returns the Fourier amplitudes of array. WindowType can be "none", "Hamming", "Hann", or "flat-top", or may be omitted (meaning "none"). See the TestArrayFourier macro for an example and more documentation. Requires 1.49i. 
+\item \textbf{Array.getStatistics(array, min, max, mean, stdDev)} Returns the
+min, max, mean, and stdDev of array, which must contain all numbers.
+\item \textbf{Array.print(array)} Prints the array on a single line. 
+\item \textbf{Array.rankPositions(array)} Returns, as an array, the rank
+positions of array, which must contain all numbers or all strings. 
+\item \textbf{Array.resample(array,len)} Returns an array which is linearly resampled to a different length. Requires 1.47j. 
+\item \textbf{Array.reverse(array)} Reverses (inverts) the order of the
+elements in array. 
+\item \textbf{Array.show(array)} Displays the contents of array in a window. Requires 1.48d.
+\item \textbf{Array.show("title", array1, array2, ...)} Displays one or more arrays in a Results window (examples). If title (optional) is "Results", the window will be the active Results window, otherwise, it will be a dormant Results window (see also IJ.renameResults). If title ends with "(indexes)", a 0-based Index column is shown. If title ends with "(row numbers)", the row number column is shown. Requires 1.48d. 
+\item \textbf{Array.slice(array,start,end)} Extracts a part of an array and
+returns it. 
+\item \textbf{Array.sort(array)} Sorts array, which must contain all numbers
+or all strings. String sorts are case-insensitive in v1.44i or later.
+\item \textbf{Array.trim(array, n)} Returns an array that contains the first n
+elements of array.
+\end{indentCom}\end{shaded}
+
+For example, array could be sorted and reversed:
+
+\begin{lstlisting}[numbers=none]
+EMBL = newArray("Heidelberg","Hamburg","Hixton","Grenoble","Monterotondo");
+Array.print(EMBL);
+Array.sort(EMBL);
+Array.print(EMBL);
+Array.reverse(EMBL);
+Array.print(EMBL);
+\end{lstlisting} 
+The output of this code is:
+\begin{lstlisting}[numbers=left]
+Heidelberg,Hamburg,Hixton,Grenoble,Monterotondo
+Grenoble,Hamburg,Heidelberg,Hixton,Monterotondo
+Monterotondo,Hixton,Heidelberg,Hamburg,Grenoble
+\end{lstlisting} 
+The first line is printed in the order when the array was initialized. After
+sorting, names are in alphabetical order. Third line shows the reversed
+elements. 

@@ -1,0 +1,99 @@
+%\section{Homework!}
+
+\subsection{Homework for basics} 
+
+\subsubsection{Assignment 1}
+Change code 12.75 so that 
+\begin{itemize}
+\item Does not use "\&\&"(AND) 
+\item Instead, uses "||" (OR). 
+\end{itemize}
+
+Comment: This is also a test if you can think things logically\ldots Thanks to Prof. Boole. 
+
+\subsubsection{Assignment 2}
+
+Write a macro that draws gird (lattice) in a image (see example, attached).
+If you have time, modify the macro so that the macro plots diagonal lattice.
+Steps should be something like:
+\begin{enumerate}
+\item creat a new image
+\item loop in x direction and draw vertical line
+\dots for this, use command \ilcom{drawLine(x1, y1, x2, y2)}
+\dots see
+\url{http://rsb.info.nih.gov/ij/developer/macro/functions.html#drawLine}
+\item loop in y direction and draw horizontal line
+\end{enumerate}
+
+
+Hints: if you want to draw white lines on black image
+ \begin{itemize}
+\item you need to select black background when you make a new image
+\item you need to set the drawing color using \ilcom{setColor()}
+\item see
+\url{http://rsb.info.nih.gov/ij/developer/macro/functions.html#setColor}
+\end{itemize}
+%composing grids
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{fig/grid.png}
+\caption{Composing grid image}
+\label{fig_homeworkGrid}
+\end{center}
+\end{figure}
+
+%composing diagonalgrids
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{fig/gridDiagonal.png}
+\caption{Composing grid image}
+\label{fig_homeworkGridDiagonal}
+\end{center}
+\end{figure}
+
+\subsubsection{Assignment 3}  
+Write a macro that deletes every second frame (even-numbered frames) in a stack. 
+
+Hint: use \ilcom{run("Delete Slice");} to delete a single slice. 
+
+Comment: it might be tricky.
+
+\subsubsection{Assignment 4} 
+Write a time stamping macro for t-stacks. You should implement following functions. 
+\begin{itemize}
+\item User inputs the time resolution of the recording (how many seconds per frame).
+\item The time point of each frame appears at the top-left corner of each frame.  
+\item If possible, time should be in the following format: \\
+mm:ss \\
+(two-digits minutes and two digits seconds)
+\end{itemize}
+Hint: Use following: for-statement, 
+\ilcom{nSlices, setSlice, getNumber,\\ setForegroundcolor, setBackgroundColor,
+drawString, IJ.pad}. (refer to the Build-in Macro Function page in ImageJ web
+site!)
+
+\subsubsection{Assignment 5} 
+Modify code 14 so that the macro does not use "while" loop. For example with the following way. 
+\begin{itemize}
+\item Macro measures the integrated density of all area in the first frame ( = ref\_int).
+\item In the next frame, full integrated intensity is measured again (temp\_int).
+\item Decrease the lower for the thresholding by temp\_int/ref\_int.
+ \end{itemize}
+
+\subsection{Homework for a bit advanced}
+
+\subsubsection{Assignment 6}
+Write an elementary calculator macro with single dialog box that does:
+\begin{itemize}
+\item user input two numbers
+\item user selects either one of addition, subtraction, multiplication or division. 
+\item answer appears in the Log window. 
+ \end{itemize}
+Hint: use \ilcom{Dialog.addChoice Dialog.getChoice} command.   
+
+\subsubsection{Assignment 7}
+Write a macro that does pseudo high-pass filtering by Gaussian blurred image
+(duplicate an image, do Gaussian blurring with a large kernel to create
+background and subtract it from the original). If you could successfully write a
+macro, then convert it to a function and use it from a macro.
+Hint: use \ilcom{getImageID(), selectImage(id)} command.   

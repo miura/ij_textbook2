@@ -1,0 +1,32 @@
+
+\subsubsection{Application of if-statement}
+\label{sec:dotmove}
+
+As an application of looping and conditions, we write a macro that produces an animation of moving dot. User inputs the speed of the dot, and then the animation is generated. 
+In the animation (which actually is a stack) the dot moves horizontally and bounces back from the edge
+of the frame. 
+\ilcom(if) operator is used to switch the movement direction.
+\lstinputlisting[morekeywords={*, setForegroundColor, setBackgroundColor, if}]{code/code13.ijm}
+
+\begin{itemize}
+\item Lines 4 to 11: Set parameters for drawing a dot. It is also possible to directly use numerical values in the later lines, but for the sake of readability of the code, and also for possible later extension of the code, it is always better to use easy-to-understand variable names and explicitly define them before the main part starts. 
+%\end{itemize}
+\item A short note on the x-y coordinate system in digital images: Since digital image is a matrix of numbers, each pixel position is represented as coordinates. The top left corner of image is the position (x, y) = (0, 0). X increases horizontally towards right side of the image. Y increases vertically towards the bottom of the image.  In line 9, y-position of the dot is defined to be placed in the middle of the vertical axis. 
+%\begin{itemize}
+\item Lines 14, 15: These lines set the drawing and background color. Three arguments are for  intensity of each RGB component. Here the image is in grayscale so all the RGB components are set to the same value. 0 is black, and \ilcom{int} is white (255).
+\item Line 14 asks the user to input the speed of the dot movement.
+\item Lines 16, 17 prepares a new stack with parameters defined in lines 7, 8 and 9.
+\item Lines 21 to 34 is the loop for drawing moving dot. Loop will be iterated from the starting frame until the last frame. Line 21 creates an oval Region-of-Interest (ROI), which will be filled in line 22 with the foreground color that was already set in the line 14. \ilcom{makeOval} function is explained in the Built-on function page as follows.
+
+\begin{indentCom}
+\textbf{makeOval}(x, y, width, height)\\
+Creates an elliptical selection, where (x,y) defines the upper left corner of the bounding rectangle of the ellipse. 
+\end{indentCom}
+\item Line 27: Shifts the x position of the dot by ``speed'' distance. 
+\item Line 28: if the position calculated in the line 27 exceeds the boundary, either left \ilcom{(x\_position < 0)} OR right \ilcom{(x\_position > (w-sizenum))}, then the direction of movement is switched by multiplying -1.
+\end{itemize}
+\begin{indentexercise}{2}
+Modify code 13 that the dot moves up and down vertically. Change the stack width and height as well. 
+
+If you are successful with this, try further on to extend the code so that the dot moves both in x and y directions. For this, you need to have two independent speed \ilcom{xspeed} and \ilcom{yspeed} since change in the direction by bouncing should be independent in x and y. 
+\end{indentexercise}

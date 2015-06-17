@@ -1,0 +1,46 @@
+\subsection{Global Variables}
+
+"Global variables" are variables that are defined outside macro or function within the same macro file. So what is good about Global variables? For instance in Code 18.5, we had a variable called \ilcom{scale}. \ilcom{scale} had to be typed every time when you execute the macro. One way to avoid such tedious interaction with the program is forget about the line 10 and 19, where the user input is asked for the \ilcom{scale}, and instead place something like
+\begin{lstlisting}[numbers=none]
+scale = 0.1
+\end{lstlisting}
+somewhere at the beginning of the macro. This works OK, but the problem appears 
+when there are many macros in the file, since it will be a loads of work to 
+find the variable \ilcom{scale} in the file and change the value. 
+It could also be that the name of variable is not \ilcom{scale} and something like \ilcom{pixelsize}, 
+which then you have to check what this variable is doing. Furthermore, 
+it becomes redundant if you need to calculate the scale in every macro. 
+For this reason, you could define the scale only once in the macro file such that:
+
+\lstinputlisting[linerange={1-20}, morekeywords={*, Gscale}]{code/code18_75.ijm}
+
+\ilcom{var} is a statement that tells macro interpreter to treat the variable as a global variable. 
+It should be always outside the scope (braces) of macro or function. 
+I replaced the default value in the scale input field of the \ilcom{dialog.addnumber()} at line 11 
+to \ilcom{Gscale}, so that the initial value defined in line 2 appears in the dialog box. 
+The value in the field could be modified by the user, 
+but this does not affect the \ilcom{Gscale} value defined in Line 2. 
+This is because the flow of information is:
+
+\ilcom{Gscale} \\
+\tab > default value for the \ilcom{Dialog.addNumber} field 5 \\
+\tab\tab > user changes the value  \\
+\tab\tab\tab > stored in the \ilcom{Dialog.addNumber} field 5\\
+\tab\tab\tab\tab > scale = \ilcom{Dialog.getNumber} (field 5)\\
+
+So \ilcom{Gscale} is referenced, but not modified. 
+If you want to change the Global value from inside the macro, you must redefine by such as
+\begin{lstlisting}[numbers=none]
+Gscale = scale;
+\end{lstlisting}
+In the macro set below, we test the use of global variable (+ function!). 
+The macro is for the conversion of pixel length into micrometer. 
+The second macro changes the scale value. 
+I usually put G for all global variable. This is not necessary, 
+but in a file with many macros this is convenient.
+\lstinputlisting[morekeywords={*, G_scale}]{code/code19_globalVariable.ijm}
+\begin{indentexercise}{1}
+Add another global variable G\_scale\_z ( [\ensuremath{\mu}m]) for storing spacing in z-axis. 
+Change the first macro, that it calculates the size of Voxel in um3. 
+Then add another macro for changing the scale in Z axis. 
+\end{indentexercise}

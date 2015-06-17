@@ -1,0 +1,53 @@
+\subsection{Numerical Array}
+
+Array could also contain numerical values, and this way of usage is more common when you do image analysis. Here is a simple example of numerical array that prints out intensity profile along selected line ROI. 
+
+\lstinputlisting[morekeywords={*, newArray, selectionType, getProfile, setResult, updateResults}]{code/code20_5.ijm}
+
+\begin{itemize}
+\item Line 3: Check if the selection type is a straight line ROI. If not, macro terminates leaving a message. 
+
+\begin{indentCom}
+\textbf{selectionType}()\\ 
+Returns the selection type, where 0=rectangle, 1=oval, 2=polygon, 3=freehand, 4=traced, 5=straight line, 6=segmented line, 7=freehand line, 8=angle, 9=composite and 10=point. Returns -1 if there is no selection.
+\end{indentCom}
+
+\item Line 4: Empty array \ilcom{tempProfile} is loaded with the intensity profile along the line ROI by \ilcom{getProfile}().
+\item
+\begin{indentCom}
+\textbf{getProfile}()\\
+Runs \ijmenu{[Analyze > Plot Profile]} (without displaying the plot) and returns the intensity values as an array.
+\end{indentCom}
+
+\item Line 5: Passing the array \ilcom{tempProfile} to function "output\_results", which prints the content of array in the table shown in the ``Results'' window. 
+
+\item Line 7 to 14: A function for outputting the profile array in the table shown in the ``Results'' window. It takes an argument \ilcom{rA}, which is supposed to be an array. 
+\item Line 8: Clears the results table. 
+\item Line 9 to 12: for-loop to go through the array and to print out each element. 
+\item Line 10: Sets the pixel position along the segment in the column labeled "n". 
+\item Line 11: Sets the content of the array (pixel intensity) in the column labeled "intensity".
+
+\begin{indentCom}
+\textbf{setResult}("Column", row, value)
+Adds an entry to the ImageJ results table or modifies an existing entry. The first argument specifies a column in the table. If the specified column does not exist, it is added. The second argument specifies the row, where 0<=row<=nResults. (nResults is a predefined variable.) A row is added to the table if row=nResults. The third argument is the value to be added or modified. 
+\end{indentCom}
+\item Line 13: Updates the table shown in the ``Results'' window. 
+
+\begin{indentCom}
+\textbf{updateResults}()
+Call this function to update the "Results" window after the results table has been modified by calls to the setResult() function. 
+\end{indentCom}
+\end{itemize}
+
+\begin{indentexercise}{1}
+Modify code 20.5 that the macro calculates the sum of all intensities.\\
+
+Hint:
+
+\begin{itemize}
+\item
+\item You do not need the function anymore. 
+\item \ilcom{for}-loop should be used.
+\item Use \ilcom{tempProfile.length}
+\end{itemize}
+\end{indentexercise}
