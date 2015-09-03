@@ -1,0 +1,31 @@
+\subsection{Build-in Macro Functions using Array}
+\label{subsec:arrayreturn}
+Many built-in macro functions return an array, to have multiple numerical values as a singular object. Below is a list of those functions. 
+
+\begin{shaded}\begin{indentCom}
+\texttt{
+\item Dialog.addChoice("Label", items) 
+\item Dialog.addChoice("Label", items, default)
+\item Fit.doFit(equation, xpoints, ypoints)
+\item Fit.doFit(equation, xpoints, ypoints, initialGuesses)
+\item getFileList(directory)
+\item getHistogram(values, counts, nBins[, histMin, histMax])
+\item getList("window.titles")
+\item getList("java.properties")
+\item getLut(reds, greens, blues)
+\item getProfile()
+\item getRawStatistics(nPixels, mean, min, max, std, histogram)
+\item getSelectionCoordinates(xCoordinates, yCoordinates)
+\item getStatistics(area, mean, min, max, std, histogram)
+\item makeSelection(type, xcoord, ycoord)
+\item newArray(size)
+\item newMenu(macroName, stringArray)
+\item Plot.create("Title", "X-axis Label", "Y-axis Label", xValues, yValues)
+\item Plot.add("circles", xValues, yValues)
+\item Plot.getValues(xpoints, ypoints)
+\item setLut(reds, greens, blues)
+\item split(string, delimiters) 
+}
+\end{indentCom}\end{shaded}
+
+
