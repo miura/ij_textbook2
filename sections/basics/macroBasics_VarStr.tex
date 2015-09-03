@@ -13,6 +13,15 @@ The above operation concatenates content of \ilcom{text2} to the content of \ilc
 
 \begin{indentexercise}{1}
 \item Add more string variables and make a longer sentence.\\
+
+\item **Answer**: One example could be as shown in the figure \ref{var_stringconcat}. 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{fig/var_stringContcat.png}
+\caption{Concatenating many strings} \label{var_stringconcat}
+\end{center}
+\end{figure}
+
 \end{indentexercise}
 
 
@@ -64,5 +73,17 @@ ImageJ does handle numerical values within string function,
 so the line is interpreted without problem and prints out the result successfully. Note that such confusion of string and numerical types are rarely seen in general scripting languages and specific to ImageJ macro language.
 
 \begin{indentexercise}{2}
-Modify the code 4, so that the calculation involves subtraction (-), multiplication (*) and division (/). 
+
+\item Modify the code 4, so that the calculation involves subtraction (-), multiplication (*) and division (/).
+
+\item \textbf{Answer}: Add following lines to print results of calculations. Note that the arguments of \ilcom{print} are separated by comma, which will be space-separated text in the output.  
+\begin{lstlisting}[numbers=none]
+sub = a - b;
+mul = a * b;
+div = a / b;
+print(a, "-", b, "=", sub);
+print(a, "*", b, "=", mul);
+print(a, "/", b, "=", div);
+\end{lstlisting}
+
 \end{indentexercise}
