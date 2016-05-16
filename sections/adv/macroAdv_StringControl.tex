@@ -1,0 +1,125 @@
+\subsection{Working with Strings}
+
+With some advanced macro programming, you might need to manipulate Strings (texts) from your code. For example, let's think about a title of an image ``exp13\_C0\_Z10\_T3.tif''. Such naming occurs often to indicate that this image is from the third time point (T3), at the 11th slice (Z10, imagine that the Z slice numbering starts from 0) and its the first channel (C0). 
+
+We might be lucky enough to read out its dimensional information from header, but quite often such information is only available in the file name (the title of the image). To extract dimensional information from file name, we need to know how to deal with strings in macro to decompose those strings and extract information that we need. Build-in macro functions which are related to such tasks with strings are the following. 
+
+\begin{shaded}\begin{indentCom}
+\item lengthOf(str)
+\item substring(string, index1, index2)
+\item indexOf(string, substring)
+\item indexOf(string, substring, fromIndex)
+\item lastIndexOf(string, substring)
+\item startsWith(string, prefix)
+\item endsWith(string, suffix)
+\item matches(string, regex)
+\item replace(string, old, new)
+\end{indentCom}\end{shaded}
+
+Let's go back to the example file name ``exp13\_C0\_Z10\_T3.tif'' again. If we need to get the file name without file extension, what should we do? Several ways are there, but lets start with the simplest way. 
+
+We already know that all the file names are in the TIFF format, so all file names end with ``.tif''.  We could remove this suffix by replacing the ``.tif'' with a string with length 0. We could do this by using \ilcom{replace}. 
+
+\begin{lstlisting}
+name = "exp13_C0_Z10_T3.tif";
+newname = replace(name, ".tif", "");
+print(newname);
+\end{lstlisting}
+
+This will print out "exp13\_C0\_Z10\_T3" in the log window. In the second line, the function \ilcom{replace} is used. The old string ".tif" is replaced by a new 0 length string "". So it works! 
+
+But what if our lucky assumption that all files end with ".tif" is not true and it could be anything? To work with this, we now need to use different strategy to know the file extension. 
+
+By definition, file extension and the file name is separated by a dot. Length of the extension could be different, as some extension such as a python file is ".py" and a C code is ".c". Thus, we cannot assume that the length of the file extension is constant, but we know that there is a dot. 
+
+For such cases with variable length of file extension being expected, we first need to know about the \textbf{index} of the dot within file name. Each character within file name is positioned at certain index from the beginning of the name. In the example we are now dealing with, the index 0 is ``e''. The index 1 is ``x''. Since the index starts from 0, the last index will be total length of the file name minus one. You could modify the code above like below to try getting the length of the file name. 
+
+\begin{lstlisting}
+name = "exp13_C0_Z10_T3.tif";
+tlength = lengthOf(name);
+print(tlength);
+\end{lstlisting}
+
+You should see ``19'' in the log window. That is the length of this file name. So in this example string, index starts from 0 and the last index is 18. 
+
+Next, we use the function \ilcom{substring(string, index1, index2)}. With this function, you could extract part of the \ilcom{string} by giving the start index (index1) and the end index (index2) as arguments. We could just try this by again modifying the code above. 
+
+\begin{lstlisting}
+name = "exp13_C0_Z10_T3.tif";
+subname = substring(name, 0, 3);
+print(subname);
+\end{lstlisting}
+
+The output after running this code is ``exp'' printed in the log window. The second argument of the function \ilcom{substring} is 0, and the third is 3. This tells the function \ilcom{substring} to extract characters from the index 0 to the index 2 (so the third argument will be the index just after the last index that would be included in the substring). 
+
+\begin{indentexercise}{1}
+Test changing the second and the third argument so that different part of the file name is extracted. 
+\end{indentexercise}
+
+How could we know the index of the dot? For this we use the \ilcom{indexOf(string, substring)}. Try the following code. 
+
+\begin{lstlisting}
+name = "exp13_C0_Z10_T3.tif";
+dotindex = indexOf(name, ".");
+print(dotindex);
+\end{lstlisting}
+
+Now you know that the index of dot is ``15''. We could then combine the knowledge we have now to compose a single macro that extracts the filename without file extension. 
+
+\begin{lstlisting}
+name = "exp13_C0_Z10_T3.tif";
+dotindex = indexOf(name, ".");
+filename = substring(name, 0, dotindex);
+print(filename);
+\end{lstlisting}
+
+Let's make the problem a bit more complicated. If the file name contains multiple dots, what should we do? In the example below, I added two more dots. 
+
+\begin{lstlisting}
+name = "exp13._C0._Z10_T3.tif";
+dotindex = indexOf(name, ".");
+filename = substring(name, 0, dotindex);
+print(filename);
+\end{lstlisting}
+
+Output is now ``exp13''. Far from what we need. To treat such case, we use \ilcom{lastIndexOf}, which returns the index of the last appearance of the given character. Let's slightly modify the code. 
+
+\begin{lstlisting}
+name = "exp13._C0._Z10_T3.tif";
+dotindex = lastIndexOf(name, ".");
+filename = substring(name, 0, dotindex);
+print(filename);
+\end{lstlisting}
+
+It should then working again as we want. 
+
+Let's change our task: We now want to know the time point that this image was taken. How should we do that? Examining the file name again, we realize that the time point number appears after ``T''. The number could be any length of digits, but currently is 0. Then the dot comes right after the number. We then just need to know the index of ``T'' \ldots but wait, we might have ``T'' anywhere, as this is a single character alphabet that could easily be a file name. Therefore we find the index of ``\_T'' that looks like more specific. 
+
+\begin{lstlisting}
+name = "exp13._C0._Z10_T3.tif";
+timeindex = indexOf(name, "_T");
+print(timeindex);
+\end{lstlisting}
+
+Now we know that ``\_T'' is at index 14, so the number should start from the index 16 (because index 15 will be ``T''). Taken this into account, we could extract the time point. 
+
+\begin{lstlisting}
+name = "exp13._C0._Z10_T3.tif";
+timeindex = indexOf(name, "_T");
+dotindex = lastIndexOf(name, ".");
+timepoint = substring(name, timeindex + 2, dotindex);
+print(timepoint);
+\end{lstlisting}
+
+The time point that you have just now captured is a string. You can not pass this to mathematical assignments. To do so, you need to convert this to a number. For doing so, you could use \ilcom{parseInt(string)}. 
+
+\begin{lstlisting}
+name = "exp13._C0._Z10_T3.tif";
+timeindex = indexOf(name, "_T");
+dotindex = lastIndexOf(name, ".");
+timepoint = substring(name, timeindex + 2, dotindex);
+timepoint = parseInt(timepoint);
+print(timepoint * 2);
+\end{lstlisting}
+
+An example case where conversion of string to number (in this case an integer) required would be when you need to compare such file names and get the maximum time point from all the file names. Usage is diverse, but at some point you need to use this. If you need a Float number (numbers with decimal point), use \ilcom{parseFloat(string)}.
