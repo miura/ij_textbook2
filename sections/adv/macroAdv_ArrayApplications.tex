@@ -42,6 +42,10 @@ Run the code, then you should see multiple point ROIs indicating positions of ri
 \end{figure}
 
 
+%\begin{indentexercise}{1}
+%\item Add some codes that the macro also prints out the total intensity along the segment ROI. Use looping. \\
+%\end{indentexercise}
+
 \subsubsection{Extending Stack Analysis by Direct Measurements}
 
 We studied how to use for-loops to measure each frame/slice within a stack (\ref{sec:forloopStack}). There we did measurements by firstly setting measurement parameters with \ilcom{run("Set Measurements...")} and then did measurement by \ilcom{run("Measure")}. Measured values were shown in the table in the ``Results'' window. To use those measured values to \textit{e.g.} calculate statistics or plot the results, one should access the table in the ``Results'' window and parse all the values. This is possible with the macro language, but we will not try this method as it is indirect. Instead, we try to access directly to the measured values and compute. There are two ways. 
@@ -74,110 +78,3 @@ We could do the measurement using \ilcom{List.setMeasurement} function for every
   \item Line 11, 12: Retrieve the results, mean intensity and its standard deviation. 
   \item Line 15, 16: Print out results in the log window. 
 \end{itemize}
-
-\subsubsection{Acquiring intensity profile from segmented line ROI}
- 
-In recent version of ImageJ, selection thickness controls the width of segmented
-line ROI when you do \ijmenu{[Analyze > Plot Profile])}. We try to mimick this
-behavior in macro, and instead of choosing the line ROI thickness using GUI, the
-macro asks the user to input the thickness. 
-
-In the code below, there is only one macro. Two functions are added at the
-bottom. One is for profile plotting and the last one is for listing
-intensity profile data in the result table. Strategy of this macro is to use
-straight line selection for each segment, measure that segment and then profiles
-are concatenated to the total profile array.
-
-%\lstinputlisting[morekeywords={*, newArray, selectionType, getProfile, setResult, updateResults}]{code/code20_75.ijm}
-%\lstinputlisting[morekeywords={*, getSelectionCoordinates, makeLine, Plot,
-% create, setLimits, setColor, add, show}]{code/code20_75.ijm}
-\lstinputlisting[morekeywords={*, getSelectionCoordinates, makeLine, Plot,
-create, setLimits, setColor, add, show, Array, concat,
-getStatistics}]{code/code20_76.ijm}
-
-\begin{itemize}
-\item Lines 2 - 16: Main part, macro for the segmented line ROI measurement.  
-
-\item Line 3: Check if the selection type is a segmented line ROI. If not, macro
-terminates leaving a message.
-
-\item Line 4: Reads the x and y coordinates of the segmented line
-and store them in two arrays \ilcom{xCA} and \ilcom{yCA}.
-
-\begin{indentCom}
-\textbf{getSelectionCoordinates(xCoordinates, yCoordinates)}\\
-Returns two arrays containing the X and Y coordinates of the points that define the current selection. 
-\end{indentCom}
-
-\item Line 5 - 7: Asks the user to input width of the segmented ROI. The ROI
-line width is set to that value.
-
-\item Line 8: A new array \ilcom{totalprofile} is created, initialized without
-any element. This new array will store the profile data of full ROI.
-
-\item Line 9 - 13: Profile measurement by placing straight line ROI,
-for wach segment of the original ROI. \ilcom{makeLine} function is used for this
-purpose, and \ilcom{getProfile} returns intensity profile of the corresponding
-line ROI. Profile data in \ilcom{thisprofile} array are concatenated to
-\ilcom{totalprofile} array using \ilcom{Array.concat}.
-
-\begin{indentCom}
-\textbf{makeLine(x1, y1, x2, y2)}\\
-Creates a new straight line selection. The origin (0,0) is assumed to be the upper left corner of the image. Coordinates are in pixels. With ImageJ 1.35b and letter, you can create segmented line selections by specifying more than two coordinate, for example makeLine(25,34,44,19,69,30,71,56).
-\end{indentCom}
-
-\item Line 14: Call graph plotting function (Line 20 - 27), passing
-\ilcom{totalprofile} array as an argument.
-
-\item Line 15: call function to printout the profile array in the results window
-(Lines 32 - 39).
-
-\item Line 20 - 27: Function for plotting the intensity profile.
-\item Line 21 : Use \ilcom{Array.getStatistics} function to know the minimum and
-the maximum value of the array that was given as argument.
-\item Line 22: Creates the window and axes of the plot. 
-\item Line 23: Set the range for x and y axis using the results of line 21
-\ilcom{min} and \ilcom{max}. 5\% of offset is added to both values for some
-margins below and above.
-\item Line 24: Sets the color of the plot. 
-\item Line 25: Plot the profile. 
-\item Line 26: Show the plot on the screen (lot is hidden until this show()
-function).
-
-\item Line 30 - 37: Function for outputting the profile array in the result
-table. This function is exactly the same function you already used in the
-previous chapter (code 20.5).
-
-\end{itemize}
-
-\subsubsection{Build-in Macro Functions using Array}
-
-Many built-in macro functions return an array, to have multiple numerical values as a singular object. Below is a list of those array-returning functions. 
-
-\begin{indentCom}
-\texttt{
-\item Dialog.addChoice("Label", items) 
-\item Dialog.addChoice("Label", items, default)
-\item Fit.doFit(equation, xpoints, ypoints)
-\item Fit.doFit(equation, xpoints, ypoints, initialGuesses)
-\item getFileList(directory)
-\item getHistogram(values, counts, nBins[, histMin, histMax])
-\item getList("window.titles")
-\item getList("java.properties")
-\item getLut(reds, greens, blues)
-\item getProfile()
-\item getRawStatistics(nPixels, mean, min, max, std, histogram)
-\item getSelectionCoordinates(xCoordinates, yCoordinates)
-\item getStatistics(area, mean, min, max, std, histogram)
-\item makeSelection(type, xcoord, ycoord)
-\item newArray(size)
-\item newMenu(macroName, stringArray)
-\item Plot.create("Title", "X-axis Label", "Y-axis Label", xValues, yValues)
-\item Plot.add("circles", xValues, yValues)
-\item Plot.getValues(xpoints, ypoints)
-\item setLut(reds, greens, blues)
-\item split(string, delimiters) 
-}
-\end{indentCom}
-
-
