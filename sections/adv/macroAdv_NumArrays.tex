@@ -1,13 +1,6 @@
 \subsection{Numerical Array}
 \label{subsec:numericalarray}
-Array could also contain numerical values, and this way of usage is more common when you do image analysis. We examine a simple example of using numerical array that prints out intensity profile along selected line ROI. We use\ilcom{getProfile} function to access intensity profile. 
-
-\begin{shaded}\begin{indentCom}
-\textbf{getProfile()}\\
-Runs Analyze>Plot Profile (without displaying the plot) and returns the intensity values as an array. For an example, see the GetProfileExample macro\footnote{\url{http://rsb.info.nih.gov/ij/macros/GetProfileExample.txt}}. See also: Plot.getValues().
-\end{indentCom}\end{shaded}
-
-Before running code20\_5.ijm, an image (could be anything) a line ROI should be present in the active image.
+Array could also contain numerical values, and this way of usage is more common when you do image analysis. Here is a simple example of numerical array that prints out intensity profile along selected line ROI. 
 
 \lstinputlisting[morekeywords={*, newArray, selectionType, getProfile, setResult, updateResults}]{code/code20_5.ijm}
 
