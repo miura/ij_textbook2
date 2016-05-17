@@ -43,6 +43,11 @@ Then in line 6 interpreter sees the boundary \ilcom{\}} and goes back to line 4 
 (2) Change the second parameter in \ilcom{for(i=0;i<5;i+=1)} so that the macro prints out 10 lines. 
 
 (3) Change the third parameter in \ilcom{for(i=0;i<5;i+=1)} so that the macro prints out 10 lines. 
+
+\item \textbf{Answer}: 
+	\item (1) \ilcom{for(i=4;i<5;i+=1)}
+	\item (2) \ilcom{for(i=0;i<10;i+=1)}
+	\item (3) \ilcom{for(i=0;i<5;i+=0.5)}
 \end{indentexercise}
 
 
@@ -54,7 +59,10 @@ Many ImageJ functions work with only single frame within a stack.
 Without macro programming, you need to execute the command while you flip the frame manually. 
 Macro programming enables you to automate this process. 
 Here is an example of measuring intensity change over time\footnote{What we write as macro here could be done with a single command \ilcom{[Image > Stacks > Plot Z-Profile]} but this only measures intensity. If you want to measure other values such as the minimum intensity, a macro should be written. }. 
+
+\label{code:10}
 \lstinputlisting[morekeywords={*, run, setSlice, nSlices}]{code/code10.ijm}
+
 \begin{itemize}
 \item Line 3: \ilcom{nSlices} is a macro function that returns the number of slices in the active stack. 
 
@@ -98,13 +106,16 @@ Execute the macro. Results will be printed in the Results window (see the table 
 \end{figure}
 
 
-Measurement parameters can be added as argument by modifying the line 4 in the code 10. "Set Measurement" could be added with more parameters to be measured, and the digits after the decimal point could be increased by increasing the number after ``decimal=''. For example, 
+Measurement parameters can be added as argument by modifying the line 4 in the code 10.
+
+\begin{indentexercise}{1}
+Modify code 10 to include more measurement parameters (whatever you like), and test the macro. Check the results. 
+
+\item \textbf{Answer}:``Set Measurement'' could be added with more parameters to be measured, and the digits after the decimal point could be increased by increasing the number after ``decimal=''. For example, 
 \begin{lstlisting}[numbers=none]
 run("Set Measurements...", "area mean standard modal min centroid center perimeter bounding integrated median stack redirect=None decimal=5");
 \end{lstlisting}
 
-\begin{indentexercise}{1}
-Modify code 10 to include more measurement parameters (whatever you like), and test the macro. Check the results. 
 \end{indentexercise}
 
 % figure
@@ -170,14 +181,20 @@ These two last macro functions are said to work faster than +=1 or -=1, but I my
 \begin{indentexercise}{1}
 (1) Try changing code 11 so that it uses "+=" sign.\\
 (2) Change code 11 so that it uses "++" sign, and prints out integers from 0 to 9.\\
+
+\item \textbf{Answer}: (1) Change line 6 to \ilcom{counter += 1;}. (2) Change line 4 to \ilcom{while (counter<=9)} and line 6 to \ilcom{counter++}.
 \end{indentexercise}
-Evaluation of \ilcom{while} condition could also be at the end of loop. In this case, \ilcom{do} should be stated at the beginning of the loop. With do-while combination, the loop is always executed at least once, regardless of the condition defined by \ilcom{while} since macro interpreter reads lines from top to bottom. Try with the following exercise.
 
 \begin{indentexercise}{2}
 Change line 4 of code 11 to \ilcom{while (counter <0)} and check the effect (see below).
 \end{indentexercise}
 
+Evaluation of \ilcom{while} condition could also be at the end of loop. In this case, \ilcom{do} should be stated at the beginning of the loop. With do-while combination, the loop is always executed at least once, regardless of the condition defined by \ilcom{while} since macro interpreter reads lines from top to bottom. Try with the following exercise.
+
+
 \lstinputlisting[morekeywords={*, while}]{code/code11_5.ijm}
+
+In this example, the exit condition for going out from looping is \ilcom{counter < 0}, and the initial value of \ilcom{counter} is 0, which does not satisfy that looping condition. Since this evaluation occurs only after the looping part is executed for the first time, the macro still prints out a line before it exits from the loop.  
 
 Condition for the while-statement could be various. Here is a small list of comparison operators.
 
@@ -194,7 +211,20 @@ Condition for the while-statement could be various. Here is a small list of comp
 
 \begin{indentexercise}{3}
 Modify code 11 so that the macro prints out numbers from 200 to 100, with an increment of -10. 
+
+\item \textbf{Answer}: There could be slightly various ways to do this modification, but here is one way. 
+	\begin{lstlisting}
+macro "while looping1" {
+	counter=200;
+	while (counter>=100) {
+		print(counter);
+		counter -= 10;
+	}
+}
+\end{lstlisting}
+
 \end{indentexercise}
+
 
 \subsubsection{Why is there while-loop?}
 
@@ -308,10 +338,11 @@ true in the above code, OR operator returns true because at least one of them is
 true. Only when both sides are false, the returned value becomes false (0).
 
 \begin{indentexercise}{1}
-Change the values of \ilcom{a} and \ilcom{b} in code 12\_65 to \ilcom{false} and
+Adjust the values of \ilcom{a} and \ilcom{b} in code 12\_65 to \ilcom{true} or \ilcom{false} and
 compose other three possible combinations (e.g. \ilcom{a = true}, \ilcom{b = false} will print
-only one line).
-Check the output. Change the values of \ilcom{a} and \ilcom{b} also to 0 and/or
+only one line). Check the output.
+
+Next, change the values of \ilcom{a} and \ilcom{b} to 0 and/or
 1 and check the results. 
 \end{indentexercise}
 
