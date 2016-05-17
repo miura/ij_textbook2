@@ -1,5 +1,5 @@
 \subsection{Recording ImageJ macro functions}
-There are many commands in ImageJ as you could see them by exploring the menu tree. In ImageJ native distribbution, there are ca. 500 commands. In the Fiji distribution, there are 900+ commands. Some plugins are not macro-ready, but except for those spacial cases almost all of these commands can be accessed by build-in macro functions. We then encounter a problem: how do we find a macro function that does what we want to do?
+There are many commands in ImageJ. In the native ImageJ distribution, there are ca. 500 commands. In the Fiji distribution, there are 900+ commands. Some plugins are not macro-ready, but almost all of these commands can be accessed by build-in macro functions. That is great, but we then encounter a problem: how do we find a macro function that does what we want to do?
 
 To show you how to find a function, we write a small macro that creates a new image, adds noise, blurs this image by Gaussian blurring, and then thresholds the image. There is a convenient tool called \textbf{Command Recorder}. 
 Do \ijmenu{[PlugIns -> Macros -> Record\ldots]}. A window shown in figure
@@ -31,7 +31,7 @@ All the menu commands that you execute will be printed out as a history of macro
 \end{figure}
 
 Now, check the Command Recorder window. 
-It should now look like Fig. \ref{fig_macroRecorderFilled}. 
+It should look like Fig. \ref{fig_macroRecorderFilled}. 
 Each line is a macro function that corresponds to a menu command you selected.
 
 \begin{figure}[htbp]
@@ -46,7 +46,7 @@ These texts generated in the recorder can be used as it is in your macro.  You c
 \lstinputlisting{code/code06_9.ijm}
 
 Run the macro! \ldots I hope that you are amazed by now with the power of Macro
-Recorder! Now, you could simply add a line at the top and bottom to package this in a named macro by curly braces. This is optional in the current case, but it's always good to keep your macro packaged since the boundary of the macro becomes clear. 
+Recorder! Next, you could simply add a line with curly braces at the top and bottom, to package macro commands in a named macro. This is optional in the current case, but it's always a good practice to keep your macro packaged since the boundary of the macro becomes clear. 
  
 \lstinputlisting{code/code07.ijm}
 
@@ -54,7 +54,7 @@ The third line in the above macro has a function \ilcom{newImage()}. This
 function creates a new image. It has five arguments (in coding jargon, we say
 there are "five arguments"). To know what these arguments are, 
 the quickest way is to read the Build-In Macro Function page in ImageJ web site\footnote{\url{http://rsbweb.nih.gov/ij/developer/macro/functions.html}}.  
-In case of the function \ilcom{newImage}, the description looks like this. 
+The description of the function \ilcom{newImage} looks like this. 
 
 \begin{indentCom}
 
@@ -70,7 +70,12 @@ As an example, use "16-bit ramp" to create a 16-bit image containing a grayscale
 Using this information, you can modify the macro to change the size of the image.
 
 \begin{indentexercise}{1}
-Modify the code 8, so that user can input the desired Gaussian sigma.
+Modify the code 7 and try changing the size of window to be created.
+
+\item \textbf{Answer}: Change the 3rd line as shown below. It will create a image with 500 pixels width and 200 pixels height image.  
+	\begin{lstlisting}[numbers=none]
+		newImage("test", "8-bit Black", 500, 200, 1);
+	\end{lstlisting}
 \end{indentexercise}
 
 Other optional lines you could add to the macro are ``comments''. This does not affect the macro but adding some comment about what the macro does helps you to understand what the macro is doing when you open the file some time later. There are two ways to add comment. One is the \textbf{block comment}. Texts bounded by \ilcom{ /*} and \ilcom{*/} will be ignored by interpreter. Another is the line comment. Texts in a line starting with double slash \ilcom{//} will be ignored by the interpreter. Below is an example of commenting code 07. 
