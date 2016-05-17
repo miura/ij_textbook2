@@ -1,0 +1,39 @@
+% This subsubsection can only be added with 
+% conditionsloops/macroWhileApplication.tex
+% using the code 14 in the above subsection (threshold adjustment for segmenting microtubule)
+% some parts of the code are wrapped into user-defined-functions.
+\subsubsection{Example of Creating Function}
+
+Let's go back to the code 14, the automatic threshold adjusting macro. 
+
+At the beginning of the code, we check if the active image if it is a stack. 
+There is another check after that, to see if the image is adjusted with threshold level.
+
+\lstinputlisting[linerange={1-10}]{code/code14.ijm}
+
+We can make a function for checking stack (line 3 to 5) and another function that checks 
+if the stack is adjusted with threshold level (from line 6 to 9) as below.
+
+\lstinputlisting{code/code16_17functions.ijm}
+
+Then the initial part of code 14 (line 3 to 9) can now be replaced with 
+these two functions\footnote{For a complete coding of 14.1, 
+getThreshold(lower, upper) should appear again in line 8 to get lower and upper threshold value 
+of the reference image.}. 
+
+\lstinputlisting[linerange={1-5}]{code/code14_1.ijm}
+
+\begin{indentexercise}{1}
+The following macro asks the user to input x and y coordinates of two points, 
+calculate the distance between those points and prints out the distance. 
+Modify the code so that the distance calculation is done in a separate function. 
+
+\lstinputlisting{code/code18.ijm}
+
+Note that function \ilcom{pow()} in the code is defined as
+\begin{indentCom}
+\textbf{pow}(base, exponent)\\
+Returns the value of base raised to the power of exponent. 
+\end{indentCom}
+For example, \ilcom{pow(4, 2)} returns 16.
+\end{indentexercise}
